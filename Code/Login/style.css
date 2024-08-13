@@ -27,18 +27,20 @@ body {
 }
 
 .info {
-    width: 90%;
-    height: 90%;
+    width: 95%;
+    height: 95%;
     background-color: white;
     border-radius: 30px;
     display: grid;
-    grid-template-rows: 50% 25% 25%;
+    grid-template-rows: 60% 20% 20%;
     place-items: center;
     overflow: hidden;
 }
 
 .img1 {
-    transform: scale(0.5);
+    position: relative;
+    height: 100%;
+
 }
 
 .img2 {
@@ -52,7 +54,7 @@ body {
     align-self: start;
     width: 70%;
     text-align: center;
-    font-weight: bolder;
+    font-weight: 600;
     font-size: 1.2em;
     color: #190582;
 }
