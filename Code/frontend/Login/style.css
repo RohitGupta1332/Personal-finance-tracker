@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    height: 100vh;
+}
+
+.left, .right {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+.left {
+    background-color: #C1D9FF;
+}
+
+.right {
+    background-color: #190582;
+}
+
+.info {
+    width: 95%;
+    height: 95%;
+    background-color: white;
+    border-radius: 30px;
+    display: grid;
+    grid-template-rows: 60% 20% 20%;
+    place-items: center;
+    overflow: hidden;
+}
+
+.img1 {
+    position: relative;
+    height: 100%;
+
+}
+
+.img2 {
+    background-color: #190582;
+    transform: scale(0.7);
+    padding: 15px 57px 12px 0px;
+    border-radius: 100px;
+}
+
+.txt {
+    align-self: start;
+    width: 70%;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.2em;
+    color: #190582;
+}
+
+.login {
+    width: 70%;
+    height: 80%;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.logintxt p:first-child {
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+    color: #212529;
+}
+
+.logintxt p:last-child {
+    font-size: 20px;
+    color: #6C757D;
+    margin-bottom: 3rem;
+}
+
+.credentials p {
+    font-size: 20px;
+    text-align: left;
+    color: #212529;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.credentials input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 0.9em;
+}
+
+button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #190582;
+    border: 1px #0E0055;
+    color: white;
+    font-size: 1em;
+    font-weight: 600;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    margin:3em 0em 1rem 0em;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0f0456;
+}
+
+.signup {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.signup a {
+    color: #190582;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signup a:hover {
+    text-decoration: underline;
+}
