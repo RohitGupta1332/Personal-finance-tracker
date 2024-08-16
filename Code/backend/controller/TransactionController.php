@@ -1,34 +1,39 @@
 <?php
-
 header('Content-Type: application/json');
 
 include 'C:\xampp\htdocs\Minor Project\Code\backend\config\Database.php';
-include 'C:\xampp\htdocs\Minor Project\Code\backend\model\Accounts.php';
+include 'C:\xampp\htdocs\Minor Project\Code\backend\model\Transaction.php';
 
 $conn = new Database();
 $db = $conn->connect();
 
-$accounts = new Accounts($db);
+$transaction = new Transaction($db);
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $data = json_decode(file_get_contents("php://input"), true);
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $data = json_decode(file_get_contents('php://input'), true);
 
-    $result = $accounts->insertData($data);
+    $result = $transaction->insertData($data);
 
-    if ($result) {
-        http_response_code(201); //created
-        echo json_encode(["message" => "Account created successfully"]);
-    } 
-    else {
-        http_response_code(500); //Internal server error
-        echo json_encode(["message" => "Failed to create account"]);
+    if($result){
+        http_response_code(201);
+        echo json_encode(
+            ["message" => "Insert successful"]
+        );
     }
-} 
+    else{
+        http_response_code(500);
+        echo json_encode(
+            ["message" => "Insert Failed"]
+        );
+    }
+}
+
+
 else if($_SERVER['REQUEST_METHOD'] == 'GET'){
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
 
-        $result = $accounts->getData($id);
+        $result = $transaction->getData($id);
 
         if ($result) {
             http_response_code(200);
@@ -48,9 +53,9 @@ else if($_SERVER['REQUEST_METHOD'] == 'GET'){
     }
 }
 else if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
-    if (isset($_GET['id'])) {
+    if(isset($_GET['id'])) {
         $id = $_GET['id'];
-        $result = $accounts->deleteData($id);
+        $result = $transaction->deleteData($id);
 
         if ($result) {
             http_response_code(200);
@@ -66,8 +71,11 @@ else if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
         echo json_encode(["message" => "Missing ID parameter"]);
     }
 }
-else {
-    http_response_code(405); //Method not allowed
-    echo json_encode(["message" => "Invalid request method"]);
+
+else{
+    http_response_code(405);
+    echo json_encode(
+        ["message" => "Invalid request method"]
+    );
 }
 ?>
