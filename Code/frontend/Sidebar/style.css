@@ -73,6 +73,15 @@ body{
     height: 60px;
     list-style: none;
 }
+.sidebar .nav_list .menu{
+    padding: 6px 6px 14px 25px;
+    list-style: none;
+    font-size: 12px;
+    display: none;
+}
+.sidebar .nav_list .showMenu .menu{
+    display: block;
+}
 .sidebar .nav_list .active{
     list-style: none;
     background-color: #492CC0;
@@ -80,6 +89,7 @@ body{
     border-bottom-right-radius: 20px;
     height: 30px;
     width: 65%;
+    margin-top: 70px;
 }
 .sidebar .nav_list .normal a{
     margin-left: 10px;
@@ -89,6 +99,9 @@ body{
     align-items: center;
     text-decoration: none;
 }
+.sidebar .nav_list .menu a{
+    height: 30px;
+}
 .sidebar .nav_list .active a{
     padding-left: 40px;
     color: #fff;
@@ -97,20 +110,39 @@ body{
     text-decoration: none;
     text-wrap: nowrap;
     font-size: small;
+    height: 30px;
 }
 .sidebar .nav_list .normal a:hover{
     color: #fff;
     background-color: #492CC0;
     border-radius: 30px;
 }
-.sidebar .normal a i{
+.sidebar .nav_list .normal a i{
     height: 50px;
     min-width: 50px;
     border-radius: 12px;
     line-height: 50px;
     text-align: center;
 }
-.sidebar .active a i{
+.sidebar .nav_list .menu a i{
+    height: 50px;
+    text-align: right;
+    transition: all 0.3s ease;
+}
+.sidebar .nav_list .normal .total{
+    background: #fff;
+    border-radius: 30px;
+    height: 25px;
+    width: 35%;
+    margin-left: 10px;
+    text-align: center;
+}
+.sidebar .nav_list .normal .total i{
+    color: #190582;
+    line-height: 25px;
+    font-size: 10px;
+}
+.sidebar .nav_list .active a i{
     height: 30px;
     min-width: 30px;
     border-radius: 12px;

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sidebar.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sidebar</title>
@@ -36,14 +36,35 @@
                     <span class="links_name">All Accounts</span>
                 </a>
             </li>
+            <li class="normal">
+                <a href="#">
+                    <i class='bx bxs-chevron-down arrow'></i>
+                    <span class="links_name">Budget</span>
+                    <div class="total">
+                        <i class='bx bx-rupee'>
+                            <span>10 lakh</span>
+                        </i>
+                    </div>
+                </a>
+                <ul class="menu">
+                    <li><a href="#">Savings
+                        <i class='bx bx-rupee'></i>
+                        <span>2,58,999</span>
+                    </a></li>
+                    <li><a href="#">Cash
+                        <i class='bx bx-rupee'></i>
+                        <span>2,58,999</span>
+                    </a></li>
+                </ul>
+            </li>
             <li class="active">
                 <a href="#">
                     <span class="links_name">Add Account</span>
                     <i class='bx bxs-plus-circle'></i>
                 </a>
-            </li>
+            </li>   
          </ul>
     </div>
-    <script src="script.js"></script>
+    <script src="sidebar.js"></script>
 </body>
 </html>
