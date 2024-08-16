@@ -9,55 +9,40 @@
 </head>
 <body>
     <div class="sidebar">
-        <div class="logo_content">
-            <div class="logo">
-                <img src="logo.png" alt="logo">
-                <div class="logo_name">TrackIT</div>
-            </div>
-            <i class='bx bx-menu' id="btn"></i>
+        <div class="profile_content">
+            <img src="logo_circle.png" alt="logo">
+            <div class="user">
+                <div class="name">User Name</div>
+                <div class="email">User@email</div>
+                <i class='bx bx-log-out' id="log_out"></i>
+            </div>     
         </div>
          <ul class="nav_list">
-            <li>
+            <li class="normal">
                 <a href="#">
                     <i class='bx bx-grid-alt' ></i>
                     <span class="links_name">Budget</span>
                 </a>
-                <span class="tooltip">Budget</span>
             </li>
-            <li>
+            <li class="normal">
                 <a href="#">
                     <i class='bx bxs-objects-vertical-bottom'></i>
                     <span class="links_name">Reports</span>
                 </a>
-                <span class="tooltip">Reports</span>
             </li>
-            <li>
+            <li class="normal">
                 <a href="#">
                     <i class='bx bxs-bank' ></i>
                     <span class="links_name">All Accounts</span>
                 </a>
-                <span class="tooltip">All Accounts</span>
             </li>
-            <li>
+            <li class="active">
                 <a href="#">
-                    <i class='bx bxs-plus-circle'></i>
                     <span class="links_name">Add Account</span>
+                    <i class='bx bxs-plus-circle'></i>
                 </a>
-                <span class="tooltip">Add Account</span>
             </li>
          </ul>
-         <div class="profile_content">
-            <div class="profile">
-                <div class="profile_details">
-                    <i class='bx bxs-user-circle'></i>
-                    <div class="user">
-                        <div class="name">User Name</div>
-                        <div class="email">User@email</div>
-                    </div>
-                </div>
-                <i class='bx bx-log-out' id="log_out"></i>
-            </div>
-         </div>
     </div>
     <script src="sidebar.js"></script>
 </body>
