@@ -7,34 +7,23 @@ function credentials(){
     const password = passwords.value;
 }
 
-login.addEventListener('click', () =>{
+function valid_password(password) {
+    const lower = /[a-z]/.test(password);
+    const upper = /[A-Z]/.test(password);
+    const num = /\d/.test(password);
+    const symb = /[!@#$%^&*()+./\\?<>~`|\\-_'":;]/.test(password);
+    const minl = password.length >= 8;
+    return lower && upper && num && symb && minl;
+}
+
+login.addEventListener('click', (event) =>{
+    event.preventDefault()
     if(emails.value.trim() === '' || passwords.value.trim() === ''){
         alert('Please enter all the credentials!')
+    } else if(!valid_password(passwords.value.trim())){
+        document.getElementById('msg').textContent = 'Invalid Password';
+        login.style.margin = '1.5em 0em 1rem 0em'
     } else{
         credentials()
-    }
-})
-
-emails.addEventListener('keydown', (event) =>{
-    if(event.key === 'Enter'){
-        if(passwords.value.trim() === ''){
-            alert('Please enter the password!')
-        } else if(emails.value.trim() === ''){
-            alert('Please enter the email')
-        } else{
-            credentials()
-        }
-    }
-})
-
-passwords.addEventListener('keydown', (event) =>{
-    if(event.key === 'Enter'){
-        if(emails.value.trim() === ''){
-            alert('Please enter the email!')
-        } else if(passwords.value.trim() === ''){
-            alert('Please enter the password!')
-        } else{
-            credentials()
-        }
     }
 })
