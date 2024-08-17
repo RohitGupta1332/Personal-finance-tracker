@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
@@ -7,64 +8,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sidebar</title>
 </head>
+
 <body>
     <div class="sidebar">
-        <div class="profile_content">
-            <img src="../../../images/logo/logo_circle.png" alt="logo">
+        <div class="profile-content">
+            <img src="../../../images/logo/logo_circle.png" alt="logo" width="30px" height="30px">
             <div class="user">
-                <div class="name">User Name</div>
-                <div class="email">User@email</div>
-                <i class='bx bx-log-out' id="log_out"></i>
-            </div>     
+                <div class="user-name">User Name</div>
+                <div class="user-email">Username454542@gmail.com</div>
+            </div>
+            <i class='bx bx-log-out' id="log-out"></i>
         </div>
-         <ul class="nav_list">
-            <li class="normal">
-                <a href="#">
-                    <i class='bx bx-grid-alt' ></i>
-                    <span class="links_name">Budget</span>
-                </a>
-            </li>
-            <li class="normal">
-                <a href="#">
-                    <i class='bx bxs-objects-vertical-bottom'></i>
-                    <span class="links_name">Reports</span>
-                </a>
-            </li>
-            <li class="normal">
-                <a href="#">
-                    <i class='bx bxs-bank' ></i>
-                    <span class="links_name">All Accounts</span>
-                </a>
-            </li>
-            <li class="normal">
-                <a href="#">
+        <div class="navlist">
+            <div class="link">
+                <i class='bx bx-grid-alt'></i>
+                <a href="">Budget</a>
+            </div>
+            <div class="link">
+                <i class='bx bxs-objects-vertical-bottom'></i>
+                <a href="">Reports</a>
+            </div>
+            <div class="link">
+                <i class='bx bxs-bank'></i>
+                <a href="">All Accounts</a>
+            </div>
+            <div class="drop-down">
+                <div class="drop-down-heading">
                     <i class='bx bxs-chevron-down arrow'></i>
-                    <span class="links_name">Budget</span>
-                    <div class="total">
-                        <i class='bx bx-rupee'>
-                            <span>10 lakh</span>
-                        </i>
+                    <span>Budget</span>
+                    <span class="total-amount">
+                        ₹1000000
+                    </span>
+                </div>
+                <div class="drop-down-list">
+                    <div class="list-name">
+                        <a href="">Savings</a>
+                        <span>₹500000</span>
                     </div>
-                </a>
-                <ul class="menu">
-                    <li><a href="#">Savings
-                        <i class='bx bx-rupee'></i>
-                        <span>2,58,999</span>
-                    </a></li>
-                    <li><a href="#">Cash
-                        <i class='bx bx-rupee'></i>
-                        <span>2,58,999</span>
-                    </a></li>
-                </ul>
-            </li>
-            <li class="active">
-                <a href="#">
-                    <span class="links_name">Add Account</span>
-                    <i class='bx bxs-plus-circle'></i>
-                </a>
-            </li>   
-         </ul>
+                    <div class="list-name">
+                        <a href="">Cash</a>
+                        <span>₹20000</span>
+                    </div>
+                    <div class="list-name">
+                        <a href="">Current</a>
+                        <span>₹300000</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <button>
+            Add Account
+            <i class='bx bxs-plus-circle'></i>
+        </button>
     </div>
-    <script src="script.js"></script>
+    <script>
+        let dropDown = document.querySelector(".drop-down");
+        let arrow = document.querySelector(".arrow");
+        let dropDownMenu = document.querySelector(".drop-down-list")
+        dropDown.addEventListener('click', () => {
+            arrow.classList.toggle("arrow-rotate")
+            dropDownMenu.classList.toggle("drop-down-hide")
+        })
+    </script>
 </body>
+
 </html>

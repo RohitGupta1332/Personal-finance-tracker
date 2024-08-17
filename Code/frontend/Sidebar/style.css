@@ -1,151 +1,129 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-*{
+
+* {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins" , sans-serif ;
+    font-family: "Poppins", sans-serif;
+    color: white;
 }
-body{
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
-    overflow: hidden;
-}
-.sidebar{
-    position: fixed;
-    top: 0;
-    left: 0;
+
+html,
+body {
     height: 100%;
-    width: 250px;
-    background: #190582;
-    padding: 0 16px 16px 0;
+    width: 100%;
+
 }
-.sidebar .profile_content{
-    padding: 10px;
-    margin: 0 5px 5px 18px;
-    position: relative;
-    background-color: #492CC0;
-    color: #fff;
+
+.sidebar {
+    height: 100%;
+    width: 290px;
+    background-color: #190582;
+}
+
+.profile-content {
     display: flex;
-    height: 50px;
-    width: 90%;
+    justify-content: space-between;
+    background-color: #492CC0;
+    padding: 12px 10px;
+    margin-left: 20px;
+    margin-right: 20px;
     align-items: center;
-    opacity: 1;
-    pointer-events: none;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
-.sidebar .profile_content img{
-    width: 35px;
-    display: flex;
-    align-items: center;
+.user-name{
+    font-size: 16px;
+    font-weight: 600;
+
 }
-.profile_content i{
-    margin-right: 5px;
-}
-.profile_content .user{
-    margin-left: 10px;
-}
-.profile_content .normal{
-    font-size: 15px;
-    font-weight: 400px;
-}
-.profile_content .email{
-    font-size: 12px;
-}
-.sidebar #log_out{
-    position: absolute;
-    color: #fff;
-    left: 80%;
-    top: 0;
-    font-size: 20px;
-    height: 50px;
-    width: 50px;
-    text-align: center;
-    line-height: 50px;
-}
-.sidebar .nav_list{
-    margin-top: 20px;
-    align-items: center;
-}
-.sidebar .nav_list .normal{
-    height: 60px;
-    list-style: none;
-}
-.sidebar .nav_list .menu{
-    padding: 6px 6px 14px 25px;
-    list-style: none;
-    font-size: 12px;
-    display: none;
-}
-.sidebar .nav_list .showMenu .menu{
-    display: block;
-}
-.sidebar .nav_list .active{
-    list-style: none;
-    background-color: #492CC0;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    height: 30px;
-    width: 65%;
-    margin-top: 70px;
-}
-.sidebar .nav_list .normal a{
-    margin-left: 10px;
-    padding-left: 10px;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-}
-.sidebar .nav_list .menu a{
-    height: 30px;
-}
-.sidebar .nav_list .active a{
-    padding-left: 40px;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    text-wrap: nowrap;
-    font-size: small;
-    height: 30px;
-}
-.sidebar .nav_list .normal a:hover{
-    color: #fff;
-    background-color: #492CC0;
-    border-radius: 30px;
-}
-.sidebar .nav_list .normal a i{
-    height: 50px;
-    min-width: 50px;
-    border-radius: 12px;
-    line-height: 50px;
-    text-align: center;
-}
-.sidebar .nav_list .menu a i{
-    height: 50px;
-    text-align: right;
-    transition: all 0.3s ease;
-}
-.sidebar .nav_list .normal .total{
-    background: #fff;
-    border-radius: 30px;
-    height: 25px;
-    width: 35%;
-    margin-left: 10px;
-    text-align: center;
-}
-.sidebar .nav_list .normal .total i{
-    color: #190582;
-    line-height: 25px;
+.user-email{
     font-size: 10px;
+    font-weight: 600;
 }
-.sidebar .nav_list .active a i{
-    height: 30px;
-    min-width: 30px;
-    border-radius: 12px;
-    line-height: 30px;
-    text-align: center;
+.navlist{
+    margin: 30px 25px;
+}
+
+.link{
+    border-radius: 57px;
+    padding: 10px 20px 7px 15px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+
+}
+
+.link:hover{
+    background-color: #492CC0;
+
+}
+.link a{
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: 500;
+}
+a{
+    text-decoration: none;
+
+}
+.drop-down{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+
+}
+.drop-down-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 0px 10px;
+}
+
+.drop-down-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 30px;
+    margin-top: 20px;
+}
+.list-name{
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin: 5px;
+}
+
+button{
+    background-color: #492CC0;
+    padding: 5px 5px 5px 50px;
+    border-top-right-radius: 36px;
+    border-bottom-right-radius: 36px;
+    display: flex;
+    align-items: center;
+    border: none;
+}
+
+i{
     font-size: 20px;
+    margin-left: 3px;
+}
+
+.total-amount{
+    background-color: white;
+    color: #190582;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+.arrow{
+    font-size: 30px;
+}
+.arrow-rotate{
+    transform: rotate(180deg);
+}
+.drop-down-hide{
+    display: none;
 }
