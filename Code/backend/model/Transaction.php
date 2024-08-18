@@ -53,11 +53,11 @@ class Transaction{
     }
     public function getData($id){ //pass the user id
         try{
-            $query = "SELECT * FROM Transaction WHERE id = :id";
+            $query = "SELECT * FROM Transaction WHERE user_id = :id";
             $runQuery = $this->db->prepare($query);
             $runQuery->bindParam(':id', $id);
             $runQuery->execute();
-            $result = $runQuery->fetch();
+            $result = $runQuery->fetchAll();
             return $result;
         }
         catch(Exception $e){

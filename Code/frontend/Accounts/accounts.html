@@ -1,11 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../Sidebar/style.css">
+    <link rel="stylesheet" href="accounts.css">
     <title>Document</title>
+    <style>
+    .account-page{
+        width: 100%;
+        color: black;
+    }
+    </style>
 </head>
+
 <body>
-    
+    <div class="sidebar">
+        <div class="profile-content">
+            <img src="../../../images/logo/logo_circle.png" alt="logo" width="30px" height="30px">
+            <div class="user">
+                <div class="user-name">User Name</div>
+                <div class="user-email">Username454542@gmail.com</div>
+            </div>
+            <i class='bx bx-log-out' id="log-out"></i>
+        </div>
+        <div class="navlist">
+            <div class="link">
+                <i class='bx bx-grid-alt'></i>
+                <a href="">Budget</a>
+            </div>
+            <div class="link">
+                <i class='bx bxs-objects-vertical-bottom'></i>
+                <a href="">Reports</a>
+            </div>
+            <div class="link">
+                <i class='bx bxs-bank'></i>
+                <a href="">All Accounts</a>
+            </div>
+            <div class="drop-down">
+                <div class="drop-down-heading">
+                    <i class='bx bxs-chevron-down arrow'></i>
+                    <span>Budget</span>
+                    <span class="total-amount">
+
+                    </span>
+                </div>
+                <div class="drop-down-list">
+
+                </div>
+            </div>
+
+        </div>
+        <button>
+            Add Account
+            <i class='bx bxs-plus-circle'></i>
+        </button>
+    </div>
+    <!-- accounts page starts here -->
+    <div class="account-page">  
+        <h1 class="account-name">Accounts-Name</h1>
+        <hr>
+        <div class="balance-details">
+            <div class="balance">
+                <span class="font-20">₹140000</span>
+                <span class="font-14">Cleared Balance</span>
+            </div>
+            <span class="sign">+</span>
+            <div class="balance">
+                <span class="font-20">₹40000</span>
+                <span class="font-14">Uncleared Balance</span>
+            </div>
+            <span class="sign">=</span>
+            <div class="balance">
+                <span class="font-20">₹140000</span>
+                <span class="font-14">Working Balance</span>
+            </div>
+        </div>
+        <hr>
+        <div class="features">
+            <div class="feature">
+                <i class='bx bxs-plus-circle'></i>
+                <span class="font-14">Add transaction</span>
+            </div>
+            <div class="feature">
+                <span class="font-14">Sort by</span>
+                <i class='bx bxs-down-arrow'></i>
+            </div>
+            <div class="feature">
+                <i class='bx bx-search-alt-2' ></i>
+                <span class="font-14">search</span>
+            </div>
+        </div>
+        <hr>
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Date</th>
+                        <th>Payee</th>
+                        <th>Category</th>
+                        <th>Outflow</th>
+                        <th>Inflow</th>
+                        <th>Cleared</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="transaction-form">
+                        <td></td>
+                        <td><input type="date" name="created_date" id=""></td>
+                        <td><input type="text" name="" id="" placeholder="Payee"></td>
+                        <td>
+                            <select name="categories" id="">
+                                <option value="category">Category</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="outflow" placeholder="Outflow"></td>
+                        <td><input type="text" name="Inflow" placeholder="Inflow"></td>
+                        <td><input type="checkbox" name="cleared" id="checkbox"></td>
+                        
+                    </tr>
+
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+
+    </div>
+    <script src="../Sidebar/script.js"></script>
+    <script src="fetchAccount.js"></script>
+
 </body>
+
 </html>

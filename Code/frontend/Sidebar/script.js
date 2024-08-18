@@ -1,4 +1,4 @@
-let dropDown = document.querySelector(".drop-down");
+let dropDown = document.querySelector(".drop-down-heading");
 let arrow = document.querySelector(".arrow");
 let dropDownMenu = document.querySelector(".drop-down-list")
 dropDown.addEventListener('click', () => {
@@ -31,7 +31,7 @@ async function fetchAccount(id) {
                 listName.classList.add('list-name');
 
                 let anchor = document.createElement('a');
-                anchor.href = "#";
+                anchor.href = `accounts.html?text=${account.ac_name}`;
                 anchor.textContent = account.ac_name;
 
                 let amount = document.createElement('span');

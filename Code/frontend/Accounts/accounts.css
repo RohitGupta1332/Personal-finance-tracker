@@ -1,0 +1,59 @@
+
+.account-name{
+    font-size: 32px;
+    font-weight: 600;
+    margin: 10px;
+}
+.font-20{
+    font-size: 20px;
+}
+.font-14{
+    font-size: 14px;
+}
+.balance-details{
+    display: flex;
+}
+.balance{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 17px;
+}
+.sign{
+    margin: 17px 0;
+}
+.features{
+    display: flex;
+}
+.feature{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 18px;
+    text-align: left;
+    font-size: 14px;
+}
+
+th, td {
+    padding: 8px 15px;
+    border: 1px solid #E0E0E0;
+}
+
+input, select{
+    width: 95%;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid #E0E0E0;
+
+}
+
+#checkbox{
+    transform: scale(1.5);
+}
