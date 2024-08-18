@@ -39,8 +39,8 @@ async function fetchTransaction(id) {
                 date.textContent = res.created_date;
                 payee.textContent = res.payee;
                 category.textContent = res.category;
-                outflow.textContent = res.outflow;
-                inflow.textContent = res.inflow;
+                outflow.textContent = res.outflow == null ? "" : `₹${res.outflow}`;
+                inflow.textContent = res.inflow == null ? "" : `₹${res.inflow}`;
                 cleared.textContent = res.cleared == '1' ? "cleared" : "uncleared"; 
 
                 tableRow.append(deleteBtn, date, payee, category, outflow, inflow, cleared);

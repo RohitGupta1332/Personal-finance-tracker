@@ -24,7 +24,7 @@ login.addEventListener('click', (event) =>{
         alert('Please enter all the credentials!');
     } else if(!valid_password(passwords.value.trim())){
         document.getElementById('msg').textContent = 'Invalid Password';
-        login.style.margin = '1.5em 0em 1rem 0em'
+        login.style.margin = '0.5em 0em 1rem 0em'
     } else{
         credentials();
     }
