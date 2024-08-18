@@ -40,11 +40,11 @@ class Accounts {
 
     public function getData($id){
         try{
-            $query = "SELECT * FROM Accounts WHERE ac_id = :ac_id";
+            $query = "SELECT * FROM Accounts WHERE user_id = :id";
             $runQuery = $this->db->prepare($query);
-            $runQuery->bindParam(':ac_id', $id);
+            $runQuery->bindParam(':id', $id);
             $runQuery->execute();
-            $result = $runQuery->fetch();
+            $result = $runQuery->fetchAll();
             return $result;
         }
         catch(Exception $e){
