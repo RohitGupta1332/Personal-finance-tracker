@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    cursor: default;
 }
 
 body {
@@ -15,7 +16,7 @@ body {
 .left, .right {
     display: grid;
     place-items: center;
-    height: 100vh;
+    height: 735.2px;
 }
 
 .left {
@@ -66,6 +67,8 @@ body {
     background-color: white;
     border-radius: 20px;
     text-align: center;
+    display: grid;
+    grid-template-rows: 30% 50% 10% 10%;
 }
 
 .logintxt p:first-child {
@@ -80,7 +83,7 @@ body {
     color: #6C757D;
     margin-bottom: 3rem;
 }
-
+ 
 .credentials p {
     font-size: 20px;
     text-align: left;
@@ -96,9 +99,10 @@ body {
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 0.9em;
+    cursor: text;
 }
 
-#msg{
+#msg {
     font-size: 16px;
     color: red;
 }
@@ -107,11 +111,9 @@ button {
     width: 100%;
     padding: 0.8rem;
     background-color: #190582;
-    border: 1px #0E0055;
     color: white;
     font-size: 1em;
     font-weight: 600;
-    border: none;
     border-radius: 60px;
     cursor: pointer;
     margin:3em 0em 1rem 0em;
@@ -124,6 +126,7 @@ button:hover {
 
 .signup {
     font-size: 0.9em;
+    margin:5em 0em 1rem 0em;
     color: #666;
 }
 
@@ -131,6 +134,7 @@ button:hover {
     color: #190582;
     text-decoration: none;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .signup a:hover {
