@@ -19,7 +19,6 @@ async function fetchTransaction(id) {
             console.log(jsonData);
 
             let tbody = document.querySelector('tbody');
-            let transactionForm = document.querySelector('.transaction-form');
             
             result.forEach(res => {
                 // Create new table row
@@ -46,7 +45,7 @@ async function fetchTransaction(id) {
 
                 tableRow.append(deleteBtn, date, payee, category, outflow, inflow, cleared);
 
-                tbody.insertBefore(tableRow, transactionForm.nextSibling);
+                tbody.appendChild(tableRow);
             });
         } else {
             console.error('HTTP error:', response.status, response.statusText);
@@ -57,3 +56,18 @@ async function fetchTransaction(id) {
 }
 
 fetchTransaction(1)
+
+//add transaction feature
+document.addEventListener('DOMContentLoaded', () => {
+    let transactionBtn = document.querySelector('.transaction');
+    let form = document.querySelector('.transaction-form-hide');
+    let cancelBtn = document.querySelector('.cancel-btn');
+
+    transactionBtn.addEventListener('click', () => {
+        form.classList.toggle('visible');  
+    });
+
+    cancelBtn.addEventListener('click', () => {
+        form.classList.remove('visible');  
+    });
+});
