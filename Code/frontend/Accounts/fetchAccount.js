@@ -60,7 +60,7 @@ fetchTransaction(1)
 //add transaction feature
 document.addEventListener('DOMContentLoaded', () => {
     let transactionBtn = document.querySelector('.transaction');
-    let form = document.querySelector('.transaction-form-hide');
+    let form = document.querySelector('.transaction-form');
     let cancelBtn = document.querySelector('.cancel-btn');
 
     transactionBtn.addEventListener('click', () => {
