@@ -18,7 +18,7 @@ class Transaction{
 
     public function insertData($data){
         try{
-            $this->id = $data['id'];
+            // $this->id = $data['id'];
             $this->user_id = $data['user_id'];
             $this->ac_name = $data['ac_name'];
             $this->created_date = $data['created_date'];
@@ -28,11 +28,11 @@ class Transaction{
             $this->inflow = $data['inflow'];
             $this->cleared = $data['cleared'];
 
-            $query = "INSERT INTO Transaction (id, user_id, ac_name, created_date, payee, category, outflow, inflow, cleared) VALUES (:id, :user_id, :ac_name, :created_date, :payee, :category, :outflow, :inflow, :cleared)";
+            $query = "INSERT INTO Transaction (user_id, ac_name, created_date, payee, category, outflow, inflow, cleared) VALUES (:user_id, :ac_name, :created_date, :payee, :category, :outflow, :inflow, :cleared)";
 
             $runQuery = $this->db->prepare($query);
 
-            $runQuery->bindParam(':id', $this->id);
+            // $runQuery->bindParam(':id', $this->id);
             $runQuery->bindParam(':user_id', $this->user_id);
             $runQuery->bindParam(':ac_name', $this->ac_name);
             $runQuery->bindParam(':created_date', $this->created_date);
@@ -51,7 +51,7 @@ class Transaction{
         }
 
     }
-    public function getData($id){ //pass the user id
+    public function getTransactionsByUserId($id){ //pass the user id
         try{
             $query = "SELECT * FROM Transaction WHERE user_id = :id";
             $runQuery = $this->db->prepare($query);
@@ -62,6 +62,21 @@ class Transaction{
         }
         catch(Exception $e){
             echo "Error: ".$e->getMessage();
+            return null;
+        }
+    }
+
+    public function getTransactionsByUserIdAndAccountName($id, $name){
+        try{
+            $query = "SELECT * FROM Transaction WHERE user_id = :id AND ac_name = :name";
+            $runQuery = $this->db->prepare($query);
+            $runQuery->bindParam(':id', $id);
+            $runQuery->bindParam(':name', $name);
+            $runQuery->execute();
+            $result = $runQuery->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
             return null;
         }
     }

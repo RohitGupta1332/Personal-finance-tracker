@@ -24,24 +24,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     if($result){
         http_response_code(201);
-        echo json_encode(
-            ["message" => "Insert successful"]
-        );
+        echo json_encode(["message" => "Insert successful"]);
     }
     else{
         http_response_code(500);
-        echo json_encode(
-            ["message" => "Insert Failed"]
-        );
+        echo json_encode(["message" => "Insert Failed"]);
     }
 }
 
-
 else if($_SERVER['REQUEST_METHOD'] == 'GET'){
     if (isset($_GET['id'])) {
-        $id = $_GET['id'];
+        $user_id = $_GET['id'];
 
-        $result = $transaction->getData($id);
+        if (isset($_GET['ac_name'])) {
+            $ac_name = $_GET['ac_name'];
+            $result = $transaction->getTransactionsByUserIdAndAccountName($user_id, $ac_name);
+        } else {
+            $result = $transaction->getTransactionsByUserId($user_id);
+        }
 
         if ($result) {
             http_response_code(200);
@@ -49,17 +49,16 @@ else if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 "data" => $result,
                 "message" => "Data received"
             ]);
-        }
-        else {
+        } else {
             http_response_code(404);
             echo json_encode(["message" => "Data not found"]);
         }
-    }
-    else {
+    } else {
         http_response_code(400);
-        echo json_encode(["message" => "Missing ID parameter"]);
+        echo json_encode(["message" => "Missing user_id parameter"]);
     }
 }
+
 else if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
     if(isset($_GET['id'])) {
         $id = $_GET['id'];
@@ -82,8 +81,6 @@ else if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
 
 else{
     http_response_code(405);
-    echo json_encode(
-        ["message" => "Invalid request method"]
-    );
+    echo json_encode(["message" => "Invalid request method"]);
 }
 ?>
