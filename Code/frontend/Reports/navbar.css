@@ -1,0 +1,23 @@
+.spending-page {
+    width: 100%;
+}
+
+.report-navbar {
+    display: flex;
+    margin-top: 60px;
+    justify-content: space-between;
+    width: 50%;
+    margin-left: 20px;
+    color: #190582;
+    font-size: 20px;
+    /* font-family: Roboto; */
+    font-weight: 600;
+}
+
+.spending-heading {
+    background-color: #190582;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    font-weight: 500;
+}
