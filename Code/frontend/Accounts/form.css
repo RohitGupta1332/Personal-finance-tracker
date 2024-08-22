@@ -6,23 +6,22 @@
     font-family: "Poppins", sans-serif;
 }
 
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-form {
+.add-account-form {
     margin: auto;
     width: 400px;
     height: 500px;
     border: 1px solid black;
-    display: flex;
+    background-color: white;
+    display: none;
     flex-direction: column;
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
+}
+.add-account-form-visible{
+    display: flex;
 }
 
 .heading {
@@ -39,37 +38,40 @@ label{
     padding-top: 28px;
 }
 
-input,
-select {
+.add-account-form input,
+.add-account-form select {
     padding: 15px;
     border-radius: 12px;
     border: 1px solid #B7B3B3;
     margin: 5px 20px;
 }
 
-.save-btn {
-    position: absolute;
-    bottom: 0;
+.btn{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 0px 25px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.account-save-btn{
     color: white;
-    font-size: 20px;
+    font-size: 12px;
     font-weight: 400;
     background: #190582;
     border-radius: 12px;
     border: 1px black solid;
-    padding: 8px 45px;
-    margin: 10px 22px;
+    padding: 8px 30px;
+    margin: 10px;
 }
-
-.cancel-btn{
-    position: absolute;
-    bottom: 0;
-    right: 0;
+.account-cancel-btn{
     color: #190582;
     background-color: white;
-    font-size: 20px;
+    font-size: 12px;
     font-weight: 400;
     border-radius: 12px;
     border: 1px black solid;
-    padding: 8px 45px;
-    margin: 10px 22px;
+    padding: 8px 25px;
+    margin: 10px 7px;
 }

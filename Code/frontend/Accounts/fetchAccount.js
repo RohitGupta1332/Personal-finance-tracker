@@ -93,11 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 let details = {
                     'user_id': 1,
                     "ac_name": text || "Default Account",
-                    "created_date": formDetails.created_date.value,
-                    "payee": formDetails.payee.value,
-                    "category": formDetails.categories.value,
-                    "outflow": formDetails.outflow.value || null,
-                    "inflow": formDetails.inflow.value || null,
+                    "created_date": formDetails.created_date.value.trim(),
+                    "payee": formDetails.payee.value.trim(),
+                    "category": formDetails.categories.value.trim(),
+                    "outflow": formDetails.outflow.value.trim() || null,
+                    "inflow": formDetails.inflow.value.trim() || null,
                     "cleared": formDetails.cleared.checked ? 1 : 0
                 };
 

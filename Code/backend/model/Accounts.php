@@ -14,17 +14,15 @@ class Accounts {
 
     public function insertData($data) {
         try {
-            $this->ac_id = $data['ac_id'];
             $this->user_id = $data['user_id'];
             $this->ac_name = $data['ac_name'];
             $this->ac_type = $data['ac_type'];
             $this->ac_balance = $data['ac_balance'];
 
-            $query = "INSERT INTO Accounts (ac_id, user_id, ac_name, ac_type, ac_balance) VALUES (:ac_id, :user_id, :ac_name, :ac_type, :ac_balance)";
+            $query = "INSERT INTO Accounts (user_id, ac_name, ac_type, ac_balance) VALUES (:user_id, :ac_name, :ac_type, :ac_balance)";
 
             $runQuery = $this->db->prepare($query);
 
-            $runQuery->bindParam(':ac_id', $this->ac_id);
             $runQuery->bindParam(':user_id', $this->user_id);
             $runQuery->bindParam(':ac_name', $this->ac_name);
             $runQuery->bindParam(':ac_type', $this->ac_type);

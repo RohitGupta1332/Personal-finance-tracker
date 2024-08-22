@@ -54,7 +54,7 @@ th, td {
     border: 1px solid #E0E0E0;
 }
 
-input, select{
+.transaction-form input, .transaction-form select{
     width: 95%;
     padding: 5px;
     margin: 10px 5px;
@@ -72,7 +72,7 @@ input, select{
     align-items: center;
     border: none;
 }
-.save-btn{
+.transaction-form .save-btn{
     position: relative;
     left: 70%;
     color: white;
@@ -84,7 +84,7 @@ input, select{
     padding: 8px 30px;
     margin: 10px;
 }
-.cancel-btn{
+.transaction-form .cancel-btn{
     position: relative;
     left: 70%;
     color: #190582;
