@@ -61,8 +61,14 @@ else if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
 else if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
     if(isset($_GET['id'])) {
-        $id = $_GET['id'];
-        $result = $transaction->deleteData($id);
+        $user_id = $_GET['id'];
+
+        if (isset($_GET['ac_name'])) {
+            $ac_name = $_GET['ac_name'];
+            $result = $transaction->deleteTransactionsByUserIdAndAccountName($user_id, $ac_name);
+        } else {
+            $result = $transaction->deleteTransactionsBytransactionId($user_id);
+        }
 
         if ($result) {
             http_response_code(200);

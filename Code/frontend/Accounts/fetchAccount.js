@@ -1,65 +1,67 @@
 const urlParams = new URLSearchParams(window.location.search);
 const text = urlParams.get('text');//taking account name through url
+const accountId = urlParams.get('id');
 
 let AccoutName = document.querySelector('.account-name');
 AccoutName.textContent = text;
 
-//fetching all transaction through api
-async function fetchTransaction(id, ac_name) {
-    try {
-        const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?id=${id}&ac_name=${ac_name}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-
-        if (response.ok) {
-            let jsonData = await response.json();
-            let result = jsonData.data;
-            console.log(jsonData);
-
-            let tbody = document.querySelector('tbody');
-
-            result.forEach(res => {
-                // Create new table row
-                let tableRow = document.createElement('tr');
-                let deleteBtn = document.createElement('td');
-                let date = document.createElement('td');
-                let payee = document.createElement('td');
-                let category = document.createElement('td');
-                let outflow = document.createElement('td');
-                let inflow = document.createElement('td');
-                let cleared = document.createElement('td');
-
-                // Creating delete button icon
-                let icon = document.createElement('i');
-                icon.classList.add('bx', 'bx-trash');
-                deleteBtn.appendChild(icon);
-
-                date.textContent = res.created_date;
-                payee.textContent = res.payee;
-                category.textContent = res.category;
-                outflow.textContent = res.outflow == null ? "" : `₹${res.outflow}`;
-                inflow.textContent = res.inflow == null ? "" : `₹${res.inflow}`;
-                cleared.textContent = res.cleared == '1' ? "cleared" : "uncleared";
-
-                tableRow.append(deleteBtn, date, payee, category, outflow, inflow, cleared);
-
-                tbody.appendChild(tableRow);
-            });
-        } else {
-            console.error('HTTP error:', response.status, response.statusText);
-        }
-    } catch (error) {
-        console.error('Fetch error:', error);
-    }
-}
-
-fetchTransaction(1, text);
-
 //add transaction feature
 document.addEventListener('DOMContentLoaded', () => {
+    //fetching all transaction through api
+    async function fetchTransaction(id, ac_name) {
+        try {
+            const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?id=${id}&ac_name=${ac_name}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            if (response.ok) {
+                let jsonData = await response.json();
+                let result = jsonData.data;
+
+                let tbody = document.querySelector('tbody');
+
+                result.forEach(res => {
+                    // Create new table row
+                    let tableRow = document.createElement('tr');
+                    let deleteBtn = document.createElement('td');
+                    let date = document.createElement('td');
+                    let payee = document.createElement('td');
+                    let category = document.createElement('td');
+                    let outflow = document.createElement('td');
+                    let inflow = document.createElement('td');
+                    let cleared = document.createElement('td');
+
+                    // Creating delete button icon
+                    let icon = document.createElement('i');
+                    icon.classList.add('bx', 'bx-trash', 'delete-btn');
+                    icon.setAttribute('transaction-id', res.id);
+                    deleteBtn.appendChild(icon);
+
+                    date.textContent = res.created_date;
+                    payee.textContent = res.payee;
+                    category.textContent = res.category;
+                    outflow.textContent = res.outflow == null ? "" : `₹${res.outflow}`;
+                    inflow.textContent = res.inflow == null ? "" : `₹${res.inflow}`;
+                    cleared.textContent = res.cleared == '1' ? "cleared" : "uncleared";
+
+                    tableRow.append(deleteBtn, date, payee, category, outflow, inflow, cleared);
+
+                    tbody.appendChild(tableRow);
+
+                });
+            } else {
+                console.error('HTTP error:', response.status, response.statusText);
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    }
+
+    fetchTransaction(1, text); //chnage the user id
+
     let transactionBtn = document.querySelector('.transaction');
     let formDiv = document.querySelector('.transaction-form');
     let cancelBtn = document.querySelector('.cancel-btn');
@@ -98,9 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     "inflow": formDetails.inflow.value || null,
                     "cleared": formDetails.cleared.checked ? 1 : 0
                 };
-            
-                console.log("Sending data:", details);
-            
+
                 try {
                     const response = await fetch('http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php', {
                         method: 'POST',
@@ -109,11 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         },
                         body: JSON.stringify(details)
                     });
-            
+
                     if (response.ok) {
-                        const result = await response.json();
-                        console.log(result);
                         alert("Transaction added successfully!");
+                        window.location.reload();
                     } else {
                         console.error('HTTP error:', response.status, response.statusText);
                         alert("Failed to add transaction.");
@@ -123,12 +122,97 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert("An error occurred while adding the transaction.");
                 }
             }
-            
+
 
             submitTransaction();
         }
 
 
     });
+
+    //delete transaction
+    document.querySelector('tbody').addEventListener('click', (event) => {
+        if (event.target && event.target.classList.contains('delete-btn')) {
+            const transactionId = event.target.getAttribute('transaction-id');
+            async function deleteTransaction(id) {
+                try {
+                    const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?id=${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    })
+
+                    if (response.ok) {
+                        alert("Transaction deleted successfully!");
+                        window.location.reload(); // Reload the page after deleting the transaction
+                    } else {
+                        console.error('HTTP error:', response.status, response.statusText);
+                        alert("Failed to delete transaction.");
+                    }
+                } 
+                catch (error) {
+                    console.error('Fetch error:', error);
+                    alert("An error occurred while deleting the transaction.");
+                }
+            }
+
+            deleteTransaction(transactionId);
+        }
+    });
+
+    // //delete account
+    document.querySelector('.delete-account').addEventListener('click', () => {
+        if (accountId && confirm("Are you sure you want to delete this account?")) {
+            async function deleteAllTransactions(userId, accountName) {
+                try {
+                    const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?id=${userId}&ac_name=${accountName}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+            
+                    if (response.ok) {
+                        console.log("All transactions deleted successfully!");
+                        // After deleting transactions, delete the account
+                        await deleteAccount(accountId);
+                    } else {
+                        console.error('HTTP error:', response.status, response.statusText);
+                        alert("Failed to delete transactions.");
+                    }
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    alert("An error occurred while deleting transactions.");
+                }
+            }            
+
+            async function deleteAccount(id) {
+                try {
+                    const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/AccountsController.php?id=${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+    
+                    if (response.ok) {
+                        alert("Account deleted successfully!");
+                        window.location.reload(); // Reload the page after deleting the account
+                    } else {
+                        console.error('HTTP error:', response.status, response.statusText);
+                        alert("Failed to delete account.");
+                    }
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    alert("An error occurred while deleting the account.");
+                }
+            }
+    
+            deleteAllTransactions(1, text);
+        }
+    });
+    
 });
+
 

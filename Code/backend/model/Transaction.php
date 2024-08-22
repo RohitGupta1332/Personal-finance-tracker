@@ -80,13 +80,29 @@ class Transaction{
             return null;
         }
     }
-    public function deleteData($id){ //pass the transaction id
+    public function deleteTransactionsBytransactionId($id){ //pass the transaction id
         try{
             $query = "DELETE FROM Transaction WHERE id = :id";
             $runQuery = $this->db->prepare($query);
             $runQuery->bindParam(':id', $id);
             $runQuery->execute();
 
+            $affectedRows = $runQuery->rowCount();
+
+            return $affectedRows > 0;
+        }
+        catch(Exception $e){
+            echo "Error: ".$e->getMessage();//replace every error message with error_log()
+            return false;
+        }
+    }
+    public function deleteTransactionsByUserIdAndAccountName($id, $name){
+        try{
+            $query = "DELETE FROM Transaction WHERE user_id = :id AND ac_name = :name";
+            $runQuery = $this->db->prepare($query);
+            $runQuery->bindParam(':id', $id);
+            $runQuery->bindParam(':name', $name);
+            $runQuery->execute();
             $affectedRows = $runQuery->rowCount();
 
             return $affectedRows > 0;
