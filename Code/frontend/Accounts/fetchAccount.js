@@ -23,6 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 let tbody = document.querySelector('tbody');
 
+                let clearedInflow = 0;
+                let unclearedInflow = 0;
+
+                let clearedOutflow = 0;
+                let unclearedOutflow = 0;
+
                 result.forEach(res => {
                     // Create new table row
                     let tableRow = document.createElement('tr');
@@ -51,7 +57,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     tbody.appendChild(tableRow);
 
+                    if(res.cleared == 1){
+                        clearedInflow += res.inflow;
+                        clearedOutflow += res.outflow;
+                    }
+                    else{
+                        unclearedInflow += res.inflow;
+                        unclearedOutflow += res.outflow;
+                    }
+
                 });
+
+                let clearedBalance = clearedInflow - clearedOutflow;
+                let unclearedBalance = unclearedInflow - unclearedOutflow;
+
+                let workingCapital = clearedBalance + unclearedBalance;
+
+                document.querySelector('.cleared-balance').textContent = clearedBalance;
+                document.querySelector('.uncleared-balance').textContent = unclearedBalance;
+                document.querySelector('.working-capital').textContent = workingCapital;
             } else {
                 console.error('HTTP error:', response.status, response.statusText);
             }

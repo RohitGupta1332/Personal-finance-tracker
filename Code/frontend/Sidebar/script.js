@@ -31,7 +31,7 @@ async function fetchAccount(id) {
                 listName.classList.add('list-name');
 
                 let anchor = document.createElement('a');
-                anchor.href = `accounts.html?text=${account.ac_name}&id=${account.ac_id}`;
+                anchor.href = `../Accounts/accounts.html?text=${account.ac_name}&id=${account.ac_id}`;
                 anchor.textContent = account.ac_name;
                 anchor.classList.add('account');
 
