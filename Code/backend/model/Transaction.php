@@ -2,10 +2,10 @@
 class Transaction{
     private $id;
     private $user_id;
-    private $ac_name;
+    private $ac_id;
     private $created_date;
     private $payee;
-    private $category;
+    private $category_id;
     private $outflow;
     private $inflow;
     private $cleared;
@@ -20,24 +20,24 @@ class Transaction{
         try{
             // $this->id = $data['id'];
             $this->user_id = $data['user_id'];
-            $this->ac_name = $data['ac_name'];
+            $this->ac_id = $data['ac_id'];
             $this->created_date = $data['created_date'];
             $this->payee = $data['payee'];
-            $this->category = $data['category'];
+            $this->category_id = $data['category_id'];
             $this->outflow = $data['outflow'];
             $this->inflow = $data['inflow'];
             $this->cleared = $data['cleared'];
 
-            $query = "INSERT INTO Transaction (user_id, ac_name, created_date, payee, category, outflow, inflow, cleared) VALUES (:user_id, :ac_name, :created_date, :payee, :category, :outflow, :inflow, :cleared)";
+            $query = "INSERT INTO Transaction (user_id, ac_id, created_date, payee, category_id, outflow, inflow, cleared) VALUES (:user_id, :ac_id, :created_date, :payee, :category_id, :outflow, :inflow, :cleared)";
 
             $runQuery = $this->db->prepare($query);
 
             // $runQuery->bindParam(':id', $this->id);
             $runQuery->bindParam(':user_id', $this->user_id);
-            $runQuery->bindParam(':ac_name', $this->ac_name);
+            $runQuery->bindParam(':ac_id', $this->ac_id);
             $runQuery->bindParam(':created_date', $this->created_date);
             $runQuery->bindParam(':payee', $this->payee);
-            $runQuery->bindParam(':category', $this->category);
+            $runQuery->bindParam(':category_id', $this->category_id);
             $runQuery->bindParam(':outflow', $this->outflow);
             $runQuery->bindParam(':inflow', $this->inflow);
             $runQuery->bindParam(':cleared', $this->cleared);
@@ -66,20 +66,35 @@ class Transaction{
         }
     }
 
-    public function getTransactionsByUserIdAndAccountName($id, $name){
-        try{
-            $query = "SELECT * FROM Transaction WHERE user_id = :id AND ac_name = :name";
+    public function getTransactionsByUserIdAndAccountId($id, $ac_id) {
+        try {
+            $query = "
+                SELECT 
+                    t.*, 
+                    a.ac_name, 
+                    c.category_name
+                FROM 
+                    transaction t
+                JOIN 
+                    Accounts a ON t.ac_id = a.ac_id
+                JOIN 
+                    Category c ON t.category_id = c.category_id
+                WHERE 
+                    t.user_id = :id AND t.ac_id = :ac_id
+            ";
+    
             $runQuery = $this->db->prepare($query);
             $runQuery->bindParam(':id', $id);
-            $runQuery->bindParam(':name', $name);
+            $runQuery->bindParam(':ac_id', $ac_id);
             $runQuery->execute();
             $result = $runQuery->fetchAll();
             return $result;
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
+            // Handle or log the exception as needed
             return null;
         }
     }
+    
     public function deleteTransactionsBytransactionId($id){ //pass the transaction id
         try{
             $query = "DELETE FROM Transaction WHERE id = :id";

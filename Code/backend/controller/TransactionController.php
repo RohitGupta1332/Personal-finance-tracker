@@ -36,9 +36,9 @@ else if($_SERVER['REQUEST_METHOD'] == 'GET'){
     if (isset($_GET['id'])) {
         $user_id = $_GET['id'];
 
-        if (isset($_GET['ac_name'])) {
-            $ac_name = $_GET['ac_name'];
-            $result = $transaction->getTransactionsByUserIdAndAccountName($user_id, $ac_name);
+        if (isset($_GET['ac_id'])) {
+            $ac_id = $_GET['ac_id'];
+            $result = $transaction->getTransactionsByUserIdAndAccountId($user_id, $ac_id);
         } else {
             $result = $transaction->getTransactionsByUserId($user_id);
         }
@@ -63,9 +63,9 @@ else if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
     if(isset($_GET['id'])) {
         $user_id = $_GET['id'];
 
-        if (isset($_GET['ac_name'])) {
-            $ac_name = $_GET['ac_name'];
-            $result = $transaction->deleteTransactionsByUserIdAndAccountName($user_id, $ac_name);
+        if (isset($_GET['ac_id'])) {
+            $ac_id = $_GET['ac_id'];
+            $result = $transaction->deleteTransactionsByUserIdAndAccountName($user_id, $ac_id);
         } else {
             $result = $transaction->deleteTransactionsBytransactionId($user_id);
         }

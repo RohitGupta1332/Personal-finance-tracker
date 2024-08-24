@@ -8,9 +8,9 @@ AccoutName.textContent = text;
 //add transaction feature
 document.addEventListener('DOMContentLoaded', () => {
     //fetching all transaction through api
-    async function fetchTransaction(id, ac_name) {
+    async function fetchTransaction(id, ac_id) {
         try {
-            const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?id=${id}&ac_name=${ac_name}`, {
+            const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?id=${id}&ac_id=${ac_id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     date.textContent = res.created_date;
                     payee.textContent = res.payee;
-                    category.textContent = res.category;
+                    category.textContent = res.category_name;
                     outflow.textContent = res.outflow == null ? "" : `₹${res.outflow}`;
                     inflow.textContent = res.inflow == null ? "" : `₹${res.inflow}`;
                     cleared.textContent = res.cleared == '1' ? "cleared" : "uncleared";
@@ -57,13 +57,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     tbody.appendChild(tableRow);
 
-                    if(res.cleared == 1){
-                        clearedInflow += res.inflow;
-                        clearedOutflow += res.outflow;
-                    }
-                    else{
-                        unclearedInflow += res.inflow;
-                        unclearedOutflow += res.outflow;
+                    let inflowValue = res.inflow ? parseFloat(res.inflow) : 0;
+                    let outflowValue = res.outflow ? parseFloat(res.outflow) : 0;
+
+                    if (res.cleared == '1') {
+                        clearedInflow += inflowValue;
+                        clearedOutflow += outflowValue;
+                    } else {
+                        unclearedInflow += inflowValue;
+                        unclearedOutflow += outflowValue;
                     }
 
                 });
@@ -84,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    fetchTransaction(1, text); //chnage the user id
+    fetchTransaction(1, accountId); //chnage the user id
 
     let transactionBtn = document.querySelector('.transaction');
     let formDiv = document.querySelector('.transaction-form');
@@ -116,10 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
             async function submitTransaction() {
                 let details = {
                     'user_id': 1,
-                    "ac_name": text || "Default Account",
+                    "ac_id": accountId,
                     "created_date": formDetails.created_date.value.trim(),
                     "payee": formDetails.payee.value.trim(),
-                    "category": formDetails.categories.value.trim(),
+                    "category_id": formDetails.categories.value.trim(),
                     "outflow": formDetails.outflow.value.trim() || null,
                     "inflow": formDetails.inflow.value.trim() || null,
                     "cleared": formDetails.cleared.checked ? 1 : 0
@@ -174,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.error('HTTP error:', response.status, response.statusText);
                         alert("Failed to delete transaction.");
                     }
-                } 
+                }
                 catch (error) {
                     console.error('Fetch error:', error);
                     alert("An error occurred while deleting the transaction.");
@@ -188,15 +190,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // //delete account
     document.querySelector('.delete-account').addEventListener('click', () => {
         if (accountId && confirm("Are you sure you want to delete this account?")) {
-            async function deleteAllTransactions(userId, accountName) {
+            async function deleteAllTransactions(userId, accountId) {
                 try {
-                    const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?id=${userId}&ac_name=${accountName}`, {
+                    const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?id=${userId}&ac_name=${accountId}`, {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
                         }
                     });
-            
+
                     if (response.ok) {
                         console.log("All transactions deleted successfully!");
                         // After deleting transactions, delete the account
@@ -209,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.error('Fetch error:', error);
                     alert("An error occurred while deleting transactions.");
                 }
-            }            
+            }
 
             async function deleteAccount(id) {
                 try {
@@ -219,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             'Content-Type': 'application/json',
                         }
                     });
-    
+
                     if (response.ok) {
                         alert("Account deleted successfully!");
                         window.location.reload(); // Reload the page after deleting the account
@@ -232,11 +234,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert("An error occurred while deleting the account.");
                 }
             }
-    
-            deleteAllTransactions(1, text);
+
+            deleteAllTransactions(1, accountId);
         }
     });
-    
+
 });
 
 
