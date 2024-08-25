@@ -39,13 +39,15 @@ foreign key (category_id) references Category(category_id)
 create table transaction(
 id int auto_increment primary key,
 user_id int,
-ac_name varchar(100),
+ac_id int,
 created_date date,
 payee varchar(50),
-category varchar(100),
+category_id int,
 outflow decimal(15,2),
 inflow decimal(15,2),
 cleared boolean,
 foreign key (user_id) references User(user_id)
+foreign key (ac_id) references Accounts(ac_id)
+foreign key (category_id) references Category(category_id)
 );
 
