@@ -4,14 +4,45 @@
 
 .report-navbar {
     display: flex;
-    margin-top: 50px;
-    margin-left: 20px;
+    margin-top: 40px;
     justify-content: space-between;
-    width: 50%;
+}
+
+.report-links-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.report-links.active {
     color: #190582;
+    text-decoration: underline; 
+    text-decoration-thickness: 3px;
+}
+
+.report-links{
     font-size: 20px;
-    /* font-family: Roboto; */
+    color: #190582;
     font-weight: 600;
+    margin-left: 25px;
+}
+input[type="month"] {
+    padding: 20px 10px 10px 15px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-right: 13%;
+    background-color:  rgba(212, 225, 253, 0.60);
+    color: #190582;
+    font-weight: 600;
+    outline: none;
+    width: 150px;
+    transition: border-color 0.3s;
+}
+
+input[type="month"]:focus {
+    border-color: #190582;
+    background-color: #e8e8e8;
 }
 
 .spending-heading {
@@ -20,4 +51,73 @@
     font-size: 20px;
     padding: 15px;
     font-weight: 500;
+}
+
+.all-categories-heading{
+    font-size: 20px;
+    font-weight: 600;
+    color: #190582;
+    margin: 25px;
+    text-align: left;
+}
+
+.spending-page .container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+canvas{
+    margin: 95px;
+}
+
+.chart-details{
+    background-color: rgba(212, 225, 253, 0.60);
+    width: 280px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.total-spending{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 12px;
+    margin: 25px 10px;
+    border-radius: 10px;
+}
+
+.labels{
+    margin-left: 30px;
+}
+.label{
+    display: flex;
+    align-items: center;
+}
+
+.shades{
+    width: 25px;
+    height: 25px;
+    margin: 15px 20px 12px 0;
+    border-radius: 50px;
+}
+
+.bills-shade{
+    background-color: #190582;
+}
+
+.needs-shade{
+    background-color: #7E9EEF;
+}
+
+.wants-shade{
+    background-color: #83DD3F;
+}
+.date{
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 15px;
 }

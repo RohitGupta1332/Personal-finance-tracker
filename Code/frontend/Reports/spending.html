@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="navbar.css">
     <title>Document</title>
 </head>
+
 <body>
     <div class="sidebar">
         <div class="profile-content">
@@ -53,14 +55,46 @@
     </div>
     <div class="spending-page">
         <nav class="report-navbar">
-            <a href="spending.html" class="report-links">Spending</a>
-            <a href="" class="report-links">Net Worth</a>
-            <a href="" class="report-links">Income v Expense</a>
+            <div class="report-links-div">
+                <a href="spending.html" class="report-links active">Spending</a>
+                <a href="" class="report-links">Net Worth</a>
+                <a href="" class="report-links">Income v Expense</a>
+            </div>
+            <input type="month" id="dateInput" name="date" />
         </nav>
-        <br>
         <h1 class="spending-heading">
             Spending
         </h1>
+
+        <div class="container">
+            <div class="chart-container">
+                <canvas class="my-chart"></canvas>
+            </div>
+            <div class="chart-details">
+                <div class="date">
+                </div>
+                <div class="total-spending">
+                    <p>Total Spending</p>
+                    <h3 class="total-spending-amount">₹0</h3>
+                </div>
+                <div class="labels">
+                    <span>Categories</span>
+                    <div class="label">
+                        <div class="shades bills-shade"></div>
+                        <span>Bills</span>
+                    </div>
+                    <div class="label">
+                        <div class="shades needs-shade"></div>
+                        <span>Needs</span>
+                    </div>
+                    <div class="label">
+                        <div class="shades wants-shade"></div>
+                        <span>Wants</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 
     <form action="" method="post" class="add-account-form">
@@ -85,5 +119,8 @@
     <script src="../Sidebar/script.js"></script>
     <script src="../Accounts/fetchAccount.js"></script>
     <script src="../Accounts/form.js"></script>
+    <script src="fetchSpending.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
+
 </html>
