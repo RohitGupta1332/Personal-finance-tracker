@@ -1,13 +1,4 @@
-const emails = document.querySelector('.credentials input[type="email"]');
-const passwords = document.querySelector('.credentials input[type="password"]');
-const login = document.querySelector('button');
-
-function credentials(){
-    const email = emails.value;
-    const password = passwords.value;
-}
-
-function valid_password(password) {
+function validPassword(password) {
     const lower = /[a-z]/.test(password);
     const upper = /[A-Z]/.test(password);
     const num = /\d/.test(password);
@@ -16,14 +7,53 @@ function valid_password(password) {
     return lower && upper && num && symb && minl;
 }
 
-login.addEventListener('click', (event) =>{
-    event.preventDefault()
-    if(emails.value.trim() === '' || passwords.value.trim() === ''){
-        alert('Please enter all the credentials!')
-    } else if(!valid_password(passwords.value.trim())){
-        document.getElementById('msg').textContent = 'Invalid Password';
-        login.style.margin = '1.5em 0em 1rem 0em'
-    } else{
-        credentials()
-    }
-})
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#sub').onclick = event => {
+        event.preventDefault();
+
+        if (document.querySelector('#password').type !== 'password') {
+            document.querySelector('#password').type = 'password';
+            document.querySelector('#invisible').style.display = 'block';
+            document.querySelector('#visible').style.display = 'none';
+        }
+
+        const email = document.querySelector('input[type="email"]').value.trim();
+        const password = document.querySelector('input[type="password"]').value.trim();
+
+        if (email === '' || password === '') {
+            document.querySelector('#msg').innerHTML = 'Please enter all the credentials';
+        } else if (!validPassword(password)) {
+            document.querySelector('#msg').innerHTML = 'Invalid Password';
+            document.querySelector('#msg').style.color = 'red'
+        } else {
+            document.querySelector('#msg').innerHTML = 'Successful'
+            document.querySelector('#msg').style.color = 'springgreen'
+        }
+    };
+
+    document.querySelector('input[type="password"]').onkeyup = event => {
+        event.preventDefault();
+        const password = document.querySelector('input[type="password"]').value.trim();
+
+        if (password.length === 0) {
+            document.querySelector('#msg').innerHTML = '';
+        }
+    };
+
+    document.querySelectorAll('.bi').forEach(icon => {
+        icon.onclick = event => {
+            event.preventDefault();
+
+            if (document.querySelector('#password').type === 'password') {
+                document.querySelector('#password').type = 'text';
+                document.querySelector('#invisible').style.display = 'none';
+                document.querySelector('#visible').style.display = 'block';
+            } else {
+                document.querySelector('#password').type = 'password';
+                document.querySelector('#invisible').style.display = 'block';
+                document.querySelector('#visible').style.display = 'none';
+            }
+        };
+        
+    });
+});

@@ -1,142 +1,284 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     cursor: default;
 }
 
 body {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    height: 100vh;
-}
-
-.left, .right {
-    display: grid;
-    place-items: center;
-    height: 735.2px;
+    display: flex;
+    user-select: none;
 }
 
 .left {
+    max-width: 60vw;
+    min-height: 100vh;
     background-color: #C1D9FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.right {
-    background-color: #190582;
-}
-
-.info {
-    width: 95%;
-    height: 95%;
+.details {
     background-color: white;
+    margin: 0px 30px;
+    padding: 0px 150px;
     border-radius: 30px;
-    display: grid;
-    grid-template-rows: 60% 20% 20%;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     overflow: hidden;
 }
 
-.img1 {
-    position: relative;
-    height: 100%;
-
+#piggybank {
+    width: 300px;
+    max-width: 100%;
+    margin: 10px;
 }
 
-.img2 {
+#logo {
+    width: 350px;
     background-color: #190582;
-    transform: scale(0.7);
-    padding: 15px 57px 12px 0px;
+    padding: 5px 20px;
     border-radius: 100px;
+    margin-bottom: 50px;
 }
 
-.txt {
-    align-self: start;
-    width: 70%;
-    text-align: center;
+.details > p {
+    width: 500px;
     font-weight: 600;
-    font-size: 1.2em;
+    font-size: 20px;
     color: #190582;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.right {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #190582;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .login {
-    width: 70%;
-    height: 80%;
-    padding: 2rem;
     background-color: white;
-    border-radius: 20px;
-    text-align: center;
-    display: grid;
-    grid-template-rows: 30% 50% 10% 10%;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    overflow: hidden;
+    /* margin: 20px 28.5px */
 }
 
-.logintxt p:first-child {
+.top_text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px 0px;
+}
+
+.top_text > .head {
     font-size: 40px;
-    font-weight: 500;
-    margin-bottom: 0.2rem;
-    color: #212529;
-}
-
-.logintxt p:last-child {
-    font-size: 20px;
-    color: #6C757D;
-    margin-bottom: 3rem;
-}
- 
-.credentials p {
-    font-size: 20px;
-    text-align: left;
-    color: #212529;
     font-weight: 400;
-    margin-bottom: 0.5rem;
+    line-height: 48px;
+    margin-bottom: 5px;
 }
 
-.credentials input {
-    width: 100%;
-    padding: 0.8rem;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 0.9em;
-    cursor: text;
+.top_text > p {
+    font-size: 20px;
+    font-weight: 400;
+    color: #6C757D;
 }
 
-#msg {
-    font-size: 16px;
+form > p{
+    margin-left: 35px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+}
+
+form > p > span {
     color: red;
 }
 
-button {
-    width: 100%;
-    padding: 0.8rem;
-    background-color: #190582;
+form .input {
+    width: 430px;
+    height: 40px;
+    margin: 15px 35px;
+    padding: 0px 10px;
+    cursor: text;
+    border-radius: 4px;
+    border: 1px solid rgb(35, 34, 34);
+}
+
+form  .input:focus {
+    border: none;
+    outline: 2px solid #6C757D;
+}
+
+form {
+    margin-bottom: 40px;
+}
+
+.pswd {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.pswd .input {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.pswd > svg {
+    margin-right: 20px;
+    height: 20px;
+    width: 20px;
+    cursor: default;
+}
+
+#visible {
+    display: none;
+}
+
+form > #sub {
+    width: 430px;
+    height: 50px;
+    margin-left: 30px;
+    margin-top: 40px;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: 400;
     color: white;
-    font-size: 1em;
-    font-weight: 600;
-    border-radius: 60px;
+    border: none;
+    background-color: #190582;
     cursor: pointer;
-    margin:3em 0em 1rem 0em;
-    transition: background-color 0.3s ease;
+    transition: background-color 200ms ease-in;
 }
 
-button:hover {
-    background-color: #0f0456;
+form > #sub:hover {
+    background-color: #0E0055;
 }
 
-.signup {
-    font-size: 0.9em;
-    margin:5em 0em 1rem 0em;
-    color: #666;
+form > #msg {
+    color: red;
+    margin-top: 10px;
 }
 
-.signup a {
-    color: #190582;
-    text-decoration: none;
-    font-weight: 600;
+.login > p{
+    margin-bottom: 30px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #6C757D;
+    line-height: 24px;
+}
+
+.login > p > a {
     cursor: pointer;
+    color: #0D6EFD;
 }
 
-.signup a:hover {
-    text-decoration: underline;
+@media (orientation : portrait) {
+    .left {
+        display: none;
+    }
+
+    body {
+        background-color: #190582;
+    }
+    
+    .right {
+        height: 100vh;
+        width: 100vw;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width : 600px) {
+    .left {
+        display: none;
+    }
+
+    body {
+        background-color: #190582;
+    }
+    
+    .right {
+        height: 100vh;
+        width: 100vw;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .login {
+        transform: scale(0.7);
+        padding: 0px 270px;
+        margin: 0px;
+    }
+
+    .top_text {
+        width: 400px;
+    }
+
+    .top_text > .head {
+        font-size: 35px
+    }
+
+    .top_text > p {
+        font-size: 18px;
+    }
+
+    .login > p {
+        width: 400px;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width : 400px) {
+    .left {
+        display: none;
+    }
+
+    body {
+        background-color: #190582;
+    }
+    
+    .right {
+        height: 100vh;
+        width: 100vw;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .login {
+        transform: scale(0.6);
+        padding: 0px 270px;
+        margin: 0px;
+    }
+
+    .top_text {
+        width: 400px;
+    }
+
+    .top_text > .head {
+        font-size: 35px
+    }
+
+    .top_text > p {
+        font-size: 18px;
+    }
+
+    .login > p {
+        width: 400px;
+        display: flex;
+        justify-content: center;
+    }
 }
