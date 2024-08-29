@@ -44,15 +44,22 @@
     border-radius: 30px;
     margin: 0 20px;
 }
+.login a{
+    text-decoration: none;
+    color: #FFBF53;
+}
 .login{
     border:3px solid #FFBF53;
     background-color: #190582;
     color: white;
     font-weight: 600;
 }
+.signup a{
+    text-decoration: none;
+}
 .signup{
+    border:3px solid #FFBF53;
     background-color: #FFBF53;
-    border-style: none;
     color: black;
     font-weight: 600;
 }
