@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../Sidebar/style.css">
+    <link rel="stylesheet" href="../Accounts/form.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="netWorth.css">
+    <title>Net-Worth</title>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="profile-content">
+            <img src="../../../images/logo/logo_circle.png" alt="logo" width="30px" height="30px">
+            <div class="user">
+                <div class="user-name">User Name</div>
+                <div class="user-email">Username454542@gmail.com</div>
+            </div>
+            <i class='bx bx-log-out' id="log-out"></i>
+        </div>
+        <div class="navlist">
+            <div class="link">
+                <i class='bx bx-grid-alt'></i>
+                <a href="">Budget</a>
+            </div>
+            <div class="link">
+                <i class='bx bxs-objects-vertical-bottom'></i>
+                <a href="">Reports</a>
+            </div>
+            <div class="link">
+                <i class='bx bxs-bank'></i>
+                <a href="">All Accounts</a>
+            </div>
+            <div class="drop-down">
+                <div class="drop-down-heading">
+                    <i class='bx bxs-chevron-down arrow'></i>
+                    <span>Budget</span>
+                    <span class="total-amount"></span>
+                </div>
+                <div class="drop-down-list"></div>
+            </div>
+        </div>
+        <button class="add-account-btn">
+            Add Account
+            <i class='bx bxs-plus-circle'></i>
+        </button>
+    </div>
+    <div class="netWorth-page">
+        <nav class="report-navbar">
+            <div class="report-links-div">
+                <a href="spending.html" class="report-links">Spending</a>
+                <a href="netWorth.html" class="report-links active">Net Worth</a>
+                <a href="" class="report-links">Income v Expense</a>
+            </div>
+        </nav>
+        <h1 class="netWorth-heading">Net Worth</h1>
+   
+        <div class="container">
+            <canvas id="canvas"></canvas>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <script src="../Sidebar/script.js"></script>
+    <script src="../Accounts/fetchAccount.js"></script>
+    <script src="../Accounts/form.js"></script>
+    
+</body>
+</html>

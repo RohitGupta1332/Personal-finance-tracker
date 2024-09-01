@@ -1,0 +1,19 @@
+.netWorth-page {
+    width: 100%;
+}
+
+.netWorth-heading {
+    background-color: #190582;
+    color: white;
+    font-size: 20px;
+    padding: 15px;
+    font-weight: 500;
+}
+
+.container{
+	width: 80%;
+}
+
+#canvas{
+	width: 100%;
+}
