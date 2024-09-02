@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../Sidebar/style.css">
     <link rel="stylesheet" href="../Accounts/form.css">
     <link rel="stylesheet" href="navbar.css">
-    <link rel="stylesheet" href="networth.css">
     <title>Document</title>
 </head>
 
@@ -61,9 +60,10 @@
                 <a href="networth.html" class="report-links">Net Worth</a>
                 <a href="" class="report-links">Income v Expense</a>
             </div>
-            <input type="month" id="dateInput" name="date" />
         </nav>
-        <h1 class="spending-heading">
+        <input type="month" id="dateInput" name="date" />
+
+        <h1 class="report-heading">
             Spending
         </h1>
 
@@ -75,7 +75,7 @@
                 <div class="date">
                 </div>
                 <div class="total-spending">
-                    <p>Total Spending</p>
+                    <h4>Total Spending</h4>
                     <h3 class="total-spending-amount">₹0</h3>
                 </div>
                 <div class="labels">
@@ -118,7 +118,6 @@
     </form>
 
     <script src="../Sidebar/script.js"></script>
-    <script src="../Accounts/fetchAccount.js"></script>
     <script src="../Accounts/form.js"></script>
     <script src="fetchSpending.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

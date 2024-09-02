@@ -2,10 +2,15 @@
     width: 100%;
 }
 
+.netWorth-page {
+    width: 100%;
+}
+
 .report-navbar {
     display: flex;
     margin-top: 40px;
     justify-content: space-between;
+    margin-bottom: 6.5px;
 }
 
 .report-links-div{
@@ -31,13 +36,15 @@ input[type="month"] {
     border: 2px solid #ccc;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    margin-right: 13%;
-    background-color:  rgba(212, 225, 253, 0.60);
+    background-color: rgba(212, 225, 253, 0.60);
     color: #190582;
     font-weight: 600;
     outline: none;
-    width: 150px;
+    width: 160px;
     transition: border-color 0.3s;
+    position: absolute;
+    top: 2.5%;
+    right: 10%;
 }
 
 input[type="month"]:focus {
@@ -45,7 +52,7 @@ input[type="month"]:focus {
     background-color: #e8e8e8;
 }
 
-.spending-heading {
+.report-heading {
     background-color: #190582;
     color: white;
     font-size: 20px;
@@ -61,13 +68,28 @@ input[type="month"]:focus {
     text-align: left;
 }
 
-.spending-page .container{
-    display: flex;
-    justify-content: space-evenly;
+.netWorth-page .container{
+	width: 80%;
 }
 
-canvas{
-    margin: 95px;
+.chart-container{
+    width: 400px;
+}
+.my-chart, p{
+    position: absolute;
+    top: 55%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+}
+
+.bar-container{
+    width: 800px;
+}
+#canvas{
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .chart-details{
@@ -77,6 +99,9 @@ canvas{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    position: absolute;
+    top: 19%;
+    right: 10%;
 }
 
 .total-spending{
