@@ -73,9 +73,16 @@ input[type="month"]:focus {
 }
 
 .chart-container{
-    width: 400px;
+    width: 35%;
+    padding: 50px 200px;
 }
-.my-chart, p{
+.bar-container{
+    width: 500px;
+    margin: 50px 150px;
+    padding: 50px;
+}
+
+.container p{
     position: absolute;
     top: 55%;
     left: 45%;
@@ -85,12 +92,7 @@ input[type="month"]:focus {
 .bar-container{
     width: 800px;
 }
-#canvas{
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+
 
 .chart-details{
     background-color: rgba(212, 225, 253, 0.60);
