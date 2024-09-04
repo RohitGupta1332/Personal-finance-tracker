@@ -39,7 +39,12 @@ else if($_SERVER['REQUEST_METHOD'] == 'GET'){
         if (isset($_GET['ac_id'])) {
             $ac_id = $_GET['ac_id'];
             $result = $transaction->getTransactionsByUserIdAndAccountId($user_id, $ac_id);
-        } else {
+        }
+        else if (isset($_GET['summary']) && $_GET['summary'] == 'monthly') {
+            // Fetch monthly income and expense summary
+            $result = $transaction->getMonthlyIncomeAndExpense($user_id);
+        }
+        else {
             $result = $transaction->getTransactionsByUserId($user_id);
         }
 

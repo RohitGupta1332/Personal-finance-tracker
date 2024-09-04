@@ -66,6 +66,27 @@ class Transaction{
         }
     }
 
+    public function getMonthlyIncomeAndExpense($user_id){
+        try{
+            $query = "SELECT DATE_FORMAT(created_date, '%Y-%m') AS month, 
+                         SUM(CASE WHEN inflow > 0 THEN inflow ELSE 0 END) AS total_income,
+                         SUM(CASE WHEN outflow > 0 THEN outflow ELSE 0 END) AS total_expense
+                  FROM Transaction 
+                  WHERE user_id = :user_id
+                  GROUP BY month
+                  ORDER BY month ASC";
+            $runQuery = $this->db->prepare($query);
+            $runQuery->bindParam(':user_id', $user_id);
+            $runQuery->execute();
+            $result = $runQuery->fetchAll();
+
+            return $result;
+        }
+        catch(Exception $e){
+            error_log("Error: " . $e->getMessage());
+            return null;
+        }
+    }
     public function getTransactionsByUserIdAndAccountId($id, $ac_id) {
         try {
             $query = "
