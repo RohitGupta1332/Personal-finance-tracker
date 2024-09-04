@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="../Sidebar/style.css">
     <link rel="stylesheet" href="../Accounts/form.css">
     <link rel="stylesheet" href="navbar.css">
-    <title>Net-Worth</title>
+    <title>Income v/s Expense</title>
 </head>
+
 <body>
     <div class="sidebar">
         <div class="profile-content">
@@ -46,20 +47,20 @@
             <i class='bx bxs-plus-circle'></i>
         </button>
     </div>
-    <div class="netWorth-page">
+    <div class="ive-page">
         <nav class="report-navbar">
             <div class="report-links-div">
                 <a href="spending.html" class="report-links">Spending</a>
-                <a href="netWorth.html" class="report-links active">Net Worth</a>
-                <a href="incomeExpense.html" class="report-links">Income v Expense</a>
+                <a href="netWorth.html" class="report-links ">Net Worth</a>
+                <a href="incomeExpense.html" class="report-links active ">Income v Expense</a>
             </div>
         </nav>
-        <h1 class="report-heading">Net Worth</h1>
+        <h1 class="report-heading">Income vs Expense</h1>
    
         <div class="bar-container">
-            <canvas class="" id="canvas"></canvas>
+            <canvas class="line-chart"></canvas>
         </div>
-    </div>
+        
     <form action="" method="post" class="add-account-form">
         <p class="heading">Add Account</p>
         <hr>
@@ -79,9 +80,10 @@
         </div>
     </form>
 
-    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../Sidebar/script.js"></script>
     <script src="../Accounts/form.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="incomeAndExpense.js"></script>
+    
 </body>
 </html>
