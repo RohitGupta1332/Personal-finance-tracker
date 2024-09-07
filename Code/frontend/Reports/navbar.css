@@ -1,9 +1,16 @@
 .spending-page {
     width: 100%;
+    margin-left: 20%;
 }
 
 .netWorth-page {
     width: 100%;
+    margin-left: 20%;
+
+}
+.ive-page{
+    width: 100%;
+    margin-left: 20%;
 }
 
 .report-navbar {
