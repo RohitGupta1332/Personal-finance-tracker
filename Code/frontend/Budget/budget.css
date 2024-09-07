@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+    display: flex;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background-color: #f0f4f7;
+}
+
+.main-content {
+    width: 100%;
+    flex-grow: 1;
+    background-color: #FFFFFF;
+}
+input[type="month"] {
+    padding: 20px 10px 14px 15px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: rgba(212, 225, 253, 0.60);
+    color: #190582;
+    font-weight: 600;
+    outline: none;
+    width: 160px;
+    transition: border-color 0.3s;
+}
+
+input[type="month"]:focus {
+    border-color: #190582;
+    background-color: #e8e8e8;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 0px 20px;
+}
+
+.balance {
+    padding: 12px 0px 12px 12px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(212, 225, 253, 0.60);
+    color: #190582;
+    font-weight: 600;
+    outline: none;
+    width: 160px;
+    transition: border-color 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.balance p {
+    margin: 0;
+    
+}
+
+.balance p:first-child {
+    font-size: 18px;
+}
+
+.total-balance {
+    font-size: 24px;
+    background-color: #241687;
+    color: #FFFFFF;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.budget-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+.budget-table thead{
+    color: #FFFFFF;
+    background-color: #190582;
+}
+.budget-table th, .budget-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #A6C9FE;
+}
+.budget-table td{
+    color: #241687;
+}
+.budget-table .align-right {
+    text-align: center;
+}
+.budget-table .category-header {
+    background-color: #D4E1FD;
+    font-weight: bold;
+    border-radius: 3px;
+    border-color: #7E9EEF;
+}
+.budget-table .available {
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.budget-table .available.positive {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.budget-table .available.negative {
+    background-color: #f8d7da;
+    color: #721c24;
+}

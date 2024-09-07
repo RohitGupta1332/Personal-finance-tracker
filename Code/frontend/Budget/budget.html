@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Sidebar/style.css">
+    <link rel="stylesheet" href="budget.css">
+    <title>Budget</title>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="profile-content">
+            <img src="../../../images/logo/logo_circle.png" alt="logo" width="30px" height="30px">
+            <div class="user">
+                <div class="user-name">User Name</div>
+                <div class="user-email">Username454542@gmail.com</div>
+            </div>
+            <i class='bx bx-log-out' id="log-out"></i>
+        </div>
+        <div class="navlist">
+            <div class="link">
+                <i class='bx bx-grid-alt'></i>
+                <a href="">Budget</a>
+            </div>
+            <div class="link">
+                <i class='bx bxs-objects-vertical-bottom'></i>
+                <a href="">Reports</a>
+            </div>
+            <div class="link">
+                <i class='bx bxs-bank'></i>
+                <a href="">All Accounts</a>
+            </div>
+            <div class="drop-down">
+                <div class="drop-down-heading">
+                    <i class='bx bxs-chevron-down arrow'></i>
+                    <span>Budget</span>
+                    <span class="total-amount">
+
+                    </span>
+                </div>
+                <div class="drop-down-list">
+
+                </div>
+            </div>
+
+        </div>
+        <button class="add-account-btn">
+            Add Account
+            <i class='bx bxs-plus-circle'></i>
+        </button>
+    </div>
+<!--Main content-->
+    <div class="main-content">
+        <div class="header">
+            <input type="month" id="dateInput" name="date"/>
+            <div class="balance">
+                <p>Balance</p>
+                <span class="total-balance">
+                    ₹0
+                </span>
+            </div>
+        </div>
+    
+        <table class="budget-table">
+            <thead>
+                <tr>
+                    <th>CATEGORY</th>
+                    <th class="align-right">ASSIGNED</th>
+                    <th class="align-right">ACTIVITY</th>
+                    <th class="align-right">AVAILABLE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4" class="category-header"><i class='bx bxs-chevron-down'></i> Bills <i class='bx bxs-plus-circle' ></i></td>
+                </tr>
+                <tr>
+                    <td><i class='bx bx-trash' ></i> Fee</td>
+                    <td class="align-right">₹15,000</td>
+                    <td class="align-right">₹300</td>
+                    <td class="align-right"><span class="available positive">₹14,700</span></td>
+                </tr>
+                <tr>
+                    <td><i class='bx bx-trash' ></i> Cooking</td>
+                    <td class="align-right">₹5,000</td>
+                    <td class="align-right">₹100</td>
+                    <td class="align-right"><span class="available positive">₹4,900</span></td>
+                </tr>
+                <tr>
+                    <td><i class='bx bx-trash' ></i> Clothes</td>
+                    <td class="align-right">₹5,000</td>
+                    <td class="align-right">₹100</td>
+                    <td class="align-right"><span class="available positive">₹4,900</span></td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="category-header"><i class='bx bxs-chevron-down'></i> Needs <i class='bx bxs-plus-circle' ></i></td>
+                </tr>
+                <tr>
+                    <td><i class='bx bx-trash' ></i> Groceries</td>
+                    <td class="align-right">₹5,000</td>
+                    <td class="align-right">₹6,000</td>
+                    <td class="align-right"><span class="available negative">₹-1,000</span></td>
+                </tr>
+                <tr>
+                    <td><i class='bx bx-trash' ></i> Bike fuel</td>
+                    <td class="align-right">₹5,000</td>
+                    <td class="align-right">₹6,000</td>
+                    <td class="align-right"><span class="available negative">₹-1,000</span></td>
+                </tr>
+                <tr>
+                    <td><i class='bx bx-trash' ></i> Water</td>
+                    <td class="align-right">₹5,000</td>
+                    <td class="align-right">₹6,000</td>
+                    <td class="align-right"><span class="available negative">₹-1,000</span></td>
+                </tr>
+                <tr>
+                    <td><i class='bx bx-trash' ></i> Medicine</td>
+                    <td class="align-right">₹5,000</td>
+                    <td class="align-right">₹6,000</td>
+                    <td class="align-right"><span class="available negative">₹-1,000</span></td>
+                </tr>
+                <tr></tr>
+                    <td colspan="4" class="category-header"><i class='bx bxs-chevron-down'></i> Wants <i class='bx bxs-plus-circle' ></i></td>
+                </tr>
+                <tr>
+                    <td><i class='bx bx-trash' ></i> Groceries</td>
+                    <td class="align-right">₹5,000</td>
+                    <td class="align-right">₹6,000</td>
+                    <td class="align-right"><span class="available negative">₹-1,000</span></td>
+                </tr>
+                <tr>
+                    <td><i class='bx bx-trash' ></i> Bike fuel</td>
+                    <td class="align-right">₹5,000</td>
+                    <td class="align-right">₹6,000</td>
+                    <td class="align-right"><span class="available negative">₹-1,000</span></td>
+                </tr>
+                <tr>
+                    <td><i class='bx bx-trash' ></i> Water</td>
+                    <td class="align-right">₹5,000</td>
+                    <td class="align-right">₹6,000</td>
+                    <td class="align-right"><span class="available negative">₹-1,000</span></td>
+                </tr>
+                <tr>
+                    <td><i class='bx bx-trash' ></i> Medicine</td>
+                    <td class="align-right">₹5,000</td>
+                    <td class="align-right">₹6,000</td>
+                    <td class="align-right"><span class="available negative">₹-1,000</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <script src="../Sidebar/script.js"></script>
+    <script src="budget.js"></script>
+</body>
+</html>
