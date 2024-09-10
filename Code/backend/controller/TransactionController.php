@@ -70,7 +70,7 @@ else if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
 
         if (isset($_GET['ac_id'])) {
             $ac_id = $_GET['ac_id'];
-            $result = $transaction->deleteTransactionsByUserIdAndAccountName($user_id, $ac_id);
+            $result = $transaction->deleteTransactionsByUserIdAndAccountId($user_id, $ac_id);
         } else {
             $result = $transaction->deleteTransactionsBytransactionId($user_id);
         }

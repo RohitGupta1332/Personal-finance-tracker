@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (accountId && confirm("Are you sure you want to delete this account?")) {
             async function deleteAllTransactions(userId, accountId) {
                 try {
-                    const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?id=${userId}&ac_name=${accountId}`, {
+                    const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?id=${userId}&ac_id=${accountId}`, {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',

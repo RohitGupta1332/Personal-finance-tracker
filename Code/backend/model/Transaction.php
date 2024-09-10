@@ -132,12 +132,12 @@ class Transaction{
             return false;
         }
     }
-    public function deleteTransactionsByUserIdAndAccountName($id, $name){
+    public function deleteTransactionsByUserIdAndAccountId($id, $ac_id){
         try{
-            $query = "DELETE FROM Transaction WHERE user_id = :id AND ac_name = :name";
+            $query = "DELETE FROM Transaction WHERE user_id = :id AND ac_id = :ac_id";
             $runQuery = $this->db->prepare($query);
             $runQuery->bindParam(':id', $id);
-            $runQuery->bindParam(':name', $name);
+            $runQuery->bindParam(':ac_id', $ac_id);
             $runQuery->execute();
             $affectedRows = $runQuery->rowCount();
 
