@@ -1,11 +1,11 @@
-let myChart = null; 
+let myChart = null;
 
 const dateInput = document.getElementById('dateInput');
 const currentDate = new Date();
 const year = currentDate.getFullYear();
 const monthIndex = currentDate.getMonth();
-const monthNames = ["January", "February", "March", "April", "May", "June", 
-                    "July", "August", "September", "October", "November", "December"];
+const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
 const month = monthNames[monthIndex];
 dateInput.value = `${year}-${String(monthIndex + 1).padStart(2, '0')}`;
 document.querySelector('.date').textContent = `${month} ${year}`;
@@ -33,16 +33,21 @@ async function getSpending(user, date) {
 
         if (response.ok) {
             const result = await response.json();
-            const data = result.data; 
+            const data = result.data;
 
             let labels = [];
             let values = [];
 
             let totalSpending = 0;
             data.forEach((item) => {
-                labels.push(item.category_type);
-                values.push(parseFloat(item.total_spending));
-                totalSpending += parseFloat(item.total_spending);
+                if (item.total_spending != null) {
+                    labels.push(item.category_type);
+                    values.push(parseFloat(item.total_spending));
+                    totalSpending += parseFloat(item.total_spending);
+                }
+                else{
+                    myChartContainer.innerHTML = '<p>No data available for the selected date.</p>';    
+                }
             });
 
             document.querySelector('.total-spending-amount').textContent = `₹${totalSpending}`;
@@ -52,9 +57,9 @@ async function getSpending(user, date) {
                     label: "Spending",
                     data: values,
                     backgroundColor: [
-                        "#7E9EEF", 
-                        "#83DD3F", 
-                        "#190582" 
+                        "#7E9EEF",
+                        "#83DD3F",
+                        "#190582"
                     ]
                 }]
             };

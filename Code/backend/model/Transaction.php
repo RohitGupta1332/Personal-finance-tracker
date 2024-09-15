@@ -141,7 +141,7 @@ class Transaction{
             $runQuery->execute();
             $affectedRows = $runQuery->rowCount();
 
-            return $affectedRows > 0;
+            return $affectedRows >= 0;
         }
         catch(Exception $e){
             echo "Error: ".$e->getMessage();//replace every error message with error_log()

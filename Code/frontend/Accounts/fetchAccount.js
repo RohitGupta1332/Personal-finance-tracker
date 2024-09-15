@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (response.ok) {
                         alert("Account deleted successfully!");
-                        window.location.reload(); // Reload the page after deleting the account
+                        window.location.href = "../Budget/budget.html" // Redirect to budget page
                     } else {
                         console.error('HTTP error:', response.status, response.statusText);
                         alert("Failed to delete account.");
