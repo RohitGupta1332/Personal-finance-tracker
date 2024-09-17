@@ -49,5 +49,26 @@ class User {
             return false;
         }
     }
+
+    public function loginUser($data){
+        try{
+            $query = "SELECT * FROM user WHERE email = :email";
+            $runQuery = $this->db->prepare($query);
+            $runQuery->bindParam(':email', $data['email']);
+            $runQuery->execute();
+
+            $result = $runQuery->fetch();
+
+            if ($result && password_verify($data['password'], $result['password'])) {
+                return $result;
+            } else {
+                return null;
+            }
+        }
+        catch(Exception $e){
+            echo "Error: " . $e->getMessage();
+            return null;
+        }
+    }
 }
 ?>
