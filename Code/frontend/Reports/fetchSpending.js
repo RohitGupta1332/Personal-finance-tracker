@@ -10,13 +10,17 @@ const month = monthNames[monthIndex];
 dateInput.value = `${year}-${String(monthIndex + 1).padStart(2, '0')}`;
 document.querySelector('.date').textContent = `${month} ${year}`;
 
+
+const userData = JSON.parse(localStorage.getItem('userData'));
+
 // Function to fetch spending data
-async function getSpending(user, date) {
+async function getSpending(date) {
     try {
-        const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/CategoryController.php?id=${user}&date=${date}`, {
+        const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/CategoryController.php?date=${date}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': userData.jwt,
             }
         });
 
@@ -85,7 +89,7 @@ async function getSpending(user, date) {
     }
 }
 
-getSpending(1, dateInput.value);
+getSpending(dateInput.value);
 
 // Fetch spending data when the date changes
 dateInput.addEventListener('change', (event) => {

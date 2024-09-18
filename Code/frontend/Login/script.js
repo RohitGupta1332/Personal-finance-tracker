@@ -1,12 +1,3 @@
-function validPassword(password) {
-    const lower = /[a-z]/.test(password);
-    const upper = /[A-Z]/.test(password);
-    const num = /\d/.test(password);
-    const symb = /[!@#$%^&*()+./\\?<>~`|\\-_'":;]/.test(password);
-    const minl = password.length >= 8;
-    return lower && upper && num && symb && minl;
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#sub').onclick = event => {
         event.preventDefault();
@@ -22,12 +13,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (email === '' || password === '') {
             document.querySelector('#msg').innerHTML = 'Please enter all the credentials';
-        } else if (!validPassword(password)) {
-            document.querySelector('#msg').innerHTML = 'Invalid Password';
-            document.querySelector('#msg').style.color = 'red'
-        } else {
-            document.querySelector('#msg').innerHTML = 'Successful'
-            document.querySelector('#msg').style.color = 'springgreen'
+        }
+        else {
+
+            const data = {
+                "email": email,
+                "password": password
+            };
+
+            async function login(data) {
+                try {
+                    const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/LoginController.php`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (response.ok) {
+                        const jsonResponse = await response.json(); 
+                        localStorage.setItem('userData', JSON.stringify(jsonResponse));
+                        window.location.href = "../Budget/budget.html";
+
+                    }
+                    else if (response.status === 500) {
+                        alert("Invalid email or password!");
+                    }
+                    else {
+                        alert("An error occurred!");
+                    }
+                }
+                catch (error) {
+                    console.error(error);
+                    alert("An error occured");
+                }
+            }
+
+            login(data);
         }
     };
 
@@ -54,6 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector('#visible').style.display = 'none';
             }
         };
-        
+
     });
 });

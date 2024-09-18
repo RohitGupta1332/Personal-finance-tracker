@@ -27,8 +27,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $iss = "localhost";
         $iat = time();
-        $nbf = $iat + 10;
-        $exp = $iat + 60;
+        $nbf = $iat + 0;
+        $exp = $iat + 3600;
         $aud = "myuser";
         $user_data = array(
             "id" => $result['user_id'],
@@ -58,7 +58,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         ]);
     }
     else{
-        http_response_code(500);
+        http_response_code(404);
         echo json_encode([
             'message' => 'User not found' 
         ]);

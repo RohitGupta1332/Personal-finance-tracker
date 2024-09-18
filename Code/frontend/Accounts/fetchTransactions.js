@@ -5,15 +5,19 @@ const accountId = urlParams.get('id');
 let AccoutName = document.querySelector('.account-name');
 AccoutName.textContent = text;
 
+
+const userData = JSON.parse(localStorage.getItem('userData'));
+
 //add transaction feature
 document.addEventListener('DOMContentLoaded', () => {
     //fetching all transaction through api
-    async function fetchTransaction(id, ac_id) {
+    async function fetchTransaction(ac_id) {
         try {
-            const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?id=${id}&ac_id=${ac_id}`, {
+            const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?ac_id=${ac_id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': userData.jwt,
                 }
             });
 
@@ -86,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    fetchTransaction(1, accountId); //chnage the user id
+    fetchTransaction(accountId); 
 
     let transactionBtn = document.querySelector('.transaction');
     let formDiv = document.querySelector('.transaction-form');
@@ -117,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         else {
             async function submitTransaction() {
                 let details = {
-                    'user_id': 1,
+                    'user_id': userData.data.user_id,
                     "ac_id": accountId,
                     "created_date": formDetails.created_date.value.trim(),
                     "payee": formDetails.payee.value.trim(),
@@ -162,10 +166,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const transactionId = event.target.getAttribute('transaction-id');
             async function deleteTransaction(id) {
                 try {
-                    const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?id=${id}`, {
+                    const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?transaction_id=${id}`, {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
+                            'Authorization': userData.jwt,
                         }
                     })
 
@@ -190,12 +195,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // //delete account
     document.querySelector('.delete-account').addEventListener('click', () => {
         if (accountId && confirm("Are you sure you want to delete this account?")) {
-            async function deleteAllTransactions(userId, accountId) {
+            async function deleteAllTransactions(accountId) {
                 try {
-                    const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?id=${userId}&ac_id=${accountId}`, {
+                    const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?ac_id=${accountId}`, {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
+                            'Authorization': userData.jwt,
                         }
                     });
 
@@ -235,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            deleteAllTransactions(1, accountId);
+            deleteAllTransactions(accountId);
         }
     });
 
