@@ -62,95 +62,250 @@
                 </span>
             </div>
         </div>
-    
-        <table class="budget-table">
-            <thead>
-                <tr>
-                    <th>CATEGORY</th>
-                    <th class="align-right">ASSIGNED</th>
-                    <th class="align-right">ACTIVITY</th>
-                    <th class="align-right">AVAILABLE</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="4" class="category-header"><i class='bx bxs-chevron-down'></i> Bills <i class='bx bxs-plus-circle' ></i></td>
-                </tr>
-                <tr>
-                    <td><i class='bx bx-trash' ></i> Fee</td>
-                    <td class="align-right">₹15,000</td>
-                    <td class="align-right">₹300</td>
-                    <td class="align-right"><span class="available positive">₹14,700</span></td>
-                </tr>
-                <tr>
-                    <td><i class='bx bx-trash' ></i> Cooking</td>
-                    <td class="align-right">₹5,000</td>
-                    <td class="align-right">₹100</td>
-                    <td class="align-right"><span class="available positive">₹4,900</span></td>
-                </tr>
-                <tr>
-                    <td><i class='bx bx-trash' ></i> Clothes</td>
-                    <td class="align-right">₹5,000</td>
-                    <td class="align-right">₹100</td>
-                    <td class="align-right"><span class="available positive">₹4,900</span></td>
-                </tr>
-                <tr>
-                    <td colspan="4" class="category-header"><i class='bx bxs-chevron-down'></i> Needs <i class='bx bxs-plus-circle' ></i></td>
-                </tr>
-                <tr>
-                    <td><i class='bx bx-trash' ></i> Groceries</td>
-                    <td class="align-right">₹5,000</td>
-                    <td class="align-right">₹6,000</td>
-                    <td class="align-right"><span class="available negative">₹-1,000</span></td>
-                </tr>
-                <tr>
-                    <td><i class='bx bx-trash' ></i> Bike fuel</td>
-                    <td class="align-right">₹5,000</td>
-                    <td class="align-right">₹6,000</td>
-                    <td class="align-right"><span class="available negative">₹-1,000</span></td>
-                </tr>
-                <tr>
-                    <td><i class='bx bx-trash' ></i> Water</td>
-                    <td class="align-right">₹5,000</td>
-                    <td class="align-right">₹6,000</td>
-                    <td class="align-right"><span class="available negative">₹-1,000</span></td>
-                </tr>
-                <tr>
-                    <td><i class='bx bx-trash' ></i> Medicine</td>
-                    <td class="align-right">₹5,000</td>
-                    <td class="align-right">₹6,000</td>
-                    <td class="align-right"><span class="available negative">₹-1,000</span></td>
-                </tr>
-                <tr></tr>
-                    <td colspan="4" class="category-header"><i class='bx bxs-chevron-down'></i> Wants <i class='bx bxs-plus-circle' ></i></td>
-                </tr>
-                <tr>
-                    <td><i class='bx bx-trash' ></i> Groceries</td>
-                    <td class="align-right">₹5,000</td>
-                    <td class="align-right">₹6,000</td>
-                    <td class="align-right"><span class="available negative">₹-1,000</span></td>
-                </tr>
-                <tr>
-                    <td><i class='bx bx-trash' ></i> Bike fuel</td>
-                    <td class="align-right">₹5,000</td>
-                    <td class="align-right">₹6,000</td>
-                    <td class="align-right"><span class="available negative">₹-1,000</span></td>
-                </tr>
-                <tr>
-                    <td><i class='bx bx-trash' ></i> Water</td>
-                    <td class="align-right">₹5,000</td>
-                    <td class="align-right">₹6,000</td>
-                    <td class="align-right"><span class="available negative">₹-1,000</span></td>
-                </tr>
-                <tr>
-                    <td><i class='bx bx-trash' ></i> Medicine</td>
-                    <td class="align-right">₹5,000</td>
-                    <td class="align-right">₹6,000</td>
-                    <td class="align-right"><span class="available negative">₹-1,000</span></td>
-                </tr>
-            </tbody>
-        </table>
+        
+        <div class="category-section">
+            <!-- Category Header -->
+            <div class="category-header">
+                <span>CATEGORY</span>
+                <span>ASSIGNED</span>
+                <span>ACTIVITY</span>
+                <span>AVAILABLE</span>
+            </div>
+
+            <!-- Bills Category -->
+            <div class="category-type">
+                <div class="category-name">
+                    <i class='chevron-icon bx bxs-chevron-down' style="margin-right: 10px;"></i>
+                    <span>Bills</span>
+                    <i class="bx bxs-plus-circle" style="margin-left: 10px;"></i>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available green">₹0</span>
+            </div>
+
+            <!-- Subcategories -->
+            <div class="category-row">
+                <div class="category-name">
+                    <i class='bx bx-trash' style="margin-right: 10px;"></i>
+                    <span>Electricity</span>
+                    <div class="progress-bar">
+                        <div class="bar yellow"></div>
+                    </div>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available green">₹0</span>
+            </div>
+
+            <div class="category-row">
+                <div class="category-name">
+                    <i class='bx bx-trash' style="margin-right: 10px;"></i>
+                    <span>Water</span>
+                    <div class="progress-bar">
+                        <div class="bar green"></div>
+                    </div>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available green">₹0</span>
+            </div>
+
+            <div class="category-row">
+                <div class="category-name">
+                    <i class='bx bx-trash' style="margin-right: 10px;"></i>
+                    <span>Rent</span>
+                    <div class="progress-bar">
+                        <div class="bar green"></div>
+                    </div>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available green">₹0</span>
+            </div>
+
+            <div class="category-row">
+                <div class="category-name">
+                    <i class='bx bx-trash' style="margin-right: 10px;"></i>
+                    <span>Internet</span>
+                    <div class="progress-bar">
+                        <div class="bar green"></div>
+                    </div>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available green">₹0</span>
+            </div>
+
+            <div class="category-row">
+                <div class="category-name">
+                    <i class='bx bx-trash' style="margin-right: 10px;"></i>
+                    <span>Phone</span>
+                    <div class="progress-bar">
+                        <div class="bar green"></div>
+                    </div>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available green">₹0</span>
+            </div>
+
+            <!-- Needs Category -->
+            <div class="category-type">
+                <div class="category-name">
+                    <i class='chevron-icon bx bxs-chevron-down' style="margin-right: 10px;"></i>
+                    <span>Needs</span>
+                    <i class="bx bxs-plus-circle" style="margin-left: 10px;"></i>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available red">₹0</span>
+            </div>
+
+            <div class="category-row">
+                <div class="category-name">
+                    <i class='bx bx-trash' style="margin-right: 10px;"></i>
+                    <span>Groceries</span>
+                    <div class="progress-bar">
+                        <div class="bar green"></div>
+                    </div>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available red">₹0</span>
+            </div>
+
+            <div class="category-row">
+                <div class="category-name">
+                    <i class='bx bx-trash' style="margin-right: 10px;"></i>
+                    <span>Transport</span>
+                    <div class="progress-bar">
+                        <div class="bar green"></div>
+                    </div>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available red">₹0</span>
+            </div>
+
+            <div class="category-row">
+                <div class="category-name">
+                    <i class='bx bx-trash' style="margin-right: 10px;"></i>
+                    <span>Healthcare</span>
+                    <div class="progress-bar">
+                        <div class="bar green"></div>
+                    </div>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available red">₹0</span>
+            </div>
+
+            <div class="category-row">
+                <div class="category-name">
+                    <i class='bx bx-trash' style="margin-right: 10px;"></i>
+                    <span>Insurance</span>
+                    <div class="progress-bar">
+                        <div class="bar green"></div>
+                    </div>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available red">₹0</span>
+            </div>
+
+            <div class="category-row">
+                <div class="category-name">
+                    <i class='bx bx-trash' style="margin-right: 10px;"></i>
+                    <span>Education</span>
+                    <div class="progress-bar">
+                        <div class="bar green"></div>
+                    </div>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available red">₹0</span>
+            </div>
+
+            <!-- Wants Category -->
+            <div class="category-type">
+                <div class="category-name">
+                    <i class='chevron-icon bx bxs-chevron-down' style="margin-right: 10px;"></i>
+                    <span>Wants</span>
+                    <i class="bx bxs-plus-circle" style="margin-left: 10px;"></i>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available red">₹0</span>
+            </div>
+
+            <div class="category-row">
+                <div class="category-name">
+                    <i class='bx bx-trash' style="margin-right: 10px;"></i>
+                    <span>Dining Out</span>
+                    <div class="progress-bar">
+                        <div class="bar green"></div>
+                    </div>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available red">₹0</span>
+            </div>
+
+            <div class="category-row">
+                <div class="category-name">
+                    <i class='bx bx-trash' style="margin-right: 10px;"></i>
+                    <span>Entertainment</span>
+                    <div class="progress-bar">
+                        <div class="bar green"></div>
+                    </div>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available red">₹0</span>
+            </div>
+
+            <div class="category-row">
+                <div class="category-name">
+                    <i class='bx bx-trash' style="margin-right: 10px;"></i>
+                    <span>Hobbies</span>
+                    <div class="progress-bar">
+                        <div class="bar green"></div>
+                    </div>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available red">₹0</span>
+            </div>
+
+            <div class="category-row">
+                <div class="category-name">
+                    <i class='bx bx-trash' style="margin-right: 10px;"></i>
+                    <span>Travel</span>
+                    <div class="progress-bar">
+                        <div class="bar green"></div>
+                    </div>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available red">₹0</span>
+            </div>
+
+            <div class="category-row">
+                <div class="category-name">
+                    <i class='bx bx-trash' style="margin-right: 10px;"></i>
+                    <span>Shopping</span>
+                    <div class="progress-bar">
+                        <div class="bar green"></div>
+                    </div>
+                </div>
+                <span>₹0</span>
+                <span>₹0</span>
+                <span class="available red">₹0</span>
+            </div>
+        </div>
     </div>
+
 
     <form action="" method="post" class="add-account-form">
         <p class="heading">Add Account</p>
@@ -171,7 +326,6 @@
         </div>
     </form>
 
-    
     <script src="../Sidebar/script.js"></script>
     <script src="../Accounts/form.js"></script>
     <script src="budget.js"></script>

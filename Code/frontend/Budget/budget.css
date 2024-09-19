@@ -72,43 +72,104 @@ input[type="month"]:focus {
     border-bottom-left-radius: 30px;
 }
 
-.budget-table {
+.category-section {
     width: 100%;
-    border-collapse: collapse;
     background-color: white;
+    color: #241687;
+    font-weight: 700;
 }
-.budget-table thead{
+
+.category-header {
+    display: grid;
+    grid-template-columns: 1fr 150px 150px 150px;
+    padding: 10px;
+    font-weight: bold;
     color: #FFFFFF;
     background-color: #190582;
 }
-.budget-table th, .budget-table td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 2px solid #A6C9FE;
+
+.category-type i {
+    margin-left: 10px;
+    cursor: pointer;
 }
-.budget-table td{
-    color: #241687;
+.rotate-icon {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
 }
-.budget-table .align-right {
+
+
+
+/* Category Rows */
+.category-type {
+    display: grid;
+    grid-template-columns: 1fr 150px 150px 150px;
+    padding: 10px;
+    background-color: #D4E1FD;
+    border-bottom: 3px solid #7E9EEF;
+}
+.category-type.category-name {
+    display: flex;
+    align-items: center;
+}
+.category-row {
+    display: grid;
+    grid-template-columns: 1fr 150px 150px 150px;
+    padding: 10px;
+    margin-top: 5px;
+    border-bottom: 3px solid #A6C9FE;
+}
+
+.category-row .category-name {
+    display: flex;
+    align-items: center;
+}
+
+.category-row .trash {
+    margin-right: 10px;
+    cursor: pointer;
+    color: #999;
+}
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+}
+
+.progress-bar span {
+    margin-left: 5px;
+}
+
+.progress-bar .bar {
+    height: 10px;
+    width: 100px;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.bar.green {
+    background-color: green;
+}
+
+.bar.yellow {
+    background-color: yellow;
+}
+
+.bar.red {
+    background-color: red;
+}
+
+.available {
+    font-weight: bold;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 50px;
     text-align: center;
 }
-.budget-table .category-header {
-    background-color: #D4E1FD;
-    font-weight: bold;
-    border-radius: 3px;
-    border-color: #7E9EEF;
-}
-.budget-table .available {
-    padding: 5px 10px;
-    border-radius: 5px;
+
+.available.green {
+    background-color: green;
 }
 
-.budget-table .available.positive {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.budget-table .available.negative {
-    background-color: #f8d7da;
-    color: #721c24;
+.available.red {
+    background-color: red;
 }
