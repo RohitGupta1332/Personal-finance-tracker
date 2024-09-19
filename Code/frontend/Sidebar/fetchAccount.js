@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 let jsonResponse = await response.json();
                 let accountDataArray = jsonResponse.data;
 
+                localStorage.setItem('accounts', JSON.stringify(accountDataArray));
+
                 let dropDownList = document.querySelector('.drop-down-list');
                 let TotalAmountDiv = document.querySelector('.total-amount');
                 let TotalAmount = 0;

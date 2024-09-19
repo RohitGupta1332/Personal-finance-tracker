@@ -53,7 +53,18 @@ class Transaction{
     }
     public function getTransactionsByUserId($id){ //pass the user id
         try{
-            $query = "SELECT * FROM Transaction WHERE user_id = :id";
+            $query = "SELECT 
+                    t.*, 
+                    a.ac_name, 
+                    c.category_name
+                FROM 
+                    transaction t
+                JOIN 
+                    Accounts a ON t.ac_id = a.ac_id
+                JOIN 
+                    Category c ON t.category_id = c.category_id
+                WHERE 
+                    t.user_id = :id";
             $runQuery = $this->db->prepare($query);
             $runQuery->bindParam(':id', $id);
             $runQuery->execute();

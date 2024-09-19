@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../Sidebar/style.css">
-    <link rel="stylesheet" href="accounts.css">
-    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="../Accounts/accounts.css">
+    <link rel="stylesheet" href="../Accounts/form.css">
     <title>Document</title>
 </head>
 
@@ -57,8 +57,8 @@
     <!-- accounts page starts here -->
     <div class="account-page">
         <div class="accounts-head">
-            <h1 class="account-name">Accounts-Name</h1>
-            <button class="delete-account"><i class="bx bx-trash"></i>Delete Account</button>
+            <h1 class="account-name">All Accounts</h1>
+            
         </div>
         <hr>
         <div class="balance-details">
@@ -88,6 +88,11 @@
 
         <div class="transaction-form">
             <form action="" class="form">
+
+                <select name="accounts" id="accounts">
+                    <option value="">Select Account</option>
+                </select>
+
                 <input type="date" name="created_date" id="">
                 <input type="text" name="payee" id="" placeholder="Payee"></td>
     
@@ -114,6 +119,7 @@
                 <thead>
                     <tr>
                         <th></th>
+                        <th>Account</th>
                         <th>Date</th>
                         <th>Payee</th>
                         <th>Category</th>
@@ -152,10 +158,10 @@
             <button type="button" class="account-cancel-btn">Cancel</button>
         </div>
     </form>
-    <script src="../Sidebar/fetchAccount.js"></script>
-    <script src="fetchTransactions.js"></script>
-    <script src="form.js"></script>
 
+    <script src="../Sidebar/fetchAccount.js"></script>
+    <script src="../Accounts/form.js"></script>
+    <script src="fetchAllAccounts.js"></script>
 </body>
 
 </html>
