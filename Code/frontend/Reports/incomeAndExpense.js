@@ -1,9 +1,13 @@
-async function fetchIncomeAndExpense(user_id) {
+const userData = JSON.parse(localStorage.getItem('userData'));
+
+
+async function fetchIncomeAndExpense() {
     try {
-        let response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?id=${user_id}&summary=monthly`, {
+        let response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?summary=monthly`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': userData.jwt,
             }
         });
 
@@ -70,4 +74,4 @@ function updateLineChart(months, incomeData, expenseData) {
     chart.update();
 }
 
-fetchIncomeAndExpense(1);
+fetchIncomeAndExpense();

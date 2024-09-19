@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    const userData = JSON.parse(localStorage.getItem('userData'));
+
+
     document.querySelector('.add-account-btn').addEventListener('click', () => {
         let addAccountForm = document.querySelector('.add-account-form');
         addAccountForm.classList.toggle('add-account-form-visible');
@@ -24,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let account_type = formDetails.account_type.value.trim();
                 let balance = parseFloat(formDetails.balance.value.trim());
                 let details = {
-                    "user_id": 1,
+                    "user_id": userData.data.user_id,
                     "ac_name": account_name,
                     "ac_type": account_type,
                     "ac_balance": balance
@@ -36,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify(details) // Fixed typo here
+                        body: JSON.stringify(details) 
                     });
     
                     if (response.ok) {

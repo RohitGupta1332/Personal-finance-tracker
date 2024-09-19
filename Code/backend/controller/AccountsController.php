@@ -1,4 +1,8 @@
 <?php
+
+require '../vendor/autoload.php';
+use \Firebase\JWT\JWT;  // Correctly use JWT in uppercase
+
 // CORS headers
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS');
@@ -17,6 +21,7 @@ include 'C:\xampp\htdocs\Minor Project\Code\backend\model\Accounts.php';
 
 $conn = new Database();
 $db = $conn->connect();
+$secretkey = "owt125";
 
 $accounts = new Accounts($db);
 
@@ -35,25 +40,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 // Handle GET request
 else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if (isset($_GET['id'])) {
-        $id = $_GET['id'];
-        $result = $accounts->getData($id);
+    $headers = getallheaders();
+    
+    if (!empty($headers['Authorization'])) {
+        $authHeader = $headers['Authorization'];        
+        // Remove "Bearer " from the header value to extract the token
+        $jwt = str_replace('Bearer ', '', $authHeader);
 
-        if ($result) {
-            http_response_code(200); // OK
-            echo json_encode([
-                "data" => $result,
-                "message" => "Data received"
-            ]);
-        } else {
-            http_response_code(404); // Not Found
-            echo json_encode(["message" => "Data not found"]);
+        try {
+            // Decode the JWT
+            $decoded_data = JWT::decode($jwt, new \Firebase\JWT\Key($secretkey, 'HS256'));
+
+            $result = $accounts->getData($decoded_data->user_id->id);
+
+            if ($result) {
+                http_response_code(200); // OK
+                echo json_encode([
+                    "data" => $result,
+                    "message" => "Data received"
+                ]);
+            } else {
+                http_response_code(404); // Not Found
+                echo json_encode(["message" => "Data not found"]);
+            }
+        } catch (Exception $e) {
+            http_response_code(401); // Unauthorized
+            echo json_encode(["message" => "Invalid token"]);
         }
     } else {
         http_response_code(400); // Bad Request
-        echo json_encode(["message" => "Missing ID parameter"]);
+        echo json_encode(["message" => "Authorization token not provided"]);
     }
 }
+
 // Handle DELETE request
 else if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     if (isset($_GET['id'])) {
