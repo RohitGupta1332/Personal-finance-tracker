@@ -76,30 +76,22 @@ input[type="month"]:focus {
     width: 100%;
     background-color: white;
     color: #241687;
-    font-weight: 700;
+    font-weight: 500;
+    font-size: 20px;
 }
 
 .category-header {
     display: grid;
     grid-template-columns: 1fr 150px 150px 150px;
-    padding: 10px;
-    font-weight: bold;
+    padding: 15px;
     color: #FFFFFF;
     background-color: #190582;
 }
-
 .category-type i {
-    margin-left: 10px;
+    margin: 10px;
+    font-size: 20px;
     cursor: pointer;
 }
-.rotate-icon {
-    transform: rotate(180deg);
-    transition: transform 0.3s ease;
-}
-
-
-
-/* Category Rows */
 .category-type {
     display: grid;
     grid-template-columns: 1fr 150px 150px 150px;
@@ -107,8 +99,13 @@ input[type="month"]:focus {
     background-color: #D4E1FD;
     border-bottom: 3px solid #7E9EEF;
 }
-.category-type.category-name {
+.category-type .category-name {
+    align-self: center;
+}
+.category-type .category-value {
     display: flex;
+    justify-content: space-between;
+    width: 380px;
     align-items: center;
 }
 .category-row {
@@ -118,58 +115,38 @@ input[type="month"]:focus {
     margin-top: 5px;
     border-bottom: 3px solid #A6C9FE;
 }
-
+.category-row i {
+    padding: 10px;
+    cursor: pointer;
+}
 .category-row .category-name {
     display: flex;
     align-items: center;
+    padding-right: 200px;
 }
-
+.category-row .category-value {
+    display: flex;
+    justify-content: space-between;
+    width: 380px;
+    align-items: center;
+}
 .category-row .trash {
     margin-right: 10px;
     cursor: pointer;
-    color: #999;
 }
 
 .progress-bar {
-    display: flex;
-    align-items: center;
-}
-
-.progress-bar span {
-    margin-left: 5px;
-}
-
-.progress-bar .bar {
-    height: 10px;
-    width: 100px;
-    border-radius: 5px;
-    margin-left: 5px;
-}
-
-.bar.green {
+    height: 16px;
+    width: 150px;
+    border-radius: 30px;
     background-color: green;
-}
-
-.bar.yellow {
-    background-color: yellow;
-}
-
-.bar.red {
-    background-color: red;
+    margin-left: auto;
 }
 
 .available {
-    font-weight: bold;
     color: white;
     padding: 5px 10px;
-    border-radius: 50px;
+    border-radius: 60px;
     text-align: center;
-}
-
-.available.green {
     background-color: green;
-}
-
-.available.red {
-    background-color: red;
 }
