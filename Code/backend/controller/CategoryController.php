@@ -46,6 +46,9 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 $result = $category->getTotalCategoryWise($user_id, $date);
 
             }
+            else{
+                $result = $category->getCategories($user_id);
+            }
 
             if ($result) {
                 http_response_code(200);
@@ -64,5 +67,22 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     } else {
         http_response_code(400); // Bad Request
         echo json_encode(["message" => "Authorization token not provided"]);
+    }
+}
+else if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    $result = $category->insertCategory($data);
+    if($result){
+        http_response_code(201);
+        echo json_encode([
+            "message" => "Insert Successful"
+        ]);
+    }
+    else{
+        http_response_code(500);
+        echo json_encode([
+            "message" => "Insert failed"
+        ]);
     }
 }

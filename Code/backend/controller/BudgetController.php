@@ -1,4 +1,8 @@
 <?php
+
+require '../vendor/autoload.php';
+use \Firebase\JWT\JWT;  // Correctly use JWT in uppercase
+
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -15,6 +19,8 @@ include 'C:\xampp\htdocs\Minor Project\Code\backend\model\Budget.php';
 $database = new Database();
 $db = $database->connect();
 
+$secretkey = "owt125";
+
 $budget = new Budget($db);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -23,45 +29,96 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($result) {
         http_response_code(201);
-        echo json_encode(["message" => "Budget entry added."]);
+        echo json_encode(["message" => "Insert Successful"]);
     } else {
         http_response_code(500);
-        echo json_encode(["message" => "Failed to add budget entry."]);
+        echo json_encode(["message" => "Insert Failed"]);
     }
 }
 
 else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if (isset($_GET['user_id'])) {
-        $user_id = $_GET['user_id'];
-        $budgets = $budget->getBudgetsByUser($user_id);
+    $headers = getallheaders();
 
-        if ($budgets) {
-            $activity = $budget->getActivityByCategory($user_id);
-            $response = [];
+    if (!empty($headers['Authorization'])) {
+        $authHeader = $headers['Authorization'];
+        // Remove "Bearer " from the header value to extract the token
+        $jwt = str_replace('Bearer ', '', $authHeader);
 
-            foreach ($budgets as $budget) {
-                $activityAmount = 0;
-                foreach ($activity as $act) {
-                    if ($act['category_id'] == $budget['category_id']) {
-                        $activityAmount = $act['total_activity'];
-                    }
-                }
+        try {
+            // Decode the JWT
+            $decoded_data = JWT::decode($jwt, new \Firebase\JWT\Key($secretkey, 'HS256'));
 
-                $available = $budget['total_assigned'] - $activityAmount;
-                $response[] = [
-                    "category" => $budget['category_name'],
-                    "total_assigned" => $budget['total_assigned'],
-                    "total_activity" => $activityAmount,
-                    "available" => $available
-                ];
+            // Extract the user ID from the token
+            $user_id = $decoded_data->user_id->id;
+
+            // Check if 'ac_id' is provided in the query parameters
+            if (isset($_GET['date'])) {
+                $date = $_GET['date'];
+                $result = $budget->getBudget($user_id, $date);
+
             }
 
-            http_response_code(200);
-            echo json_encode($response);
-        } else {
-            http_response_code(404);
-            echo json_encode(["message" => "No data found."]);
+            if ($result) {
+                http_response_code(200);
+                echo json_encode([
+                    "data" => $result,
+                    "message" => "Data received"
+                ]);
+            } else {
+                http_response_code(404); // Not Found
+                echo json_encode(["message" => "Record not found"]);
+            }
+        } catch (Exception $e) {
+            http_response_code(401); // Unauthorized
+            echo json_encode(["message" => "Invalid token"]);
         }
+    } else {
+        http_response_code(400); // Bad Request
+        echo json_encode(["message" => "Authorization token not provided"]);
     }
+}
+
+else if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+    $headers = getallheaders();
+
+    if (!empty($headers['Authorization'])) {
+        $authHeader = $headers['Authorization'];
+        // Remove "Bearer " from the header value to extract the token
+        $jwt = str_replace('Bearer ', '', $authHeader);
+
+        try {
+            // Decode the JWT
+            $decoded_data = JWT::decode($jwt, new \Firebase\JWT\Key($secretkey, 'HS256'));
+
+            // Extract the user ID from the token
+            $user_id = $decoded_data->user_id->id;
+
+            // Check if 'ac_id' is provided in the query parameters
+            if (isset($_GET['budget_id'])) {
+                $budget_id = $_GET['budget_id'];
+                $result = $budget->deleteBudget($budget_id);
+                
+            } 
+
+            if ($result) {
+                http_response_code(200); // OK
+                echo json_encode(["message" => "Delete successful"]);
+            } else {
+                http_response_code(404); // Not Found
+                echo json_encode(["message" => "Record not found"]);
+            }
+        } catch (Exception $e) {
+            http_response_code(401); // Unauthorized
+            echo json_encode(["message" => "Invalid token"]);
+        }
+    } else {
+        http_response_code(400); // Bad Request
+        echo json_encode(["message" => "Authorization token not provided"]);
+    }
+}
+
+else{
+    http_response_code(405);
+    echo json_encode(["message" => "Invalid request method"]);
 }
 ?>

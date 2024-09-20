@@ -41,6 +41,42 @@ class Category{
             return null;
         }
     }
+
+    public function insertCategory($data){
+        try{
+            $this->user_id = $data['user_id'];
+            $this->category_type = $data['category_type'];
+            $this->category_name = $data['category_name'];
+
+            $query = "INSERT INTO category(user_id, category_type, category_name) VALUES (:user_id, :category_type, :category_name)";
+            $runQuery = $this->db->prepare($query);
+
+            $runQuery->bindParam(':user_id', $this->user_id);
+            $runQuery->bindParam(':category_type', $this->category_type);
+            $runQuery->bindParam(':category_name', $this->category_name);
+
+            return $runQuery->execute();
+        }
+        catch(Exception $e){
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function getCategories($user_id){
+        try{
+            $query = "SELECT * FROM category WHERE user_id = 0 OR user_id = :user_id";
+            $runQuery = $this->db->prepare($query);
+            $runQuery->bindParam(':user_id', $user_id);
+            $runQuery->execute();
+            return $runQuery->fetchAll();
+
+        }
+        catch(Exception $e){
+            echo "Error: " . $e->getMessage();
+            return null;
+        }
+    }
 }
 
 ?>
