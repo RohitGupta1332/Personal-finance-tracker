@@ -1,3 +1,80 @@
+const userData = JSON.parse(localStorage.getItem('userData'));
+document.addEventListener("DOMContentLoaded", function () {
+    // Select elements
+    const addButtons = document.querySelectorAll('.add');
+    const categoryForms = document.querySelectorAll('.category-form');
+    const categoryRows = document.querySelectorAll('.category-row');
+    const saveButtons = document.querySelectorAll('.save-btn');
+    const cancelButtons = document.querySelectorAll('.cancel-btn');
+
+    // Add new budget event
+    addButtons.forEach((addButton, index) => {
+        addButton.addEventListener('click', () => {
+            // Toggle the form visibility
+            const isVisible = categoryForms[index].style.display === "block";
+            categoryForms[index].style.display = isVisible ? "none" : "block";
+        });
+    });
+
+    // Save new budget event
+    saveButtons.forEach((saveButton, index) => {
+        saveButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            
+            // Get values from the form
+            const categoryNameInput = categoryForms[index].querySelector("#name").value;
+            const assignedAmountInput = categoryForms[index].querySelector("#assigned").value;
+            
+            // Create a new category row dynamically
+            const newRow = document.createElement('div');
+            newRow.classList.add('category-row');
+            newRow.innerHTML = `
+                <div class="category-name">
+                    <i class='bx bx-trash'></i>
+                    <span>${categoryNameInput}</span>
+                    <div class="progress-bar"></div>
+                </div>
+                <div class="category-value">
+                    <span>₹${assignedAmountInput}</span>
+                    <span>₹0</span>
+                    <span class="available">₹${assignedAmountInput}</span>
+                </div>
+            `;
+
+            // Append the new row to the category section
+            categoryRows[index].parentNode.insertBefore(newRow, categoryForms[index]);
+
+            // Clear the form inputs and hide the form
+            categoryForms[index].querySelector("#name").value = '';
+            categoryForms[index].querySelector("#assigned").value = '';
+            categoryForms[index].style.display = "none";
+
+            // Add delete event listener to the trash icon
+            const trashIcon = newRow.querySelector('.bx-trash');
+            trashIcon.addEventListener('click', () => {
+                newRow.remove();
+            });
+        });
+    });
+
+    // Cancel button hides the form without saving
+    cancelButtons.forEach((cancelButton, index) => {
+        cancelButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            categoryForms[index].style.display = "none";
+        });
+    });
+
+    // Delete budget rows when clicking the trash icon
+    const trashIcons = document.querySelectorAll('.bx-trash');
+    trashIcons.forEach((trashIcon) => {
+        trashIcon.addEventListener('click', function () {
+            this.parentElement.parentElement.remove();
+        });
+    });
+});
+
+
 //calender
 const dateInput = document.getElementById('dateInput');
 const currentDate = new Date();
@@ -18,97 +95,3 @@ accountDataArray.forEach(account => {
 
 let TotalAmountDiv = document.querySelector('.total-balance');
 TotalAmountDiv.textContent = `₹${TotalAmount}`;
-
-
-
-//budget 
-// Function to fetch budget data from the backend
-async function fetchBudgets(user_id) {
-    try {
-        const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/BudgetController.php?user_id=${user_id}`);
-        if (response.ok) {
-            const data = await response.json();
-            console.log("Fetched budgets:", data);
-            displayBudgets(data);
-        } else {
-            console.error("Error fetching budgets:", response.statusText);
-        }
-    } catch (error) {
-        console.error("Fetch error:", error);
-    }
-}
-
-// Function to add new budget data to the backend
-async function addBudget(budgetData) {
-    try {
-        const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/BudgetController.php?budgetData=${budgetData}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(budgetData)
-        });
-
-        if (response.ok) {
-            const result = await response.json();
-            console.log("Budget added successfully:", result);
-            alert(result.message);
-            fetchBudgets(budgetData.user_id);  // Refresh the budget list after adding
-        } else {
-            console.error("Error adding budget:", response.statusText);
-        }
-    } catch (error) {
-        console.error("Post error:", error);
-    }
-}
-
-// Function to display budget data on the page
-function displayBudgets(budgets) {
-    const categoryList = document.getElementById('category-list');
-    categoryList.innerHTML = '';  // Clear the existing content
-
-    budgets.forEach(budget => {
-        const categoryRow = `
-            <div class="category-row">
-                <p>${budget.category}</p>
-                <p>₹${budget.total_assigned.toLocaleString()}</p>
-                <p>₹${budget.total_activity.toLocaleString()}</p>
-                <p class="${budget.available < 0 ? 'negative' : ''}">₹${budget.available.toLocaleString()}</p>
-            </div>
-        `;
-
-        categoryList.innerHTML += categoryRow;
-    });
-}
-
-// Event listener for adding a new budget entry
-document.getElementById('add-budget-form').addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    const user_id = 1; // Example user ID
-    const category_id = document.getElementById('category_id').value;
-    const category_type = document.getElementById('category_type').value;
-    const category_name = document.getElementById('category_name').value;
-    const outflow = document.getElementById('outflow').value;
-    const assigned = document.getElementById('assigned').value;
-    const available = assigned - outflow; // Simple calculation for available
-
-    const budgetData = {
-        user_id,
-        category_id,
-        category_type,
-        category_name,
-        outflow,
-        assigned,
-        available
-    };
-
-    // Add budget to backend
-    addBudget(budgetData);
-});
-
-// Example: Fetch budget data for a specific user on page load
-document.addEventListener('DOMContentLoaded', () => {
-    const user_id = 1;  // Example user ID
-    fetchBudgets(user_id);
-});

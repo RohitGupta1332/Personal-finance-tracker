@@ -150,3 +150,50 @@ input[type="month"]:focus {
     text-align: center;
     background-color: green;
 }
+
+.category-form {
+    display: none;
+    background-color: #7E9EEF;
+}
+
+.category-form .visible {
+    display: block; 
+}
+
+.category-form #name{
+    padding: 5px;
+    margin: 10px 500px 10px 50px;
+    border-radius: 10px;
+    border: 1px solid #E0E0E0;
+}
+.category-form #assigned{
+    padding: 5px;
+    margin: 10px 5px;
+    border-radius: 10px;
+    border: 1px solid #E0E0E0;
+}
+.form {
+    display: flex;
+    align-items: center;
+    border: none;
+}
+.category-form .save-btn{
+    color: white;
+    font-size: 12px;
+    font-weight: 400;
+    background: #190582;
+    border-radius: 12px;
+    border: 1px black solid;
+    padding: 8px 30px;
+    margin: 10px;
+}
+.category-form .cancel-btn{
+    color: #190582;
+    background-color: white;
+    font-size: 12px;
+    font-weight: 400;
+    border-radius: 12px;
+    border: 1px black solid;
+    padding: 8px 25px;
+    margin: 10px 22px;
+}
