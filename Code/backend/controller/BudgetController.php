@@ -13,8 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit();
 }
 
-include 'D:\Minor Project\Personal-finance-tracker\Code\backend\config\Database.php';
-include 'D:\Minor Project\Personal-finance-tracker\Code\backend\model\Budget.php';
+include 'C:\xampp\htdocs\Minor Project\Code\backend\config\Database.php';
+include 'C:\xampp\htdocs\Minor Project\Code\backend\model\Budget.php';
 
 $database = new Database();
 $db = $database->connect();

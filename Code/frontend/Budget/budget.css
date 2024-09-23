@@ -87,11 +87,6 @@ input[type="month"]:focus {
     color: #FFFFFF;
     background-color: #190582;
 }
-.category-type i {
-    margin: 10px;
-    font-size: 20px;
-    cursor: pointer;
-}
 .category-type {
     display: grid;
     grid-template-columns: 1fr 150px 150px 150px;
@@ -107,6 +102,20 @@ input[type="month"]:focus {
     justify-content: space-between;
     width: 380px;
     align-items: center;
+}
+.category-type i {
+    margin: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.chevron-icon{
+    font-size: 30px;
+}
+.chevron-icon-rotate{
+    transform: rotate(180deg);
+}
+.category-row-hide{
+    display: none;
 }
 .category-row {
     display: grid;
@@ -186,6 +195,7 @@ input[type="month"]:focus {
     border: 1px black solid;
     padding: 8px 30px;
     margin: 10px;
+    cursor: pointer;
 }
 .category-form .cancel-btn{
     color: #190582;
@@ -196,4 +206,5 @@ input[type="month"]:focus {
     border: 1px black solid;
     padding: 8px 25px;
     margin: 10px 22px;
+    cursor: pointer;
 }
