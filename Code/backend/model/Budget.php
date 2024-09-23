@@ -36,7 +36,22 @@ class Budget {
 
     public function getBudget($user_id, $date){
         try{
-            $query = "SELECT * FROM budget WHERE user_id = :user_id AND DATE_FORMAT(created_date, '%Y-%m') = :date";
+            $query = "SELECT 
+                        c.category_id,
+                        c.category_name,
+                        c.category_type,
+                        IFNULL(b.budget_amount, 0) AS budget_amount,
+                        DATE_FORMAT(b.created_date, '%Y-%m') AS budget_month
+                        FROM 
+                            category c
+                        LEFT JOIN 
+                            budget b ON c.category_id = b.category_id AND c.user_id = b.user_id 
+                                    AND DATE_FORMAT(b.created_date, '%Y-%m') = :date
+                        WHERE 
+                            c.user_id = :user_id
+                        OR
+                            c.user_id = 0
+                        ";
             $runQuery = $this->db->prepare($query);
             $runQuery->bindParam(':user_id', $user_id);
             $runQuery->bindParam(':date', $date);
