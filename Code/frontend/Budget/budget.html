@@ -54,7 +54,7 @@
 <!--Main content-->
     <div class="main-content">
         <div class="header">
-            <input type="month" id="dateInput" name="date"/>
+            <input type="month" class="date" />
             <div class="balance">
                 <p>Balance</p>
                 <span class="total-balance">
@@ -64,282 +64,27 @@
         </div>
         
         <div class="category-section">
-            <!-- Category Header -->
-            <div class="category-header">
-                <span>CATEGORY</span>
-                <span>ASSIGNED</span>
-                <span>ACTIVITY</span>
-                <span>AVAILABLE</span>
-            </div>
-            <!-- Bills Category -->
-            <div class="category-container">
-            <div class="category-type">
-                <div class="category-name">
-                    <i class='chevron-icon bx bxs-chevron-down'></i>
-                    <span>Bills</span>
-                    <i class="bx bxs-plus-circle add"></i>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span>₹0</span>
-                </div>
-            </div>
-            <div class="category-form">
-                <form action="" class="form">
-                    <input type="text" name="category_id" id="name" placeholder="Category">
-                    <input type="number" name="assigned" id="assigned" placeholder="Assign">
-                    <button class="cancel-btn">Cancel</button>
-                    <button class="save-btn">Save</button>
-                </form>
-            </div>
-            </div>
-            <!-- Subcategories -->
-            <div class="dropdown">
-            <div class="category-row">
-                <div class="category-name">
-                    <i class='bx bx-trash'></i>
-                    <span>Electricity</span>
-                    <div class="progress-bar"></div>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span class="available">₹0</span>
-                </div>
-            </div>
-
-            <div class="category-row">
-                <div class="category-name">
-                    <i class='bx bx-trash'></i>
-                    <span>Water</span>
-                    <div class="progress-bar"></div>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span class="available">₹0</span>
-                </div>
-            </div>
-
-            <div class="category-row">
-                <div class="category-name">
-                    <i class='bx bx-trash'></i>
-                    <span>Rent</span>
-                    <div class="progress-bar"></div>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span class="available">₹0</span>
-                </div>
-            </div>
-
-            <div class="category-row">
-                <div class="category-name">
-                    <i class='bx bx-trash'></i>
-                    <span>Internet</span>
-                    <div class="progress-bar"></div>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span class="available">₹0</span>
-                </div>
-            </div>
-
-            <div class="category-row">
-                <div class="category-name">
-                    <i class='bx bx-trash'></i>
-                    <span>Phone</span>
-                    <div class="progress-bar"></div>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span class="available">₹0</span>
-                </div>
-            </div>
-            </div>
-            <!-- Needs Category -->
-            <div class="category-container">
-            <div class="category-type">
-                <div class="category-name">
-                    <i class='chevron-icon bx bxs-chevron-down'></i>
-                    <span>Needs</span>
-                    <i class="bx bxs-plus-circle add"></i>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span>₹0</span>
-                </div>
-            </div>
-            <div class="category-form">
-                <form action="" class="form">
-                    <input type="text" name="category_id" id="name" placeholder="Category">
-                    <input type="number" name="assigned" id="assigned" placeholder="Assign">
-                    <button class="cancel-btn">Cancel</button>
-                    <button class="save-btn">Save</button>
-                </form>
-            </div>
-            </div>
-            <div class="dropdown">
-            <div class="category-row">
-                <div class="category-name">
-                    <i class='bx bx-trash'></i>
-                    <span>Groceries</span>
-                    <div class="progress-bar"></div>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span class="available">₹0</span>
-                </div>
-            </div>
-
-            <div class="category-row">
-                <div class="category-name">
-                    <i class='bx bx-trash'></i>
-                    <span>Transport</span>
-                    <div class="progress-bar"></div>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span class="available">₹0</span>
-                </div>
-            </div>
-
-            <div class="category-row">
-                <div class="category-name">
-                    <i class='bx bx-trash'></i>
-                    <span>Healthcare</span>
-                    <div class="progress-bar"></div>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span class="available">₹0</span>
-                </div>
-            </div>
-
-            <div class="category-row">
-                <div class="category-name">
-                    <i class='bx bx-trash'></i>
-                    <span>Insurance</span>
-                    <div class="progress-bar"></div>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span class="available">₹0</span>
-                </div>
-            </div>
-
-            <div class="category-row">
-                <div class="category-name">
-                    <i class='bx bx-trash'></i>
-                    <span>Education</span>
-                    <div class="progress-bar"></div>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span class="available">₹0</span>
-                </div>
-            </div>
-            </div>
-            <!-- Wants Category -->
-            <div class="category-container">
-            <div class="category-type">
-                <div class="category-name">
-                    <i class='chevron-icon bx bxs-chevron-down'></i>
-                    <span>Wants</span>
-                    <i class="bx bxs-plus-circle add"></i>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span>₹0</span>
-                </div>
-            </div>
-            <div class="category-form">
-                <form action="" class="form">
-                    <input type="text" name="category_id" id="name" placeholder="Category">
-                    <input type="number" name="assigned" id="assigned" placeholder="Assign">
-                    <button class="cancel-btn">Cancel</button>
-                    <button class="save-btn">Save</button>
-                </form>
-            </div>
-            </div>
-            <div class="dropdown">
-            <div class="category-row">
-                <div class="category-name">
-                    <i class='bx bx-trash'></i>
-                    <span>Dining Out</span>
-                    <div class="progress-bar"></div>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span class="available">₹0</span>
-                </div>
-            </div>
-
-            <div class="category-row">
-                <div class="category-name">
-                    <i class='bx bx-trash'></i>
-                    <span>Entertainment</span>
-                    <div class="progress-bar"></div>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span class="available">₹0</span>
-                </div>
-            </div>
-
-            <div class="category-row">
-                <div class="category-name">
-                    <i class='bx bx-trash'></i>
-                    <span>Hobbies</span>
-                    <div class="progress-bar"></div>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span class="available">₹0</span>
-                </div>
-            </div>
-
-            <div class="category-row">
-                <div class="category-name">
-                    <i class='bx bx-trash'></i>
-                    <span>Travel</span>
-                    <div class="progress-bar"></div>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span class="available">₹0</span>
-                </div>
-            </div>
-
-            <div class="category-row">
-                <div class="category-name">
-                    <i class='bx bx-trash'></i>
-                    <span>Shopping</span>
-                    <div class="progress-bar"></div>
-                </div>
-                <div class="category-value">
-                    <span>₹0</span>
-                    <span>₹0</span>
-                    <span class="available">₹0</span>
-                </div>
-            </div>
-            </div>
+            <table>
+                <thead class="category-header">
+                    <tr>
+                        <th>CATEGORY</th>
+                        <th>ASSIGNED</th>
+                        <th>ACTIVITY</th>
+                        <th>AVAILABLE</th>
+                    </tr>
+                </thead>
+                <tbody class="bills">
+                    <!-- Rows for Bills will be inserted here -->
+                </tbody>
+                <tbody class="needs">
+                    <!-- Rows for Needs will be inserted here -->
+                </tbody>
+                <tbody class="wants">
+                    <!-- Rows for Wants will be inserted here -->
+                </tbody>
+            </table>
         </div>
+        
     </div>
 
     <form action="" method="post" class="add-account-form">

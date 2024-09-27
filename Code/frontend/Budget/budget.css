@@ -40,7 +40,7 @@ input[type="month"]:focus {
 }
 
 .balance {
-    padding: 12px 0px 12px 12px;
+    padding: 12px 0px 14px 12px;
     font-size: 16px;
     border: 2px solid #ccc;
     border-radius: 5px;
@@ -48,7 +48,7 @@ input[type="month"]:focus {
     color: #190582;
     font-weight: 600;
     outline: none;
-    width: 160px;
+    width: 200px;
     transition: border-color 0.3s;
     display: flex;
     justify-content: space-between;
@@ -65,11 +65,18 @@ input[type="month"]:focus {
 }
 
 .total-balance {
-    font-size: 24px;
+    font-size: 20px;
     background-color: #241687;
     color: #FFFFFF;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 18px;
+    text-align: left;
+    font-size: 14px;
 }
 
 .category-section {
@@ -80,24 +87,24 @@ input[type="month"]:focus {
     font-size: 20px;
 }
 
-.category-header {
+.category-header tr {
     display: grid;
     grid-template-columns: 1fr 150px 150px 150px;
     padding: 15px;
     color: #FFFFFF;
     background-color: #190582;
 }
-.category-type {
+.bills, .needs, .wants {
     display: grid;
     grid-template-columns: 1fr 150px 150px 150px;
     padding: 10px;
     background-color: #D4E1FD;
     border-bottom: 3px solid #7E9EEF;
 }
-.category-type .category-name {
+.bills tbody, .needs tbody, .wants tbody {
     align-self: center;
 }
-.category-type .category-value {
+.bills tr, .needs tr, .wants tr{
     display: flex;
     justify-content: space-between;
     width: 380px;
@@ -108,15 +115,7 @@ input[type="month"]:focus {
     font-size: 20px;
     cursor: pointer;
 }
-.chevron-icon{
-    font-size: 30px;
-}
-.chevron-icon-rotate{
-    transform: rotate(180deg);
-}
-.category-row-hide{
-    display: none;
-}
+
 .category-row {
     display: grid;
     grid-template-columns: 1fr 150px 150px 150px;
@@ -169,15 +168,9 @@ input[type="month"]:focus {
     display: block; 
 }
 
-.category-form #name{
+.category-form .name{
     padding: 5px;
     margin: 10px 500px 10px 50px;
-    border-radius: 10px;
-    border: 1px solid #E0E0E0;
-}
-.category-form #assigned{
-    padding: 5px;
-    margin: 10px 5px;
     border-radius: 10px;
     border: 1px solid #E0E0E0;
 }
