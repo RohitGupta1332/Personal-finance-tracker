@@ -40,7 +40,7 @@ class Budget {
                         c.category_id,
                         c.category_name,
                         c.category_type,
-                        IFNULL(b.budget_amount, 0) AS budget_amount,
+                        IFNULL(b.assigned, 0) AS budget_amount,
                         DATE_FORMAT(b.created_date, '%Y-%m') AS budget_month
                         FROM 
                             category c
@@ -49,8 +49,6 @@ class Budget {
                                     AND DATE_FORMAT(b.created_date, '%Y-%m') = :date
                         WHERE 
                             c.user_id = :user_id
-                        OR
-                            c.user_id = 0
                         ";
             $runQuery = $this->db->prepare($query);
             $runQuery->bindParam(':user_id', $user_id);

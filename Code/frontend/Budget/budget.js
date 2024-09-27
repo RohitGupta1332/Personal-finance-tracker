@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //fetching all budget through api
     async function fetchBudget(user_id, date) {
         try {
-            const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/BudgetController.php?user_id=${user_id}&date=${date}, `, {
+            const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/BudgetController.php?date=${date}, `, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
