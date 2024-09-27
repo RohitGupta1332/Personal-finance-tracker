@@ -36,43 +36,6 @@ const userData = JSON.parse(localStorage.getItem('userData'));
 // budget feature
 document.addEventListener('DOMContentLoaded', () => {
 
-    async function fetchAccount() {
-        try {
-            let response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/AccountsController.php`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': userData.jwt,
-                }
-            });
-
-            if (response.ok) {
-                let jsonResponse = await response.json();
-                let accountDataArray = jsonResponse.data;
-                let TotalAmountDiv = document.querySelector('.total-balance');
-                let TotalAmount = 0;
-
-                /* Clear the previous list items
-                balance.innerHTML = '';*/
-
-                // Show the account and its balance individually
-                accountDataArray.forEach(account => {
-                    let amount = document.createElement('span');
-                    amount.textContent = `₹${account.ac_balance}`;
-
-                    TotalAmount += parseFloat(account.ac_balance);
-                });
-
-                TotalAmountDiv.textContent = `₹${TotalAmount}`;
-
-            } else {
-                console.error('HTTP error:', response.status, response.statusText);
-            }
-        } catch (error) {
-            console.error('Fetch error:', error);
-        }
-    }
-    fetchAccount(2);
 
     //fetching all budget through api
     async function fetchBudget(user_id, date) {

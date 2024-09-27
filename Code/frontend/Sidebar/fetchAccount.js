@@ -27,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 let dropDownList = document.querySelector('.drop-down-list');
                 let TotalAmountDiv = document.querySelector('.total-amount');
+                let totalbalance = document.querySelector('.total-balance');
+                
                 let TotalAmount = 0;
 
                 // Clear the previous list items
@@ -54,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 TotalAmountDiv.textContent = `₹${TotalAmount}`;
+                totalbalance.textContent = `₹${TotalAmount}`
 
                 // Update local storage with the current month's total
                 updateLocalStorageWithCurrentMonth(TotalAmount);
