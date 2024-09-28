@@ -194,29 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // //delete account
     document.querySelector('.delete-account').addEventListener('click', () => {
         if (accountId && confirm("Are you sure you want to delete this account?")) {
-            async function deleteAllTransactions(accountId) {
-                try {
-                    const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/TransactionController.php?ac_id=${accountId}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': userData.jwt,
-                        }
-                    });
-
-                    if (response.ok) {
-                        console.log("All transactions deleted successfully!");
-                        // After deleting transactions, delete the account
-                        await deleteAccount(accountId);
-                    } else {
-                        console.error('HTTP error:', response.status, response.statusText);
-                        alert("Failed to delete transactions.");
-                    }
-                } catch (error) {
-                    console.error('Fetch error:', error);
-                    alert("An error occurred while deleting transactions.");
-                }
-            }
 
             async function deleteAccount(id) {
                 try {
@@ -240,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            deleteAllTransactions(accountId);
+            deleteAccount(accountId);
         }
     });
 
