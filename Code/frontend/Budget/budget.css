@@ -118,10 +118,11 @@ table {
     text-align: left;
 }
 .bills tr:not(:first-child) input, .needs tr:not(:first-child) input, .wants tr:not(:first-child) input {
+    width: 100px;
     padding: 5px;
     margin: 10px 5px;
     border-radius: 10px;
-    border: 1px solid #E0E0E0;
+    border: 1px solid #7E9EEF;
 }
 .category-type td i {
     margin: 10px;
