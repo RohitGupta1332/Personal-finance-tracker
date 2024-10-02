@@ -20,7 +20,7 @@ date.addEventListener('change', (event) => {
     const newMonthIndex = parseInt(newDate.substring(5, 7), 10) - 1;
     const newMonth = monthNames[newMonthIndex];
     document.querySelector('.date').textContent = `${newMonth} ${newYear}`;
-    fetchBudget(userId, newDate);
+    fetchBudget(newDate);
 });
 
 //dropdown
@@ -57,8 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
     saveButtons.forEach((saveButton, index) => {
         saveButton.addEventListener('click', async (event) => {
             event.preventDefault();
-            const row = saveButton.closest('tr'); // Get the closest row
-            saveBudgetData(row);
             // Find the closest form to the saveButton
             const form = saveButton.closest('form');
                     
@@ -168,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let deleteBtn = document.createElement('td');
                     let deleteIcon = document.createElement('i');
                     deleteIcon.classList.add('bx', 'bx-trash', 'delete-btn');
-                    deleteIcon.setAttribute('budget-id', res.id);
+                    deleteIcon.setAttribute('budget-id', res.category_id);
                     deleteBtn.appendChild(deleteIcon);
                     
                     let categoryNameCell = document.createElement('td');
@@ -178,8 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     let progressBarCell = document.createElement('td');
                     let progressBarWrapper = document.createElement('div');
                     progressBarWrapper.classList.add('progress-wrapper');
-                    progressBarWrapper.style.width = '100px'; // Fixed width for the progress bar
-                    progressBarWrapper.style.height = '10px';
+                    progressBarWrapper.style.width = '150px'; // Fixed width for the progress bar
+                    progressBarWrapper.style.height = '12px';
                     progressBarWrapper.style.border = '1px solid #ccc';
                     progressBarWrapper.style.borderRadius = '5px';
                     progressBarWrapper.style.overflow = 'hidden';
@@ -252,12 +250,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     // Fetch budget data with specified user ID and date
-    fetchBudget(userId, date);
+    fetchBudget(date);
     //insert budget
     async function submitBudget() {
         let details = {
             'user_id': userData.data.user_id,
-            "created_date": '2024-10-01',
+            "created_date": date,
             "category_id": categoryId,
             "assigned": assignedValue,
         };

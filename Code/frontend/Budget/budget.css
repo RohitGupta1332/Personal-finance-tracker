@@ -91,6 +91,7 @@ table {
     font-size: 14px;
 }
 .category-header tr{
+    font-size: 20px;
     display: grid;
     grid-template-columns: 1fr 150px 150px 150px;
     padding: 15px;
@@ -98,24 +99,36 @@ table {
     background-color: #190582;
 }
 .bills .category-type, .needs .category-type, .wants .category-type {
-    font-size: 24px;
-    display: block;
-    padding: 10px;
+    font-size: 22px;
+    display: grid;
+    grid-template-columns: 50px 100px 70px 600px 150px 160px;
     background-color: #D4E1FD;
     border-bottom: 3px solid #7E9EEF;
-    align-self: center;
+    align-items: center;
+    text-align: center;
 }
-.bills tr, .needs tr, .wants tr{
-    display: block;
-    padding: 10px;
+
+.bills tr:not(:first-child), .needs tr:not(:first-child), .wants tr:not(:first-child) {
+    font-size: 18px;
+    display: grid;
+    grid-template-columns: 50px 250px 160px 200px 200px 150px;
+    align-items: center;
+    padding: 7px;
     border-bottom: 3px solid #A6C9FE;
+    text-align: left;
+}
+.bills tr:not(:first-child) input, .needs tr:not(:first-child) input, .wants tr:not(:first-child) input {
+    padding: 5px;
+    margin: 10px 5px;
+    border-radius: 10px;
+    border: 1px solid #E0E0E0;
 }
 .category-type td i {
     margin: 10px;
     font-size: 20px;
     cursor: pointer;
 }
-.total-assigned, .total-acticity, .total-available{
+.total-assigned, .total-activity, .total-available {
     text-align: right;
 }
 .bills tr i, .needs tr i, .wants tr i {
