@@ -137,13 +137,11 @@ document.addEventListener('DOMContentLoaded', () => {
             categoryRow.querySelector('.total-available').textContent = `₹${totalAvailable}`;
         });
     }
-    //fetching all budget through api
-    /*let categoryId;
-    let assignedValue;*/
 
+    //fetching all budget through api
     async function fetchBudget(date) {
         try {
-            const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/BudgetController.php?date=${date}, `, {
+            const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/BudgetController.php?date=${date}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -161,7 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 result.forEach(res => {
                     let budgetRow = document.createElement('tr');
-                    budgetRow.setAttribute('data-category-id', res.id); // Store category ID in row
 
                     // Create the cells for the row
                     let deleteBtn = document.createElement('td');
@@ -195,6 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     let assignedCell = document.createElement('td');
                     let assignedInput = document.createElement('input'); // Create input for assigned
                     assignedInput.type = 'number';
+                    assignedInput.classList.add('assign-budget');
+                    assignedInput.setAttribute('category-id', res.category_id);
                     assignedInput.value = res.assigned == null ? 0 : res.assigned; // Default to 0 if null
                     assignedCell.appendChild(assignedInput); // Append input to assignedCell
 
@@ -228,6 +227,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (tbody) {
                         tbody.appendChild(budgetRow); // Append the row to the corresponding tbody
                     }
+                    assignedInput.addEventListener('keydown', (event) => {
+                        if (event.key === 'Enter') {
+                            submitBudget(assignedInput.value, assignedInput.getAttribute('category-id'));
+                        }
+                    })
                 });
                 // Update the totals after adding new rows
                 updateCategoryTotals();
@@ -239,16 +243,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     // Fetch budget data with specified user ID and date
-    fetchBudget(date);
+    fetchBudget(date.value);
     //insert budget
-    async function submitBudget() {
+    async function submitBudget(assignedValue, categoryId) {
         let details = {
             'user_id': userData.data.user_id,
-            "created_date": date,
+            "created_date": date.value,
             "category_id": categoryId,
             "assigned": assignedValue,
         };
 
+        console.log(details)
         try {
             const response = await fetch('http://localhost/Minor%20Project/Code/backend/controller/BudgetController.php', {
                 method: 'POST',
@@ -271,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("An error occurred while adding the budget.");
         }
     }
-    submitBudget();
+    
     //delete budget
     const tableBodies = document.querySelectorAll('.category-section tbody');
 
@@ -280,10 +285,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Check if the clicked element is the delete icon (trash icon)
             if (event.target && event.target.classList.contains('bx-trash')) {
                 const budgetId = event.target.getAttribute('budget-id');  // Get budget ID from the clicked element
-                console.log(budgetId);
                 async function deleteBudget(id) {
                     try {
-                        const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/BudgetController.php?budget_id=${id}`, {
+                        const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/CategoryController.php?category_id=${id}`, {
                             method: 'DELETE',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -291,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         });
                         if (response.ok) {
-                            alert("Budget deleted successfully!");
+                            alert("Category deleted successfully!");
                             window.location.reload();
                         } else {
                             console.error('HTTP error:', response.status, response.statusText);
@@ -303,8 +307,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         alert("An error occurred while deleting the budget.");
                     }
                 }
+                deleteBudget(budgetId);
+
             }
-            deleteBudget(budgetId);
         });
     });
 });

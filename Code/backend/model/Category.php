@@ -77,6 +77,22 @@ class Category{
             return null;
         }
     }
+    public function deleteCategory($category_id){
+        try{
+            $query = "DELETE FROM category WHERE category_id = :id";
+            $runQuery = $this->db->prepare($query);
+            $runQuery->bindParam(':id', $category_id);
+            $runQuery->execute();
+
+            $affectedRows = $runQuery->rowCount();
+
+            return $affectedRows > 0;
+        }
+        catch(Exception $e){
+            echo "Error: ".$e->getMessage();//replace every error message with error_log()
+            return false;
+        }
+    }
 }
 
 ?>

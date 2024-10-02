@@ -34,6 +34,8 @@ category_id int,
 assigned decimal(15,2),
 foreign key (user_id) references User(user_id),
 foreign key (category_id) references Category(category_id)
+ON DELETE CASCADE
+ON UPDATE CASCADE
 );
 
 CREATE TABLE transaction (

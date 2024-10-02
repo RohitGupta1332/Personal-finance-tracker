@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode(file_get_contents("php://input"), true);
     $result = $budget->insertBudget($data);
 
+    echo $result;
     if ($result) {
         http_response_code(201);
         echo json_encode(["message" => "Insert Successful"]);
@@ -64,45 +65,6 @@ else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     "data" => $result,
                     "message" => "Data received"
                 ]);
-            } else {
-                http_response_code(404); // Not Found
-                echo json_encode(["message" => "Record not found"]);
-            }
-        } catch (Exception $e) {
-            http_response_code(401); // Unauthorized
-            echo json_encode(["message" => "Invalid token"]);
-        }
-    } else {
-        http_response_code(400); // Bad Request
-        echo json_encode(["message" => "Authorization token not provided"]);
-    }
-}
-
-else if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-    $headers = getallheaders();
-
-    if (!empty($headers['Authorization'])) {
-        $authHeader = $headers['Authorization'];
-        // Remove "Bearer " from the header value to extract the token
-        $jwt = str_replace('Bearer ', '', $authHeader);
-
-        try {
-            // Decode the JWT
-            $decoded_data = JWT::decode($jwt, new \Firebase\JWT\Key($secretkey, 'HS256'));
-
-            // Extract the user ID from the token
-            $user_id = $decoded_data->user_id->id;
-
-            // Check if 'ac_id' is provided in the query parameters
-            if (isset($_GET['budget_id'])) {
-                $budget_id = $_GET['budget_id'];
-                $result = $budget->deleteBudget($budget_id);
-                
-            } 
-
-            if ($result) {
-                http_response_code(200); // OK
-                echo json_encode(["message" => "Delete successful"]);
             } else {
                 http_response_code(404); // Not Found
                 echo json_encode(["message" => "Record not found"]);

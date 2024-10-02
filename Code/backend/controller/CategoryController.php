@@ -86,3 +86,42 @@ else if($_SERVER['REQUEST_METHOD'] == 'POST'){
         ]);
     }
 }
+
+else if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+    $headers = getallheaders();
+
+    if (!empty($headers['Authorization'])) {
+        $authHeader = $headers['Authorization'];
+        // Remove "Bearer " from the header value to extract the token
+        $jwt = str_replace('Bearer ', '', $authHeader);
+
+        try {
+            // Decode the JWT
+            $decoded_data = JWT::decode($jwt, new \Firebase\JWT\Key($secretkey, 'HS256'));
+
+            // Extract the user ID from the token
+            $user_id = $decoded_data->user_id->id;
+
+            // Check if 'ac_id' is provided in the query parameters
+            if (isset($_GET['category_id'])) {
+                $category_id = $_GET['category_id'];
+                $result = $category->deleteCategory($category_id);
+                
+            } 
+
+            if ($result) {
+                http_response_code(200); // OK
+                echo json_encode(["message" => "Delete successful"]);
+            } else {
+                http_response_code(404); // Not Found
+                echo json_encode(["message" => "Record not found"]);
+            }
+        } catch (Exception $e) {
+            http_response_code(401); // Unauthorized
+            echo json_encode(["message" => "Invalid token"]);
+        }
+    } else {
+        http_response_code(400); // Bad Request
+        echo json_encode(["message" => "Authorization token not provided"]);
+    }
+}
