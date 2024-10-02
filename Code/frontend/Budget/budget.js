@@ -22,7 +22,7 @@ dropDowns.forEach((dropDown) => {
         let nextRow = categoryRow.nextElementSibling;
         while (nextRow && !nextRow.classList.contains('category-type')) {
             // Toggle the display of subcategory rows
-            nextRow.style.display = nextRow.style.display === "block" ? "none" : "block";
+            nextRow.style.display = nextRow.style.display === "grid" ? "none" : "grid";
             nextRow = nextRow.nextElementSibling;
         }
     });
@@ -273,13 +273,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     submitBudget();
     //delete budget
-    const categoryRows = document.querySelectorAll('.category-row');
+    const tableBodies = document.querySelectorAll('.category-section tbody');
 
-    categoryRows.forEach((categoryRow) => {
-        categoryRow.addEventListener('click', (event) => {
+    tableBodies.forEach((tableBody) => {
+    tableBody.addEventListener('click', (event) => {
             // Check if the clicked element is the delete icon (trash icon)
             if (event.target && event.target.classList.contains('bx-trash')) {
                 const budgetId = event.target.getAttribute('budget-id');  // Get budget ID from the clicked element
+                console.log(budgetId);
                 async function deleteBudget(id) {
                     try {
                         const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/BudgetController.php?budget_id=${id}`, {
