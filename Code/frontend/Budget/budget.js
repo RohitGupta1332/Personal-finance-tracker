@@ -13,19 +13,6 @@ const month = monthNames[monthIndex];
 date.value = `${year}-${String(monthIndex + 1).padStart(2, '0')}`;
 document.querySelector('.date').textContent = `${month} ${year}`;
 
-<<<<<<< HEAD
-// Fetch budget data when the date changes
-date.addEventListener('change', (event) => {
-    const newDate = event.target.value;
-    const newYear = newDate.substring(0, 4);
-    const newMonthIndex = parseInt(newDate.substring(5, 7), 10) - 1;
-    const newMonth = monthNames[newMonthIndex];
-    document.querySelector('.date').textContent = `${newMonth} ${newYear}`;
-    fetchBudget(newDate);
-});
-
-=======
->>>>>>> eac6244472de9a02caa8aa5ef55cdcebef5fd414
 //dropdown
 const dropDowns = document.querySelectorAll('.chevron-icon');
 dropDowns.forEach((dropDown) => {
@@ -70,10 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     saveButtons.forEach((saveButton, index) => {
         saveButton.addEventListener('click', async (event) => {
             event.preventDefault();
-<<<<<<< HEAD
-=======
             const row = saveButton.closest('tr'); // Get the closest row
->>>>>>> eac6244472de9a02caa8aa5ef55cdcebef5fd414
             // Find the closest form to the saveButton
             const form = saveButton.closest('form');
 

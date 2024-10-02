@@ -111,7 +111,7 @@ table {
 .bills tr:not(:first-child), .needs tr:not(:first-child), .wants tr:not(:first-child) {
     font-size: 18px;
     display: grid;
-    grid-template-columns: 50px 250px 160px 200px 200px 150px;
+    grid-template-columns: 50px 250px 440px 200px 160px 100px;
     align-items: center;
     padding: 7px;
     border-bottom: 3px solid #A6C9FE;
