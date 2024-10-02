@@ -1,3 +1,7 @@
+const urlParams = new URLSearchParams(window.location.search);
+const userId = urlParams.get('id');
+const userData = JSON.parse(localStorage.getItem('userData'));
+
 //calender
 const date = document.querySelector('.date');
 const currentDate = new Date();
@@ -16,90 +20,26 @@ date.addEventListener('change', (event) => {
     const newMonthIndex = parseInt(newDate.substring(5, 7), 10) - 1;
     const newMonth = monthNames[newMonthIndex];
     document.querySelector('.date').textContent = `${newMonth} ${newYear}`;
-    /*fetchBudget(2, newDate);*/
+    fetchBudget(userId, newDate);
 });
 
 //dropdown
 const dropDowns = document.querySelectorAll('.chevron-icon');
-const dropDownMenus = document.querySelectorAll('.dropdown');
-dropDowns.forEach((dropDown, index) => {
+dropDowns.forEach((dropDown) => {
     dropDown.addEventListener('click', () => {
-        // Toggle the form visibility
-        dropDownMenus[index].style.display = dropDownMenus[index].style.display === "grid" ? "none" : "grid";
+        const categoryRow = dropDown.closest('tr.category-type');
+        // Get the next sibling rows (subcategories) until another .category-type is found
+        let nextRow = categoryRow.nextElementSibling;
+        while (nextRow && !nextRow.classList.contains('category-type')) {
+            // Toggle the display of subcategory rows
+            nextRow.style.display = nextRow.style.display === "block" ? "none" : "block";
+            nextRow = nextRow.nextElementSibling;
+        }
     });
 });
 
-const urlParams = new URLSearchParams(window.location.search);
-const userId = urlParams.get('id');
-const userData = JSON.parse(localStorage.getItem('userData'));
-
 // budget feature
 document.addEventListener('DOMContentLoaded', () => {
-
-
-    //fetching all budget through api
-    async function fetchBudget(user_id, date) {
-        try {
-            const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/BudgetController.php?date=${date}, `, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': userData.jwt,
-                }
-            });
-            if (response.ok) {
-                let jsonData = await response.json();
-                let result = jsonData.data;
-    
-                // Clear existing rows before adding new ones
-                document.querySelectorAll('.category-section tbody').forEach(tbody => {
-                    tbody.innerHTML = ''; // Clear all tbody sections
-                });
-    
-                result.forEach(res => {
-                    // Create a new table row
-                    let budgetRow = document.createElement('tr');
-                    
-                    // Create the cells for the row
-                    let deleteBtn = document.createElement('td');
-                    let deleteIcon = document.createElement('i');
-                    deleteIcon.classList.add('bx', 'bx-trash', 'delete-btn');
-                    deleteIcon.setAttribute('budget-id', res.id);
-                    deleteBtn.appendChild(deleteIcon);
-                    
-                    let categoryNameCell = document.createElement('td');
-                    categoryNameCell.textContent = res.category_name;
-    
-                    let assignedCell = document.createElement('td');
-                    assignedCell.textContent = res.assigned == null ? "₹0" : `₹${res.assigned}`;
-    
-                    let activityCell = document.createElement('td');
-                    activityCell.textContent = res.activity == null ? "₹0" : `₹${res.activity}`;
-    
-                    let availableCell = document.createElement('td');
-                    availableCell.textContent = res.available == null ? "₹0" : `₹${res.available}`;
-    
-                    // Append the cells to the row
-                    budgetRow.append(deleteBtn, categoryNameCell, assignedCell, activityCell, availableCell);
-    
-                    // Append the row to the appropriate tbody based on category_type
-                    const categoryType = res.category_type.toLowerCase(); // Ensure it is lowercase
-                    const tbody = document.querySelector(`.category-section tbody.${categoryType}`);
-                    
-                    if (tbody) {
-                        tbody.appendChild(budgetRow); // Append the row to the corresponding tbody
-                    }
-                });
-            } else {
-                console.error('HTTP error:', response.status, response.statusText);
-            }
-        } catch (error) {
-            console.error('Fetch error:', error);
-        }
-    }
-    
-    // Fetch budget data with specified user ID and date
-    fetchBudget(userId, date);
 
     const addButtons = document.querySelectorAll('.add');
     const categoryForms = document.querySelectorAll('.category-form');
@@ -117,7 +57,18 @@ document.addEventListener('DOMContentLoaded', () => {
     saveButtons.forEach((saveButton, index) => {
         saveButton.addEventListener('click', async (event) => {
             event.preventDefault();
-            let categoryType = document.querySelector(".category-type .category-name span").innerText;
+            const row = saveButton.closest('tr'); // Get the closest row
+            saveBudgetData(row);
+            // Find the closest form to the saveButton
+            const form = saveButton.closest('form');
+                    
+            // Find the corresponding 'tr.category-type' for that form
+            const categoryRow = form.closest('tr.category-type');
+
+            // Get the category type from the second <td> of the 'category-type' row
+            let categoryType = categoryRow.querySelector('td:nth-child(2)').textContent.trim();
+
+            /*let categoryType = document.querySelector("tbody");*/
             let categoryNameInput = categoryForms[index].querySelector(".name").value;
         
             if (categoryNameInput === "") {
@@ -156,8 +107,184 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-    
 
+    // Function to recalculate totals for each category type
+    function updateCategoryTotals() {
+        // Iterate over each category type (bills, needs, wants)
+        document.querySelectorAll('.category-type').forEach(categoryRow => {
+            // Get the tbody corresponding to the category type
+            const tbody = categoryRow.closest('tbody');
+            
+            let totalAssigned = 0;
+            let totalActivity = 0;
+            let totalAvailable = 0;
+
+            // Iterate over each row within the category (ignore the category-type row itself)
+            tbody.querySelectorAll('tr:not(.category-type)').forEach(row => {
+                // Extract values from the respective cells
+                const assignedValue = parseFloat(row.querySelector('td:nth-child(3)').textContent.replace(/[₹,]/g, '')) || 0;
+                const activityValue = parseFloat(row.querySelector('td:nth-child(4)').textContent.replace(/[₹,]/g, '')) || 0;
+                const availableValue = parseFloat(row.querySelector('td:nth-child(5)').textContent.replace(/[₹,]/g, '')) || 0;
+
+                // Add to the totals
+                totalAssigned += assignedValue;
+                totalActivity += activityValue;
+                totalAvailable += availableValue;
+            });
+
+            // Update the category-type row with the new totals
+            categoryRow.querySelector('.total-assigned').textContent = `₹${totalAssigned}`;
+            categoryRow.querySelector('.total-activity').textContent = `₹${totalActivity}`;
+            categoryRow.querySelector('.total-available').textContent = `₹${totalAvailable}`;
+        });
+    }
+    //fetching all budget through api
+    /*let categoryId;
+    let assignedValue;*/
+
+    async function fetchBudget(date) {
+        try {
+            const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/BudgetController.php?date=${date}, `, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': userData.jwt,
+                }
+            });
+            if (response.ok) {
+                let jsonData = await response.json();
+                let result = jsonData.data;
+    
+                // Clear existing rows before adding new ones
+                document.querySelectorAll('.category-section tbody').forEach(tbody => {
+                    tbody.querySelectorAll('tr:not(.category-type)').forEach(tr => tr.remove()); // Clear all non-category-type rows
+                });
+
+                result.forEach(res => {
+                    let budgetRow = document.createElement('tr');
+                    budgetRow.setAttribute('data-category-id', res.id); // Store category ID in row
+                    
+                    // Create the cells for the row
+                    let deleteBtn = document.createElement('td');
+                    let deleteIcon = document.createElement('i');
+                    deleteIcon.classList.add('bx', 'bx-trash', 'delete-btn');
+                    deleteIcon.setAttribute('budget-id', res.id);
+                    deleteBtn.appendChild(deleteIcon);
+                    
+                    let categoryNameCell = document.createElement('td');
+                    categoryNameCell.textContent = res.category_name;
+
+                    // Create a progress bar cell
+                    let progressBarCell = document.createElement('td');
+                    let progressBarWrapper = document.createElement('div');
+                    progressBarWrapper.classList.add('progress-wrapper');
+                    progressBarWrapper.style.width = '100px'; // Fixed width for the progress bar
+                    progressBarWrapper.style.height = '10px';
+                    progressBarWrapper.style.border = '1px solid #ccc';
+                    progressBarWrapper.style.borderRadius = '5px';
+                    progressBarWrapper.style.overflow = 'hidden';
+
+                    let progressBar = document.createElement('div');
+                    progressBar.classList.add('progress-bar');
+                    progressBar.style.height = '100%';
+                    progressBar.style.width = '100%'; // 100% for now, adjust color below
+
+                    // Append the progress bar inside the wrapper
+                    progressBarWrapper.appendChild(progressBar);
+                    progressBarCell.appendChild(progressBarWrapper);
+
+                    let assignedCell = document.createElement('td');
+                    let assignedInput = document.createElement('input'); // Create input for assigned
+                    assignedInput.type = 'number';
+                    assignedInput.value = res.assigned == null ? 0 : res.assigned; // Default to 0 if null
+                    assignedCell.appendChild(assignedInput); // Append input to assignedCell
+
+                    /* Add keypress event listener to the assigned input
+                    assignedInput.addEventListener('keypress', (event) => {
+                        if (event.key === 'Enter') {
+                            event.preventDefault(); // Prevent form submission if inside a form
+                            assignedValue = parseFloat(assignedInput.value) || 0; // Get assigned value from input
+                            categoryId = res.id; // Use the ID from the result set
+
+                            // Call submitBudget after storing the values
+                            submitBudget();
+                        }
+                    });*/
+
+                    let activityCell = document.createElement('td');
+                    activityCell.textContent = res.activity == null ? "₹0" : `₹${res.activity}`;
+
+                    let availableCell = document.createElement('td');
+                    availableCell.textContent = res.available == null ? "₹0" : `₹${res.available}`;
+
+                    // Change colors based on available value
+                    let availableValue = parseFloat(res.available);
+                    
+                    if (availableValue > 0) {
+                        progressBar.style.backgroundColor = 'green';
+                        availableCell.style.color = 'green';
+                    } else if (availableValue === 0) {
+                        progressBar.style.backgroundColor = 'yellow';
+                        availableCell.style.color = 'yellow';
+                    } else {
+                        progressBar.style.backgroundColor = 'red';
+                        availableCell.style.color = 'red';
+                    }
+
+                    // Append the cells to the row
+                    budgetRow.append(deleteBtn, categoryNameCell, progressBarCell, assignedCell, activityCell, availableCell);
+
+                    // Append the row to the appropriate tbody based on category_type
+                    const categoryType = res.category_type.toLowerCase(); // Ensure it is lowercase
+                    const tbody = document.querySelector(`.category-section tbody.${categoryType}`);
+                    
+                    if (tbody) {
+                        tbody.appendChild(budgetRow); // Append the row to the corresponding tbody
+                    }
+                });
+                // Update the totals after adding new rows
+                updateCategoryTotals();
+            } else {
+                console.error('HTTP error:', response.status, response.statusText);
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    }
+    // Fetch budget data with specified user ID and date
+    fetchBudget(userId, date);
+    //insert budget
+    async function submitBudget() {
+        let details = {
+            'user_id': userData.data.user_id,
+            "created_date": '2024-10-01',
+            "category_id": categoryId,
+            "assigned": assignedValue,
+        };
+
+        try {
+            const response = await fetch('http://localhost/Minor%20Project/Code/backend/controller/BudgetController.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': userData.jwt, 
+                },
+                body: JSON.stringify(details)
+            });
+
+            if (response.ok) {
+                alert("Budget added successfully!");
+                window.location.reload();
+            } else {
+                console.error('HTTP error:', response.status, response.statusText);
+                alert("Failed to add budget.");
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
+            alert("An error occurred while adding the budget.");
+        }
+    }
+    submitBudget();
     //delete budget
     const categoryRows = document.querySelectorAll('.category-row');
 
@@ -166,7 +293,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Check if the clicked element is the delete icon (trash icon)
             if (event.target && event.target.classList.contains('bx-trash')) {
                 const budgetId = event.target.getAttribute('budget-id');  // Get budget ID from the clicked element
-
                 async function deleteBudget(id) {
                     try {
                         const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/BudgetController.php?budget_id=${id}`, {
@@ -176,8 +302,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                 'Authorization': userData.jwt, 
                             }
                         });
-
                         if (response.ok) {
+                            alert("Budget deleted successfully!");
                             window.location.reload(); 
                         } else {
                             console.error('HTTP error:', response.status, response.statusText);
@@ -189,10 +315,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         alert("An error occurred while deleting the budget.");
                     }
                 }
-
-                deleteBudget(budgetId);  // Call the delete function with the budget ID
+                deleteBudget(budgetId);
             }
         });
     });
-
 });

@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-body {
-    display: flex;
+* {
     margin: 0;
+    padding: 0;
     font-family: "Poppins", sans-serif;
+}
+html, body {
+    display: flex;
     background-color: #f0f4f7;
 }
 
@@ -71,13 +74,6 @@ input[type="month"]:focus {
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
 }
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 18px;
-    text-align: left;
-    font-size: 14px;
-}
 
 .category-section {
     width: 100%;
@@ -87,47 +83,46 @@ table {
     font-size: 20px;
 }
 
-.category-header tr {
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 18px;
+    text-align: left;
+    font-size: 14px;
+}
+.category-header tr{
     display: grid;
     grid-template-columns: 1fr 150px 150px 150px;
     padding: 15px;
     color: #FFFFFF;
     background-color: #190582;
 }
-.bills, .needs, .wants {
-    display: grid;
-    grid-template-columns: 1fr 150px 150px 150px;
+.bills .category-type, .needs .category-type, .wants .category-type {
+    font-size: 24px;
+    display: block;
     padding: 10px;
     background-color: #D4E1FD;
     border-bottom: 3px solid #7E9EEF;
-}
-.bills tbody, .needs tbody, .wants tbody {
     align-self: center;
 }
 .bills tr, .needs tr, .wants tr{
-    display: flex;
-    justify-content: space-between;
-    width: 380px;
-    align-items: center;
+    display: block;
+    padding: 10px;
+    border-bottom: 3px solid #A6C9FE;
 }
-.category-type i {
+.category-type td i {
     margin: 10px;
     font-size: 20px;
     cursor: pointer;
 }
-
-.category-row {
-    display: grid;
-    grid-template-columns: 1fr 150px 150px 150px;
-    padding: 10px;
-    margin-top: 5px;
-    border-bottom: 3px solid #A6C9FE;
+.total-assigned, .total-acticity, .total-available{
+    text-align: right;
 }
-.category-row i {
+.bills tr i, .needs tr i, .wants tr i {
     padding: 10px;
     cursor: pointer;
 }
-.category-row .category-name {
+.bills tr .category-name, .needs tr .category-name, .wants tr .category-name {
     display: flex;
     align-items: center;
     padding-right: 200px;
@@ -167,7 +162,12 @@ table {
 .category-form .visible {
     display: block; 
 }
-
+.category-form input{
+    padding: 5px;
+    margin: 10px 5px;
+    border-radius: 10px;
+    border: 1px solid #E0E0E0;
+}
 .category-form .name{
     padding: 5px;
     margin: 10px 500px 10px 50px;
