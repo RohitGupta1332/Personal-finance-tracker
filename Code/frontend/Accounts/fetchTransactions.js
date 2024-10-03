@@ -4,12 +4,19 @@ const accountId = urlParams.get('id');
 
 let AccoutName = document.querySelector('.account-name');
 AccoutName.textContent = text;
-
+let categorySelect = document.querySelector('.expense-category');
 
 const userData = JSON.parse(localStorage.getItem('userData'));
 
 //add transaction feature
 document.addEventListener('DOMContentLoaded', () => {
+    const categories = JSON.parse(localStorage.getItem('categories'));
+    categories.data.forEach(category => {
+        const categoryElement = document.createElement('option');
+        categoryElement.textContent = category.category_name;
+        categoryElement.value = category.category_id;
+        categorySelect.append(categoryElement)
+    })
     //fetching all transaction through api
     async function fetchTransaction(ac_id) {
         try {
@@ -32,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 let clearedOutflow = 0;
                 let unclearedOutflow = 0;
+
 
                 result.forEach(res => {
                     // Create new table row
@@ -90,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    fetchTransaction(accountId); 
+    fetchTransaction(accountId);
 
     let transactionBtn = document.querySelector('.transaction');
     let formDiv = document.querySelector('.transaction-form');
@@ -206,6 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (response.ok) {
                         alert("Account deleted successfully!");
+                        localStorage.removeItem('accounts');
                         window.location.href = "../Budget/budget.html" // Redirect to budget page
                     } else {
                         console.error('HTTP error:', response.status, response.statusText);

@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const userData = JSON.parse(localStorage.getItem('userData'));
+    document.querySelector('.user-email').textContent = userData.data.email;
+    document.querySelector('.user-name').textContent = userData.data.user_name;
+
 
     async function fetchAccount() {
         try {
@@ -61,10 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // Update the total amounts only if the element exists
-                if (totalAmountDiv && totalbalance) {
-                    totalAmountDiv.textContent = `₹${totalAmount}`;
+                if (totalbalance) {
                     totalbalance.textContent = `₹${totalAmount}`;
                 }
+                totalAmountDiv.textContent = `₹${totalAmount}`;
 
                 // Update local storage with the current month's total
                 updateLocalStorageWithCurrentMonth(totalAmount);

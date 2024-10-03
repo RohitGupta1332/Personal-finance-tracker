@@ -1,5 +1,6 @@
 const userData = JSON.parse(localStorage.getItem('userData'));
 const selectElement = document.getElementById('accounts');
+let categorySelect = document.querySelector('.expense-category');
 
 //add transaction feature
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,6 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
     else{
         alert("Please add an account first.");
     }
+    const categories = JSON.parse(localStorage.getItem('categories'));
+    categories.data.forEach(category => {
+        const categoryElement = document.createElement('option');
+        categoryElement.textContent = category.category_name;
+        categoryElement.value = category.category_id;
+        categorySelect.append(categoryElement)
+    })
 
     //fetching all transaction through api
     async function fetchTransaction() {
@@ -41,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 let clearedOutflow = 0;
                 let unclearedOutflow = 0;
 
-                console.log(result);
                 result.forEach(res => {
                     // Create new table row
                     let tableRow = document.createElement('tr');

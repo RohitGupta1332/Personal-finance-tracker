@@ -136,7 +136,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             if (response.ok) {
                 let jsonData = await response.json();
+                localStorage.setItem('categories', JSON.stringify(jsonData));
                 let result = jsonData.data;
+
 
                 document.querySelectorAll('.category-section tbody').forEach(tbody => {
                     tbody.querySelectorAll('tr:not(.category-type)').forEach(tr => tr.remove()); 
@@ -245,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("An error occurred while adding the budget.");
         }
     }
-    //delete budget
+    //delete category
     const tableBodies = document.querySelectorAll('.category-section tbody');
 
     tableBodies.forEach((tableBody) => {
@@ -262,6 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         });
                         if (response.ok) {
+                            localStorage.removeItem('categories');
                             alert("Category deleted successfully!");
                             window.location.reload();
                         } else {
