@@ -2,6 +2,34 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#sub').onclick = async event => {
         event.preventDefault();
 
+        function checkPasswordStrength(password) {
+            // Define criteria for a strong password
+            const hasMinLength = password.length >= 8;
+            const hasLowercase = /[a-z]/.test(password);
+            const hasUppercase = /[A-Z]/.test(password);
+            const hasNumber = /[0-9]/.test(password);
+            const hasSpecialChar = /[^A-Za-z0-9]/.test(password);
+          
+            // Calculate a strength score based on the criteria
+            let strengthScore = 0;
+            if (hasMinLength) strengthScore++;
+            if (hasLowercase || hasUppercase) strengthScore++;
+            if (hasNumber) strengthScore++;
+            if (hasSpecialChar) strengthScore++;
+          
+            // Determine the strength level based on the score
+            let strengthLevel = "";
+            if (strengthScore === 4) {
+                strengthLevel = "Strong";
+            } else if (strengthScore >= 2) {
+                strengthLevel = "Medium";
+            } else {
+                strengthLevel = "Weak";
+            }
+
+            return strengthLevel;
+        }
+
         // Toggle password visibility (if necessary)
         if (document.querySelector('#password').type !== 'password') {
             document.querySelector('#password').type = 'password';
@@ -17,6 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Check if any field is empty
         if (name === '' || email === '' || password === '') {
             document.querySelector('#msg').innerHTML = 'Please enter all the credentials';
+        } else if(checkPasswordStrength(password) !== "Strong") {
+            alert('Enter a valid strong password!');
         } else {
             const data = {
                 "user_name": name,
@@ -73,16 +103,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // Calculate a strength score based on the criteria
             let strengthScore = 0;
             if (hasMinLength) strengthScore++;
-            if (hasLowercase) strengthScore++;
-            if (hasUppercase) strengthScore++;
+            if (hasLowercase || hasUppercase) strengthScore++;
             if (hasNumber) strengthScore++;
             if (hasSpecialChar) strengthScore++;
           
             // Determine the strength level based on the score
             let strengthLevel = "";
-            if (strengthScore === 5) {
+            if (strengthScore === 4) {
                 strengthLevel = "Strong";
-            } else if (strengthScore >= 3) {
+            } else if (strengthScore >= 2) {
                 strengthLevel = "Medium";
             } else {
                 strengthLevel = "Weak";
@@ -91,9 +120,17 @@ document.addEventListener('DOMContentLoaded', () => {
             // Provide feedback to the user
             let feedback = "";
             if (strengthLevel === "Weak") {
-                feedback = "Password is too weak!";
+                feedback = "Password is too weak. It should meet more criteria:";
+                if (!hasMinLength) feedback += " At least 8 characters long,";
+                if (!hasLowercase || !hasUppercase) feedback += " Include letters,";
+                if (!hasNumber) feedback += " Include numbers,";
+                if (!hasSpecialChar) feedback += " Include special characters";
             } else if (strengthLevel === "Medium") {
-                feedback = "Password is medium!";
+                feedback = "Password is medium strength. Consider these improvements:";
+                if (!hasMinLength) feedback += " At least 8 characters long,";
+                if (!hasLowercase || !hasUppercase) feedback += " Include letters,";
+                if (!hasNumber) feedback += " Include numbers,";
+                if (!hasSpecialChar) feedback += " Include special characters";
             } else {
                 feedback = "Password is strong!";
             }
@@ -103,10 +140,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#msg').innerHTML = checkPasswordStrength(password).message;
         if(checkPasswordStrength(password).strength === "Strong") {
             document.querySelector('#msg').style.color = "green";
-            document.querySelector('#sub').style.marginTop = "10px"
+            document.querySelector('#sub').style.marginTop = "23px"
         } else {
             document.querySelector('#msg').style.color = "red";
-            document.querySelector('#sub').style.marginTop = "10px"
+            document.querySelector('#sub').style.marginTop = "6px"
         }
         
         if(password.length === 0) {
