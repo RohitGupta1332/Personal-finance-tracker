@@ -1,21 +1,23 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require 'phpmailer/src/Exception.php';
-require 'phpmailer/src/PHPMailer.php';
-require 'phpmailer/src/SMTP.php';
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-// Handle OPTIONS preflight requests
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     http_response_code(204);
     exit();
 }
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'C:\xampp\htdocs\Minor Project\Code\backend\Authentication\PHPMailer-master\src\Exception.php';
+require 'C:\xampp\htdocs\Minor Project\Code\backend\Authentication\PHPMailer-master\src\PHPMailer.php';
+require 'C:\xampp\htdocs\Minor Project\Code\backend\Authentication\PHPMailer-master\src\SMTP.php';
+
+
+
 
 
 function generateOTP($digits = 6) {
@@ -40,7 +42,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mail->Port = 465; 
 
     $mail->setFrom('itzrg31052004@gmail.com'); 
-    $mail->addAddress($data);
+    $mail->addAddress($data['email']);
     $mail->isHTML(true);
     $mail->Subject = "OTP Authentication";
     $mail->Body = "Your OTP is: <strong>" . $otp . "</strong>";
@@ -50,7 +52,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo json_encode(["message" => "OTP sent successfully!", "otp" => $otp]); 
     } else {
         http_response_code(500); // Internal Server Error (or another appropriate code)
-        echo json_encode(["error" => "Email could not be sent. Error: " . $mail->ErrorInfo]); 
+        echo json_encode(["error" => "Email could not be sent. Error: "]); 
     }
 } else {
     http_response_code(405); // Method Not Allowed
