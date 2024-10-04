@@ -37,10 +37,21 @@ body {
     border-bottom-right-radius: 20px;
     
 }
+.user {
+    flex: 1;
+    flex-direction: column;
+    margin-left: 10px;
+    overflow: hidden;
+}
+.user-name,
+.user-email {
+    word-wrap: break-word;
+    font-size: 14px;
+    line-height: 1.5;
+}
 .user-name{
     font-size: 16px;
     font-weight: 600;
-
 }
 .user-email{
     font-size: 10px;

@@ -25,7 +25,6 @@ dropDowns.forEach((dropDown) => {
         }
     });
 });
-
 // budget feature
 document.addEventListener('DOMContentLoaded', () => {
     // Fetch budget data when the date changes
@@ -44,15 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     addButtons.forEach((addButton, index) => {
         addButton.addEventListener('click', () => {
-            categoryForms[index].style.display = categoryForms[index].style.display === "block" ? "none" : "block";
+            categoryForms[index].style.display = categoryForms[index].style.display === "grid" ? "none" : "grid";
         });
     });
-
     // Save new budget 
     saveButtons.forEach((saveButton, index) => {
         saveButton.addEventListener('click', async (event) => {
             event.preventDefault();
-            const row = saveButton.closest('tr'); 
             const form = saveButton.closest('form');
             const categoryRow = form.closest('tr.category-type');
             let categoryType = categoryRow.querySelector('td:nth-child(2)').textContent.trim();
@@ -67,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         "category_type": categoryType,
                         "category_name": categoryNameInput,
                     };
-
                     try {
                         const response = await fetch('http://localhost/Minor%20Project/Code/backend/controller/CategoryController.php', {
                             method: 'POST',
@@ -77,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             },
                             body: JSON.stringify(details)
                         });
-
                         if (response.ok) {
                             alert("Category added successfully!");
                             window.location.reload();
@@ -115,15 +110,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalAssigned += assignedValue;
                 totalActivity += activityValue;
                 totalAvailable += availableValue;
+                // Update the "Ready to Assign" balance
+                const readyToAssign = document.querySelector('.total-balance');
+                const currentReadyToAssign = parseFloat(readyToAssign.textContent.replace(/[₹,]/g, '')) || 0;
+                const newReadyToAssign = currentReadyToAssign - assignedValue;
+                readyToAssign.textContent = `₹${newReadyToAssign.toLocaleString()}`;
             });
-
             // Update the totals in the category-type row
             categoryRow.querySelector('.total-assigned').textContent = `₹${totalAssigned.toLocaleString()}`;
             categoryRow.querySelector('.total-activity').textContent = `₹${totalActivity.toLocaleString()}`;
             categoryRow.querySelector('.total-available').textContent = `₹${totalAvailable.toLocaleString()}`;
         });
     }
-
     //fetching all budget
     async function fetchBudget(date) {
         try {
@@ -141,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelectorAll('.category-section tbody').forEach(tbody => {
                     tbody.querySelectorAll('tr:not(.category-type)').forEach(tr => tr.remove()); 
                 });
-
                 result.forEach(res => {
                     let budgetRow = document.createElement('tr');
 
@@ -158,7 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     let progressBarWrapper = document.createElement('div');
                     progressBarWrapper.classList.add('progress-wrapper');
                     progressBarWrapper.style.width = '170px'; 
-                    progressBarWrapper.style.height = '15px';
+                    progressBarWrapper.style.height = '16px';
+                    progressBarWrapper.style.borderRadius = '30px';
                     progressBarWrapper.style.overflow = 'hidden';
 
                     let progressBar = document.createElement('div');
@@ -178,9 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     assignedCell.appendChild(assignedInput); 
                     let activityCell = document.createElement('td');
                     activityCell.textContent = res.activity == null ? "₹0" : `₹${res.activity}`;
-
                     let availableValue = (res.assigned || 0) - (res.activity || 0);
-                    
                     let availableCell = document.createElement('td');
                     availableCell.textContent = `₹${availableValue.toLocaleString()}`;
                     
@@ -262,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         });
                         if (response.ok) {
-                            alert("Category deleted successfully!");
+                            alert("Budget deleted successfully!");
                             window.location.reload();
                         } else {
                             console.error('HTTP error:', response.status, response.statusText);
