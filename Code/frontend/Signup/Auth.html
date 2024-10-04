@@ -1,12 +1,58 @@
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Auth</title>
-    </head>
-    <body>
-        <form action="" method="post">
-            otp <input type="otp" name="otp" class="otp">
-            <input type="submit" id="sub" value="regester">
-        </form>
-        <script src="Auth.js"></script>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Center the content inside the form */
+        }
+
+        .otp {
+            width: 100px;
+            padding: 10px;
+            margin: 10px 5px; /* Adjust spacing between OTP inputs */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        #sub {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 200ms ease-in;
+        }
+
+        #sub:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        <label for="otp"><strong>Enter OTP:</strong></label> <input type="password" id="otp" name="otp" class="otp" maxlength="6">
+        <input type="submit" id="sub" value="Verify OTP">
+    </form>
+    <script src="Auth.js"></script>
+</body>
 </html>

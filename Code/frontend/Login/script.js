@@ -37,11 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         window.location.href = "../Budget/budget.html";
 
                     }
-                    else if (response.status === 500) {
+                    else if (response.status === 404) {
                         alert("Invalid email or password!");
                     }
                     else {
-                        alert("An error occurred!");
+                        alert("Email not registered! Please sign-up");
                     }
                 }
                 catch (error) {
@@ -59,6 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.querySelector('input[type="password"]').value.trim();
 
         if (password.length === 0) {
+            document.querySelector('#msg').innerHTML = 'Enter a valid password';
+        } else {
             document.querySelector('#msg').innerHTML = '';
         }
     };

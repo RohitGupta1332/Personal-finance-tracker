@@ -145,6 +145,10 @@ form {
     display: none;
 }
 
+#visible, #invisible {
+    cursor: pointer;
+}
+
 form > #sub {
     width: 430px;
     height: 50px;
@@ -166,7 +170,9 @@ form > #sub:hover {
 
 form > #msg {
     color: red;
+    width: 430px;
     margin-top: 10px;
+    font-size: 15px;
 }
 
 .signup > p{

@@ -4,21 +4,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(queryString);
 
     const data = {
-        "user_name": urlParams.get(''),
-        "email": email,
-        "password": password
+        "user_name": urlParams.get('user_name'),
+        "email": urlParams.get('email'),
+        "password": urlParams.get('password')
     };
     const gen_otp = urlParams.get('otp');
-    
 
     document.querySelector('#sub').onclick = event => {
         event.preventDefault();
-        const otp = document.querySelector('input[type="otp"]').value.trim();
+        const otp = document.querySelector('#otp').value.trim();
 
-        if (otp === '') {
+        if (otp == '') {
             alert('Please enter the OTP');
         } else {
-
             async function registerUser(data) {
                 try {
                     const response = await fetch('http://localhost/Minor%20Project/Code/backend/controller/RegisterController.php', {
@@ -43,35 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             if(otp == gen_otp) {
-                registerUser()
+                registerUser(data)
             } else {
-                console.log('Not regester')
+                alert('Invalid OTP')
             }
         }
     };
-
-    // document.querySelector('input[type="password"]').onkeyup = event => {
-    //     event.preventDefault();
-    //     const password = document.querySelector('input[type="password"]').value.trim();
-
-    //     if (password.length === 0) {
-    //         document.querySelector('#msg').innerHTML = '';
-    //     }
-    // };
-
-    // document.querySelectorAll('.bi').forEach(icon => {
-    //     icon.onclick = event => {
-    //         event.preventDefault();
-            
-    //         if (document.querySelector('#password').type === 'password') {
-    //             document.querySelector('#password').type = 'text';
-    //             document.querySelector('#invisible').style.display = 'none';
-    //             document.querySelector('#visible').style.display = 'block';
-    //         } else {
-    //             document.querySelector('#password').type = 'password';
-    //             document.querySelector('#invisible').style.display = 'block';
-    //             document.querySelector('#visible').style.display = 'none';
-    //         }
-    //     };
-    // });
 });
