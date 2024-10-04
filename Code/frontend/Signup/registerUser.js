@@ -91,19 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Provide feedback to the user
             let feedback = "";
             if (strengthLevel === "Weak") {
-                feedback = "Password is too weak. It should meet more criteria:<br>";
-                if (!hasMinLength) feedback += "- At least 8 characters long<br>";
-                if (!hasLowercase) feedback += "- Include lowercase letters<br>";
-                if (!hasUppercase) feedback += "- Include uppercase letters<br>";
-                if (!hasNumber) feedback += "- Include numbers<br>";
-                if (!hasSpecialChar) feedback += "- Include special characters<br>";
+                feedback = "Password is too weak!";
             } else if (strengthLevel === "Medium") {
-                feedback = "Password is medium strength. Consider these improvements:<br>";
-                if (!hasMinLength) feedback += "- At least 8 characters long<br>";
-                if (!hasLowercase) feedback += "- Include lowercase letters<br>";
-                if (!hasUppercase) feedback += "- Include uppercase letters<br>";
-                if (!hasNumber) feedback += "- Include numbers<br>";
-                if (!hasSpecialChar) feedback += "- Include special characters<br>";
+                feedback = "Password is medium!";
             } else {
                 feedback = "Password is strong!";
             }
@@ -113,9 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#msg').innerHTML = checkPasswordStrength(password).message;
         if(checkPasswordStrength(password).strength === "Strong") {
             document.querySelector('#msg').style.color = "green";
+            document.querySelector('#sub').style.marginTop = "10px"
         } else {
             document.querySelector('#msg').style.color = "red";
-            document.querySelector('#sub').style.marginTop = "5px"
+            document.querySelector('#sub').style.marginTop = "10px"
         }
         
         if(password.length === 0) {
