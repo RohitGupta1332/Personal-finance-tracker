@@ -21,29 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 "password": password
             };
 
-            async function registerUser(data) {
-                try {
-                    const response = await fetch('http://localhost/Minor%20Project/Code/backend/controller/RegisterController.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data)
-                    });
+            window.location.href = `Auth.html?${data}`;
 
-                    if (response.ok) {
-                        window.location.href = "../Login/index.html";
-                    } else if (response.status === 500) {
-                        alert("This Email already exists!");
-                    } else {
-                        alert("Something went wrong! Please try again.");
-                    }
-                } catch (error) {
-                    console.error(error);
-                    alert("Something went wrong! Please try again.");
-                }
-            }
-            registerUser(data);
+            // registerUser(data);
         }
     };
 
