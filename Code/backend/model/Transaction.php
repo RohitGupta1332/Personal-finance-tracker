@@ -16,9 +16,9 @@ class Transaction{
         $this->db = $db;
     }
 
-    public function insertData($data){
-        try{
-            // $this->id = $data['id'];
+    public function insertData($data) {
+        try {
+            // Assign the transaction data
             $this->user_id = $data['user_id'];
             $this->ac_id = $data['ac_id'];
             $this->created_date = $data['created_date'];
@@ -27,30 +27,68 @@ class Transaction{
             $this->outflow = $data['outflow'];
             $this->inflow = $data['inflow'];
             $this->cleared = $data['cleared'];
-
-            $query = "INSERT INTO Transaction (user_id, ac_id, created_date, payee, category_id, outflow, inflow, cleared) VALUES (:user_id, :ac_id, :created_date, :payee, :category_id, :outflow, :inflow, :cleared)";
-
+    
+            // Begin a transaction (for atomicity)
+            $this->db->beginTransaction();
+    
+            // Fetch the current account balance from the Accounts table
+            $query = "SELECT ac_balance FROM Accounts WHERE ac_id = :ac_id";
             $runQuery = $this->db->prepare($query);
-
-            // $runQuery->bindParam(':id', $this->id);
-            $runQuery->bindParam(':user_id', $this->user_id);
             $runQuery->bindParam(':ac_id', $this->ac_id);
-            $runQuery->bindParam(':created_date', $this->created_date);
-            $runQuery->bindParam(':payee', $this->payee);
-            $runQuery->bindParam(':category_id', $this->category_id);
-            $runQuery->bindParam(':outflow', $this->outflow);
-            $runQuery->bindParam(':inflow', $this->inflow);
-            $runQuery->bindParam(':cleared', $this->cleared);
-
-            return $runQuery->execute();
-
-        }
-        catch(Exception $e){
-            echo "Error: " . $e->getMessage();
+            $runQuery->execute();
+            $account = $runQuery->fetch();
+    
+            if (!$account) {
+                throw new Exception("Account not found");
+            }
+    
+            // Calculate the new balance
+            $newBalance = $account['ac_balance'];
+    
+            if ($this->outflow > 0) {
+                // Subtract outflow from the balance if it's an expense
+                $newBalance -= $this->outflow;
+            } elseif ($this->inflow > 0) {
+                // Add inflow to the balance if it's an income
+                $newBalance += $this->inflow;
+            }
+    
+            // Update the account balance in the Accounts table
+            $updateQuery = "UPDATE Accounts SET ac_balance = :newBalance WHERE ac_id = :ac_id";
+            $updateRun = $this->db->prepare($updateQuery);
+            $updateRun->bindParam(':newBalance', $newBalance);
+            $updateRun->bindParam(':ac_id', $this->ac_id);
+            $updateRun->execute();
+    
+            // Insert the transaction into the Transaction table
+            $insertQuery = "INSERT INTO Transaction (user_id, ac_id, created_date, payee, category_id, outflow, inflow, cleared) 
+                            VALUES (:user_id, :ac_id, :created_date, :payee, :category_id, :outflow, :inflow, :cleared)";
+            $runInsert = $this->db->prepare($insertQuery);
+            $runInsert->bindParam(':user_id', $this->user_id);
+            $runInsert->bindParam(':ac_id', $this->ac_id);
+            $runInsert->bindParam(':created_date', $this->created_date);
+            $runInsert->bindParam(':payee', $this->payee);
+            $runInsert->bindParam(':category_id', $this->category_id);
+            $runInsert->bindParam(':outflow', $this->outflow);
+            $runInsert->bindParam(':inflow', $this->inflow);
+            $runInsert->bindParam(':cleared', $this->cleared);
+    
+            // Execute the transaction insertion
+            $result = $runInsert->execute();
+    
+            // Commit the changes if both the update and insertion were successful
+            $this->db->commit();
+            
+            return $result;
+    
+        } catch (Exception $e) {
+            // Rollback in case of an error
+            $this->db->rollBack();
+            error_log("Error: " . $e->getMessage());
             return false;
         }
-
     }
+    
     public function getTransactionsByUserId($id){ //pass the user id
         try{
             $query = "SELECT 
@@ -127,22 +165,75 @@ class Transaction{
         }
     }
     
-    public function deleteTransactionsBytransactionId($id){ //pass the transaction id
-        try{
-            $query = "DELETE FROM Transaction WHERE id = :id";
+    public function deleteTransactionsBytransactionId($id) { 
+        try {
+            // Begin transaction
+            $this->db->beginTransaction();
+    
+            // Fetch the transaction details to get the outflow, inflow, and account ID
+            $query = "SELECT ac_id, outflow, inflow FROM Transaction WHERE id = :id";
             $runQuery = $this->db->prepare($query);
             $runQuery->bindParam(':id', $id);
             $runQuery->execute();
-
-            $affectedRows = $runQuery->rowCount();
-
+            $transaction = $runQuery->fetch();
+    
+            if (!$transaction) {
+                throw new Exception("Transaction not found");
+            }
+    
+            $ac_id = $transaction['ac_id'];
+            $outflow = $transaction['outflow'];
+            $inflow = $transaction['inflow'];
+    
+            // Fetch the current account balance from the Accounts table
+            $accountQuery = "SELECT ac_balance FROM Accounts WHERE ac_id = :ac_id";
+            $runAccountQuery = $this->db->prepare($accountQuery);
+            $runAccountQuery->bindParam(':ac_id', $ac_id);
+            $runAccountQuery->execute();
+            $account = $runAccountQuery->fetch();
+    
+            if (!$account) {
+                throw new Exception("Account not found");
+            }
+    
+            // Calculate the new balance
+            $newBalance = $account['ac_balance'];
+    
+            if ($outflow > 0) {
+                // If there was an outflow, add it back to the balance
+                $newBalance += $outflow;
+            } elseif ($inflow > 0) {
+                // If there was an inflow, subtract it from the balance
+                $newBalance -= $inflow;
+            }
+    
+            // Update the account balance in the Accounts table
+            $updateQuery = "UPDATE Accounts SET ac_balance = :newBalance WHERE ac_id = :ac_id";
+            $runUpdate = $this->db->prepare($updateQuery);
+            $runUpdate->bindParam(':newBalance', $newBalance);
+            $runUpdate->bindParam(':ac_id', $ac_id);
+            $runUpdate->execute();
+    
+            // Delete the transaction from the Transaction table
+            $deleteQuery = "DELETE FROM Transaction WHERE id = :id";
+            $runDelete = $this->db->prepare($deleteQuery);
+            $runDelete->bindParam(':id', $id);
+            $runDelete->execute();
+    
+            $affectedRows = $runDelete->rowCount();
+    
+            // Commit the transaction if everything is successful
+            $this->db->commit();
+    
             return $affectedRows > 0;
-        }
-        catch(Exception $e){
-            echo "Error: ".$e->getMessage();//replace every error message with error_log()
+        } catch (Exception $e) {
+            // Rollback the transaction in case of error
+            $this->db->rollBack();
+            error_log("Error: " . $e->getMessage());
             return false;
         }
     }
+    
     public function deleteTransactionsByUserIdAndAccountId($id, $ac_id){
         try{
             $query = "DELETE FROM Transaction WHERE user_id = :id AND ac_id = :ac_id";

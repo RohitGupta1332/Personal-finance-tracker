@@ -56,4 +56,3 @@ CREATE TABLE transaction (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
-

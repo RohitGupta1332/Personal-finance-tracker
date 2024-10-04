@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     "ac_type": account_type,
                     "ac_balance": balance
                 };
-                console.log(details);
                 async function addAccounts(details) {
                     const response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/AccountsController.php`, {
                         method: 'POST',

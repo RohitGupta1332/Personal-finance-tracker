@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../Sidebar/style.css">
     <link rel="stylesheet" href="../Accounts/accounts.css">
     <link rel="stylesheet" href="../Accounts/form.css">
-    <title>Document</title>
+    <title>All-Accounts</title>
 </head>
 
 <body>
@@ -96,9 +96,8 @@
                 <input type="date" name="created_date" id="">
                 <input type="text" name="payee" id="" placeholder="Payee"></td>
     
-                <select name="categories" id="">
+                <select name="categories" class="expense-category">
                     <option value="">Category</option>
-                    <option value="1">Option1 </option>
                 </select>
     
                 <input type="text" name="outflow" placeholder="Outflow">
@@ -148,7 +147,13 @@
         <label for="account_type">What type of accountare you adding?</label>
         <select name="account_type" id="">
             <option value="">Select account type...</option>
-            <option value="Bank">Bank</option>
+            <option value="Savings">Savings</option>
+            <option value="Current">Current</option>
+            <option value="Cash">Cash</option>
+            <option value="Credit">Credit Card</option>
+            <option value="Loan">Loan</option>
+            <option value="Interest">Interest</option>
+            <option value="Other">Other</option>
         </select>
         <label for="balance">What is your current account balance?</label>
         <input type="text" name="balance">

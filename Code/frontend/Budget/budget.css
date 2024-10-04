@@ -67,6 +67,7 @@ input[type="month"]:focus {
     color: #FFFFFF;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
+    padding: 3px 10px;
 }
 .category-section {
     width: 100%;
