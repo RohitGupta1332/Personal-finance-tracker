@@ -39,7 +39,7 @@ input[type="month"]:focus {
     padding: 20px 20px 0px 20px;
 }
 .balance {
-    padding: 12px 0px 7px 12px;
+    padding: 11px 0px 12px 12px;
     font-size: 16px;
     border: 2px solid #ccc;
     border-radius: 5px;
