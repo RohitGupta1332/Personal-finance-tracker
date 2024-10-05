@@ -16,6 +16,8 @@ ac_name varchar(100),
 ac_type varchar(100),
 ac_balance decimal(15,2),
 foreign key (user_id) references User(user_id)
+ON DELETE CASCADE
+ON UPDATE CASCADE
 );
 
 create table Category(
@@ -24,6 +26,8 @@ user_id int,
 category_type varchar(100),
 category_name varchar(100),
 foreign key (user_id) references User(user_id)
+ON DELETE CASCADE
+ON UPDATE CASCADE
 );
 
 create table budget(
@@ -32,7 +36,9 @@ user_id int,
 created_date date,
 category_id int,
 assigned decimal(15,2),
-foreign key (user_id) references User(user_id),
+foreign key (user_id) references User(user_id)
+ON DELETE CASCADE
+ON UPDATE CASCADE,
 foreign key (category_id) references Category(category_id)
 ON DELETE CASCADE
 ON UPDATE CASCADE
@@ -48,7 +54,9 @@ CREATE TABLE transaction (
     outflow DECIMAL(15,2),
     inflow DECIMAL(15,2),
     cleared BOOLEAN,
-    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (user_id) REFERENCES User(user_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY (ac_id) REFERENCES Accounts(ac_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
