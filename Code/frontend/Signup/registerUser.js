@@ -19,9 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#msg').innerHTML = 'Please enter all the credentials';
         } else {
             const data = {
-                "user_name": name,
                 "email": email,
-                "password": password
             };
 
             // Function to fetch OTP asynchronously
@@ -46,15 +44,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Await the OTP result
-            const user_otp = await getotp(data);
-            if (user_otp) {
-                data.otp = user_otp.otp;
-                const queryParams = new URLSearchParams(data).toString();
-                window.location.href = `Auth.html?${queryParams}`;
-            } else {
-                console.log('OTP retrieval failed.');
+            async function checkEmail(data) {
+                try {
+                    const response = await fetch('http://localhost/Minor%20Project/Code/backend/controller/RegisterController.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (response.ok) {
+                        alert("Email already exists!");
+                    }
+                    else{
+                        const user_otp = await getotp(data);
+                        if (user_otp) {
+                            data.otp = user_otp.otp;
+                            data.user_name = name;
+                            data.password = password;
+                            const queryParams = new URLSearchParams(data).toString();
+                            window.location.href = `Auth.html?${queryParams}`;
+                        } else {
+                            console.log('OTP retrieval failed.');
+                        }
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert("Something went wrong! Please try again.");
+                }
             }
+
+            checkEmail(data);
         }
     };
 
