@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalAssigned += assignedValue;
                 totalActivity += activityValue;
                 totalAvailable += availableValue;
-                
+
                 // Update the "Ready to Assign" balance
                 const readyToAssign = document.querySelector('.total-balance');
                 const currentReadyToAssign = parseFloat(readyToAssign.textContent.replace(/[₹,]/g, '')) || 0;
@@ -141,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 let jsonData = await response.json();
                 localStorage.setItem('categories', JSON.stringify(jsonData));
                 let result = jsonData.data;
-
 
                 document.querySelectorAll('.category-section tbody').forEach(tbody => {
                     tbody.querySelectorAll('tr:not(.category-type)').forEach(tr => tr.remove()); 
