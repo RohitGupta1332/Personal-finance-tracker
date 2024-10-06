@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector(".loader").style.display = "none";
     document.querySelector('#sub').onclick = async event => {
         event.preventDefault();
 
@@ -89,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         alert("Email already exists!");
                     }
                     else{
+                        document.querySelector(".loader").style.display = "flex";
                         const user_otp = await getotp(data);
                         if (user_otp) {
                             data.otp = user_otp.otp;
@@ -98,11 +100,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             window.location.href = `Auth.html?${queryParams}`;
                         } else {
                             console.log('OTP retrieval failed.');
+                            document.querySelector(".loader").style.display = "none";
                         }
                     }
                 } catch (error) {
                     console.error(error);
                     alert("Something went wrong! Please try again.");
+                    document.querySelector(".loader").style.display = "none"; 
                 }
             }
 
