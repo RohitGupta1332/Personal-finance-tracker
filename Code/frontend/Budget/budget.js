@@ -20,11 +20,15 @@ dropDowns.forEach((dropDown) => {
         const categoryRow = dropDown.closest('tr.category-type');
         let nextRow = categoryRow.nextElementSibling;
         while (nextRow && !nextRow.classList.contains('category-type')) {
-            nextRow.style.display = nextRow.style.display === "grid" ? "none" : "grid";
+            if (!nextRow.style.display || nextRow.style.display === "") {
+                nextRow.style.display = "grid";
+            }
+            nextRow.style.display = nextRow.style.display === "none" ? "grid" : "none";
             nextRow = nextRow.nextElementSibling;
         }
     });
 });
+
 // budget feature
 document.addEventListener('DOMContentLoaded', () => {
     // Fetch budget data when the date changes
@@ -110,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 totalAssigned += assignedValue;
                 totalActivity += activityValue;
                 totalAvailable += availableValue;
+
                 // Update the "Ready to Assign" balance
                 const readyToAssign = document.querySelector('.total-balance');
                 const currentReadyToAssign = parseFloat(readyToAssign.textContent.replace(/[₹,]/g, '')) || 0;
@@ -136,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 let jsonData = await response.json();
                 localStorage.setItem('categories', JSON.stringify(jsonData));
                 let result = jsonData.data;
-
 
                 document.querySelectorAll('.category-section tbody').forEach(tbody => {
                     tbody.querySelectorAll('tr:not(.category-type)').forEach(tr => tr.remove()); 
