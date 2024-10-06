@@ -38,13 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Get input values
-        const name = document.querySelector('input[type="text"]').value.trim();
+        const name = document.querySelector('input[name="user_name"]').value.trim();
         const email = document.querySelector('input[type="email"]').value.trim();
-        const password = document.querySelector('input[type="password"]').value.trim();
-
+        const password = document.querySelector('#password').value.trim();
+        console.log(name, email, password)
         // Check if any field is empty
         if (name === '' || email === '' || password === '') {
             document.querySelector('#msg').innerHTML = 'Please enter all the credentials';
+            document.querySelector('#sub').style.marginTop = "23px"
         } else if(checkPasswordStrength(password) !== "Strong") {
             alert('Enter a valid strong password!');
         } else {
@@ -109,9 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    document.querySelector('input[type="password"]').onkeyup = event => {
+    document.querySelector('#password').onkeyup = event => {
         event.preventDefault();
-        const password = document.querySelector('input[type="password"]').value.trim();
+        const password = document.querySelector('#password').value.trim();
 
         function checkPasswordStrength(password) {
             // Define criteria for a strong password
