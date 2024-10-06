@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     assignedInput.type = 'number';
                     assignedInput.classList.add('assign-budget');
                     assignedInput.setAttribute('category-id', res.category_id);
-                    assignedInput.value = res.assigned == null ? 0 : res.assigned; 
+                    assignedInput.value = res.assigned == null ? 0 : parseInt(res.assigned, 10);
                     assignedCell.appendChild(assignedInput); 
                     let activityCell = document.createElement('td');
                     activityCell.textContent = res.activity == null ? "₹0" : `₹${res.activity}`;
