@@ -18,11 +18,6 @@ class User {
             $this->email = $data['email'];
             $this->password = password_hash($data['password'], PASSWORD_BCRYPT); // Hash the password
     
-            // Check if the email is unique
-            if (!$this->isEmailUnique($this->email)) {
-                return false; // Email already exists
-            }
-    
             // Insert the new user into the 'user' table
             $query = "INSERT INTO user (user_name, email, password) VALUES (:user_name, :email, :password)";
             $runQuery = $this->db->prepare($query);
@@ -70,16 +65,16 @@ class User {
     }
     
 
-    private function isEmailUnique($email) {
+    public function isEmailUnique($email) {
         try {
             $query = "SELECT * FROM user WHERE email = :email"; 
             $runQuery = $this->db->prepare($query);
             $runQuery->bindParam(':email', $email);
-            $runQuery->execute(); 
+            $runQuery->execute();
 
-            $result = $runQuery->fetchAll();
+            $result = $runQuery->fetch();
 
-            return empty($result);
+            return $result ? true : false;
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
             return false;

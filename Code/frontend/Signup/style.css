@@ -134,6 +134,11 @@ form {
     margin-right: 10px;
 }
 
+.pswd .input:last-child() {
+    flex: 1;
+    margin-bottom: 5px;
+}
+
 .pswd > svg {
     margin-right: 20px;
     height: 20px;
@@ -143,6 +148,10 @@ form {
 
 #visible {
     display: none;
+}
+
+#visible, #invisible {
+    cursor: pointer;
 }
 
 form > #sub {
@@ -166,7 +175,10 @@ form > #sub:hover {
 
 form > #msg {
     color: red;
-    margin-top: 10px;
+    width: 430px;
+    margin-top: 0px;
+    font-size: 12px;
+    line-height: 17px;
 }
 
 .signup > p{

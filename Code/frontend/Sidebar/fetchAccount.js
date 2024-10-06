@@ -147,4 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     fetchAccount();
+
+    //logout
+    document.querySelector('#log-out').addEventListener('click', () => {
+        localStorage.removeItem('userData');
+        localStorage.removeItem('accounts');
+        localStorage.removeItem('categories');
+        window.location.href = '../Login/index.html';
+    })
 });
