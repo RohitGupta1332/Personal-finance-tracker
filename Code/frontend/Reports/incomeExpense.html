@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../Sidebar/style.css">
     <link rel="stylesheet" href="../Accounts/form.css">
     <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="incomeExpense.css">
     <title>Income v/s Expense</title>
 </head>
 
@@ -60,6 +62,26 @@
         <div class="bar-container">
             <canvas class="line-chart"></canvas>
         </div>
+
+        <p>Income</p>
+        <br>
+        <div id="income-table-container"></div>
+        <br>
+    
+        <p class="expense">Expense</p>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <!-- Month columns will be added dynamically -->
+                </tr>
+            </thead>
+            <tbody id="category-list">
+                <!-- Categories with outflow will be dynamically added here -->
+            </tbody>
+        </table>
+    
+        
         
     <form action="" method="post" class="add-account-form">
         <p class="heading">Add Account</p>

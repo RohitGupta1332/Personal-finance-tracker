@@ -38,7 +38,7 @@ async function getSpending(date) {
         if (response.ok) {
             const result = await response.json();
             const data = result.data;
-
+            console.log(data)
             let labels = [];
             let values = [];
 
@@ -48,9 +48,6 @@ async function getSpending(date) {
                     labels.push(item.category_type);
                     values.push(parseFloat(item.total_spending));
                     totalSpending += parseFloat(item.total_spending);
-                }
-                else{
-                    myChartContainer.innerHTML = '<p>No data available for the selected date.</p>';    
                 }
             });
 

@@ -84,8 +84,7 @@ input[type="month"]:focus {
     padding: 50px 200px;
 }
 .bar-container{
-    width: 500px;
-    margin: 50px 150px;
+    margin: auto;
     padding: 50px;
 }
 
