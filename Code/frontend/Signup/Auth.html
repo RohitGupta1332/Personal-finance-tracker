@@ -1,58 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTP Verification</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f0f0f0;
-        }
-
-        form {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center; /* Center the content inside the form */
-        }
-
-        .otp {
-            width: 100px;
-            padding: 10px;
-            margin: 10px 5px; /* Adjust spacing between OTP inputs */
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 18px;
-            text-align: center;
-        }
-
-        #sub {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 200ms ease-in;
-        }
-
-        #sub:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
-    <form action="" method="post">
-        <label for="otp"><strong>Enter OTP:</strong></label> <input type="password" id="otp" name="otp" class="otp" maxlength="6">
-        <input type="submit" id="sub" value="Verify OTP">
-    </form>
-    <script src="Auth.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>OTP</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <script src="Auth.js"></script>
+        <style>
+            * {
+                font-family: "Poppins", sans-serif;
+                cursor: default;
+            }
+            .container {
+                height: 90vh;
+                background-color: white;
+                width: 35vw;
+                border-radius: 50px;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                flex-direction: column;
+                box-shadow:  inset 5px 5px 10px rgba(0, 0, 0, 0.4),
+                            10px 10px 20px rgba(0, 0, 0, 0.5);
+            }
+            .text {
+                font-size: 90px;
+            }
+            .input {
+                display: flex;
+                width: 100%;
+                padding: 0px 50px;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+            input {
+                width: 50px;
+                height: 70px;
+                font-size: 30px;
+                text-align: center;
+                cursor: text;
+                border-radius: 10px;
+            }
+            button {
+                font-size: 50px;
+                cursor: pointer;
+                border: none;
+                padding: 5px 50px;
+                border-radius: 50px;
+                background-color: #190582;
+                color: white;
+                box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+                transition: background-color 200ms ease-in;
+            }
+            button:hover {
+                box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.4);
+                background-color: #0E0055;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="loader">
+            <div class="spinner-border" role="status"></div>
+        </div>
+        <div class="left">
+            <div class="details">
+                <img id="piggybank" src="../../../images/login/login.png" alt="man with a piggybank">
+                <img id="logo" src="../../../images/logo/full_logo2.png" alt="logo">
+                <p id="text1">Create an account to track your expenses and manage your budget effortlessly.</p>
+            </div>
+        </div>
+        <div class="right">
+            <div class="container">
+                <div class="text">Enter OTP</div>
+                <div class="input">
+                    <input type="password" name="otp_1" id="otp_1">
+                    <input type="password" name="otp_2" id="otp_2">
+                    <input type="password" name="otp_3" id="otp_3">
+                    <input type="password" name="otp_4" id="otp_4">
+                    <input type="password" name="otp_5" id="otp_5">
+                    <input type="password" name="otp_6" id="otp_6">
+                </div>
+                <div class="submit">
+                    <button>Verify OTP</button>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
