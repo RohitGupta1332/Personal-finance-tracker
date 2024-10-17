@@ -32,12 +32,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com'; 
     $mail->SMTPAuth = true;
-    $mail->Username = 'itzrg31052004@gmail.com';
-    $mail->Password = 'smtvwzyyvbeqmcqg'; 
+    $mail->Username = 'trackyourfinance.team@gmail.com';
+    $mail->Password = 'jpwukduylaudjmzx'; 
     $mail->SMTPSecure = 'ssl'; 
     $mail->Port = 465; 
 
-    $mail->setFrom('itzrg31052004@gmail.com'); 
+    $mail->setFrom('trackyourfinance.team@gmail.com'); 
     $mail->addAddress($data['email']);
     $mail->isHTML(true);
     $mail->Subject = "OTP Authentication";
