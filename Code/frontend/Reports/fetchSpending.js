@@ -59,8 +59,8 @@ async function getSpending(date) {
                     data: values,
                     backgroundColor: [
                         "#7E9EEF",
-                        "#83DD3F",
-                        "#190582"
+                        "#190582",
+                        "#83DD3F"
                     ]
                 }]
             };
