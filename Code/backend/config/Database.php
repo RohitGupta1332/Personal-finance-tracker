@@ -11,7 +11,7 @@ class Database{
         $this->host = "localhost";
         $this->dbname = "finance_tracker";
         $this->username = "root";
-        $this->password = "7439rohit";
+        $this->password = "";
 
         try{
             $this->conn = new PDO("mysql:host={$this->host};dbname={$this->dbname}",$this->username,$this->password);
