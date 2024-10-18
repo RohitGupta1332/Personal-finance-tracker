@@ -24,13 +24,26 @@ async function fetchIncomeAndExpense() {
             updateLineChart(months, incomeData, expenseData);
             // Update the table with the income data
             createIncomeTable(months, incomeData);
-        } else {
+        
+        }
+        else if(response.status === 404){
+            let textMessage = document.createElement("p");
+            textMessage.textContent = "No data available.";
+            document.querySelector('.bar-container').appendChild(textMessage);
+            document.querySelector('.bar-container').style.width = "500px";
+            textMessage.style.width = "500px";
+            textMessage.style.fontSize = "16px";
+
+            textMessage.style.color = "Black";
+        } 
+        else {
             console.error('HTTP error:', response.status, response.statusText);
         }
     } catch (error) {
         console.error(error);
     }
 }
+
 
 // Function to convert 'YYYY-MM' format to 'MMM YYYY'
 function formatMonth(month) {
@@ -42,7 +55,7 @@ function formatMonth(month) {
 // Function to create and update the income table
 function createIncomeTable(months, incomeData) {
     const incomeTableContainer = document.getElementById('income-table-container');
-
+    document.querySelector('.income').textContent = "Income";
     // Create Income Table
     let incomeTable = `
     <table>
@@ -151,6 +164,7 @@ function formatMonthYear(dateString) {
 // Function to display categories with outflow totals per month and year
 function displayCategories(transactions) {
     const categories = JSON.parse(localStorage.getItem('categories'));
+    document.querySelector('.expense').textContent = "Expense";
     const categoryList = document.getElementById('category-list');
     const categoryTotals = {};  // Object to hold totals for each category
     const dateColumns = {};     // Object to hold unique month-year values

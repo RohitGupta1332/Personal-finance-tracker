@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = document.querySelector('input[name="user_name"]').value.trim();
         const email = document.querySelector('input[type="email"]').value.trim();
         const password = document.querySelector('#password').value.trim();
-        console.log(name, email, password)
         // Check if any field is empty
         if (name === '' || email === '' || password === '') {
             document.querySelector('#msg').innerHTML = 'Please enter all the credentials';
