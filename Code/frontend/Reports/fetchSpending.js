@@ -10,8 +10,14 @@ const month = monthNames[monthIndex];
 dateInput.value = `${year}-${String(monthIndex + 1).padStart(2, '0')}`;
 document.querySelector('.date').textContent = `${month} ${year}`;
 
-
 const userData = JSON.parse(localStorage.getItem('userData'));
+
+// Define the color map for each category type
+const categoryColors = {
+    'bills': "#190582",
+    'needs': "#7E9EEF",
+    'wants': "#83DD3F"
+};
 
 // Function to fetch spending data
 async function getSpending(date) {
@@ -38,15 +44,17 @@ async function getSpending(date) {
         if (response.ok) {
             const result = await response.json();
             const data = result.data;
-            console.log(data)
+            console.log(data);
             let labels = [];
             let values = [];
+            let backgroundColors = [];
 
             let totalSpending = 0;
             data.forEach((item) => {
                 if (item.total_spending != null) {
                     labels.push(item.category_type);
                     values.push(parseFloat(item.total_spending));
+                    backgroundColors.push(categoryColors[item.category_type] || "#000000"); // Default color in case of undefined category
                     totalSpending += parseFloat(item.total_spending);
                 }
             });
@@ -57,11 +65,7 @@ async function getSpending(date) {
                 datasets: [{
                     label: "Spending",
                     data: values,
-                    backgroundColor: [
-                        "#7E9EEF",
-                        "#190582",
-                        "#83DD3F"
-                    ]
+                    backgroundColor: backgroundColors // Use the predefined category colors
                 }]
             };
 
@@ -95,5 +99,5 @@ dateInput.addEventListener('change', (event) => {
     const newMonthIndex = parseInt(newDate.substring(5, 7), 10) - 1;
     const newMonth = monthNames[newMonthIndex];
     document.querySelector('.date').textContent = `${newMonth} ${newYear}`;
-    getSpending(1, newDate);
+    getSpending(newDate);
 });
