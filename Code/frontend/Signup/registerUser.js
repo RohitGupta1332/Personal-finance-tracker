@@ -98,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             const queryParams = new URLSearchParams(data).toString();
                             window.location.href = `Auth.html?${queryParams}`;
                         } else {
-                            console.log('OTP retrieval failed.');
                             document.querySelector(".loader").style.display = "none";
                         }
                     }

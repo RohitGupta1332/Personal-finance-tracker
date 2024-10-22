@@ -225,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
             "category_id": categoryId,
             "assigned": assignedValue,
         };
-        console.log(details)
         try {
             const response = await fetch('http://localhost/Minor%20Project/Code/backend/controller/BudgetController.php', {
                 method: 'POST',

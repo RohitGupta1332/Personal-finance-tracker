@@ -44,7 +44,6 @@ async function getSpending(date) {
         if (response.ok) {
             const result = await response.json();
             const data = result.data;
-            console.log(data);
             let labels = [];
             let values = [];
             let backgroundColors = [];
