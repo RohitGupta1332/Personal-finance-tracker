@@ -1,3 +1,17 @@
+//background when page clicked
+const pages = document.querySelectorAll(".menu-item");
+
+pages.forEach((item) => {
+  item.addEventListener('click', active_item);
+})
+
+function active_item () {
+  pages.forEach((item) => {
+    item.classList.remove('is-active');
+  });
+  this.classList.add('is-active');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     let dropDown = document.querySelector(".drop-down-heading");
     let arrow = document.querySelector(".arrow");

@@ -74,6 +74,9 @@ body {
     background-color: #492CC0;
 
 }
+.is-active {
+    background-color: #492CC0;
+}
 .sidebar a{
     color: white;
 }
