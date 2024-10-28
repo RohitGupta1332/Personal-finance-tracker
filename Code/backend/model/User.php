@@ -31,23 +31,23 @@ class User {
     
                 // Insert default categories for the new user
                 $query = "INSERT INTO category (user_id, category_type, category_name) VALUES
-                            (:user_id, 'bills', 'Electricity'),
-                            (:user_id, 'bills', 'Water'),
-                            (:user_id, 'bills', 'Rent'),
-                            (:user_id, 'bills', 'Internet'),
-                            (:user_id, 'bills', 'Phone'),
+                            (:user_id, 'Bills', 'Electricity'),
+                            (:user_id, 'Bills', 'Water'),
+                            (:user_id, 'Bills', 'Rent'),
+                            (:user_id, 'Bills', 'Internet'),
+                            (:user_id, 'Bills', 'Phone'),
     
-                            (:user_id, 'needs', 'Groceries'),
-                            (:user_id, 'needs', 'Transport'),
-                            (:user_id, 'needs', 'Healthcare'),
-                            (:user_id, 'needs', 'Insurance'),
-                            (:user_id, 'needs', 'Education'),
+                            (:user_id, 'Needs', 'Groceries'),
+                            (:user_id, 'Needs', 'Transport'),
+                            (:user_id, 'Needs', 'Healthcare'),
+                            (:user_id, 'Needs', 'Insurance'),
+                            (:user_id, 'Needs', 'Education'),
     
-                            (:user_id, 'wants', 'Dining Out'),
-                            (:user_id, 'wants', 'Entertainment'),
-                            (:user_id, 'wants', 'Hobbies'),
-                            (:user_id, 'wants', 'Travel'),
-                            (:user_id, 'wants', 'Shopping')";
+                            (:user_id, 'Wants', 'Dining Out'),
+                            (:user_id, 'Wants', 'Entertainment'),
+                            (:user_id, 'Wants', 'Hobbies'),
+                            (:user_id, 'Wants', 'Travel'),
+                            (:user_id, 'Wants', 'Shopping')";
     
                 $runQuery = $this->db->prepare($query);
                 $runQuery->bindParam(':user_id', $user_id);

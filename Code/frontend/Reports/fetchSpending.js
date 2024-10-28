@@ -51,9 +51,10 @@ async function getSpending(date) {
             let totalSpending = 0;
             data.forEach((item) => {
                 if (item.total_spending != null) {
+                    const categoryTypeLower = item.category_type.toLowerCase(); // Convert to lowercase
                     labels.push(item.category_type);
                     values.push(parseFloat(item.total_spending));
-                    backgroundColors.push(categoryColors[item.category_type] || "#000000"); // Default color in case of undefined category
+                    backgroundColors.push(categoryColors[categoryTypeLower] || "#000000"); // Default color in case of undefined category
                     totalSpending += parseFloat(item.total_spending);
                 }
             });

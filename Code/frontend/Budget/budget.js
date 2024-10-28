@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 async function submitCategory() {
                     let details = {
                         'user_id': userData.data.user_id,
-                        "category_type": categoryType.toLowerCase(),
+                        "category_type": categoryType,
                         "category_name": categoryNameInput,
                     };
                     try {
