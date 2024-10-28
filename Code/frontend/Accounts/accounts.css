@@ -1,3 +1,7 @@
+*{
+    cursor: pointer;
+}
+
 .account-page{
     width: 100%;
     margin-left: 19%;
