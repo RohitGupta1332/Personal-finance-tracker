@@ -69,6 +69,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         echo json_encode(["message" => "Authorization token not provided"]);
     }
 }
+
 else if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $data = json_decode(file_get_contents('php://input'), true);
 

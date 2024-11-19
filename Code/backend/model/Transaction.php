@@ -76,6 +76,8 @@ class Transaction{
             // Execute the transaction insertion
             $result = $runInsert->execute();
     
+            $this->updateNetWorth($this->user_id);
+
             // Commit the changes if both the update and insertion were successful
             $this->db->commit();
             
@@ -88,6 +90,44 @@ class Transaction{
             return false;
         }
     }
+
+    private function updateNetWorth($user_id) {
+        // Fetch the total balance of all accounts for the user
+        $query = "SELECT SUM(ac_balance) as total_balance FROM Accounts WHERE user_id = :user_id";
+        $runQuery = $this->db->prepare($query);
+        $runQuery->bindParam(':user_id', $user_id);
+        $runQuery->execute();
+        $result = $runQuery->fetch();
+    
+        if ($result) {
+            $totalBalance = $result['total_balance'];
+    
+            // Fetch the latest networth_month for the user
+            $getLatestMonthQuery = "SELECT MAX(networth_month) as latest_month FROM networth WHERE user_id = :user_id";
+            $getLatestMonthRun = $this->db->prepare($getLatestMonthQuery);
+            $getLatestMonthRun->bindParam(':user_id', $user_id);
+            $getLatestMonthRun->execute();
+            $latestMonthResult = $getLatestMonthRun->fetch();
+    
+            if ($latestMonthResult) {
+                $latestMonth = $latestMonthResult['latest_month'];
+    
+                // Update the last entry for the user in the networth table
+                $updateNetWorthQuery = "UPDATE networth 
+                                        SET amount = :amount
+                                        WHERE user_id = :user_id 
+                                        AND networth_month = :networth_month";
+                $updateRun = $this->db->prepare($updateNetWorthQuery);
+                $updateRun->bindParam(':user_id', $user_id);
+                $updateRun->bindParam(':networth_month', $latestMonth);
+                $updateRun->bindParam(':amount', $totalBalance);
+                $updateRun->execute();
+            }
+        }
+    }
+    
+    
+    
     
     public function getTransactionsByUserId($id){ //pass the user id
         try{
@@ -171,7 +211,7 @@ class Transaction{
             $this->db->beginTransaction();
     
             // Fetch the transaction details to get the outflow, inflow, and account ID
-            $query = "SELECT ac_id, outflow, inflow FROM Transaction WHERE id = :id";
+            $query = "SELECT ac_id, outflow, inflow, user_id FROM Transaction WHERE id = :id";
             $runQuery = $this->db->prepare($query);
             $runQuery->bindParam(':id', $id);
             $runQuery->execute();
@@ -184,6 +224,7 @@ class Transaction{
             $ac_id = $transaction['ac_id'];
             $outflow = $transaction['outflow'];
             $inflow = $transaction['inflow'];
+            $user_id = $transaction['user_id']; // Ensure this is fetched correctly
     
             // Fetch the current account balance from the Accounts table
             $accountQuery = "SELECT ac_balance FROM Accounts WHERE ac_id = :ac_id";
@@ -225,6 +266,9 @@ class Transaction{
             // Commit the transaction if everything is successful
             $this->db->commit();
     
+            // Update net worth after transaction deletion
+            $this->updateNetWorth($user_id);
+    
             return $affectedRows > 0;
         } catch (Exception $e) {
             // Rollback the transaction in case of error
@@ -233,6 +277,7 @@ class Transaction{
             return false;
         }
     }
+    
     
     public function deleteTransactionsByUserIdAndAccountId($id, $ac_id){
         try{

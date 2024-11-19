@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.user-email').textContent = userData.data.email;
     document.querySelector('.user-name').textContent = userData.data.user_name;
 
-
     async function fetchAccount() {
         try {
             let response = await fetch(`http://localhost/Minor%20Project/Code/backend/controller/AccountsController.php`, {
@@ -69,13 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 totalAmountDiv.textContent = `₹${totalAmount}`;
 
-                // Update local storage with the current month's total
-                updateLocalStorageWithCurrentMonth(totalAmount);
-
-                // Create or update the bar chart with data from local storage
-                const netWorthTracker = getNetWorthDataFromLocalStorage();
-                createBarChart(netWorthTracker);
-
             } else {
                 console.error('HTTP error:', response.status, response.statusText);
             }
@@ -84,67 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function updateLocalStorageWithCurrentMonth(TotalAmount) {
-        const now = new Date();
-        const currentMonth = `${now.toLocaleString('default', { month: 'long' })} ${now.getFullYear()}`;
-
-        // Get existing data from local storage
-        let netWorthTracker = JSON.parse(localStorage.getItem('netWorthTracker')) || {};
-
-        // Update the tracker with the current month's total amount
-        netWorthTracker[currentMonth] = TotalAmount;
-
-        // Keep only the last 5 months of data
-        const months = Object.keys(netWorthTracker);
-        if (months.length > 5) {
-            const monthsToKeep = months.slice(-5);
-            netWorthTracker = monthsToKeep.reduce((acc, month) => {
-                acc[month] = netWorthTracker[month];
-                return acc;
-            }, {});
-        }
-
-        // Save the updated tracker back to local storage
-        localStorage.setItem('netWorthTracker', JSON.stringify(netWorthTracker));
-    }
-
-    function getNetWorthDataFromLocalStorage() {
-        return JSON.parse(localStorage.getItem('netWorthTracker')) || {};
-    }
-
-    function createBarChart(netWorthTracker) {
-        const canvasElement = document.getElementById('canvas');
-        
-        if (canvasElement) {
-            const months = Object.keys(netWorthTracker);
-            const netWorthValues = Object.values(netWorthTracker);
-
-            const ctx = canvasElement.getContext('2d');
-            const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: months,
-                    datasets: [{
-                        label: 'Net Worth',
-                        data: netWorthValues,
-                        backgroundColor: "#190582"
-                    }]
-                },
-                options: {
-                    plugins: {
-                        legend: {
-                            display: false,
-                        },
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        }
-    }
 
     fetchAccount();
 
@@ -154,5 +85,5 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('accounts');
         localStorage.removeItem('categories');
         window.location.href = '../Login/index.html';
-    })
+    });
 });
