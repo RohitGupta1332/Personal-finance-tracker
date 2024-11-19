@@ -64,3 +64,13 @@ CREATE TABLE transaction (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
+
+create table networth(
+id int AUTO_INCREMENT primary key,
+user_id int,
+networth_month date,
+amount decimal(15,2),
+foreign key(user_id) references User(user_id)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+);
