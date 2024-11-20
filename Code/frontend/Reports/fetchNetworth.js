@@ -50,20 +50,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 networth_month: currentMonth,
                 amount: totalNetWorth
             };
-            let response = await fetch('http://localhost/Minor%20Project/Code/backend/controller/NetworthController.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': userData.jwt
-                },
-                body: JSON.stringify(details)
-            });
-
-            if (response.ok) {
-                console.log('Net worth added successfully for:', currentMonth);
-            } else {
-                console.error('Failed to add net worth:', response.status, response.statusText);
+            if(amount != null){
+                let response = await fetch('http://localhost/Minor%20Project/Code/backend/controller/NetworthController.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': userData.jwt
+                    },
+                    body: JSON.stringify(details)
+                });
+                if (response.ok) {
+                    console.log('Net worth added successfully for:', currentMonth);
+                } else {
+                    console.error('Failed to add net worth:', response.status, response.statusText);
+                }
             }
+           
         } catch (error) {
             console.error('Error adding net worth:', error);
         }
@@ -85,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 createBarChart(networth);
 
             } else {
-                document.querySelector("#message").textContent = "No data found.";
+                document.querySelector("#message").textContent = "No data available.";
             }
         } catch (error) {
             console.error('Error fetching net worth:', error);
