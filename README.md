@@ -1,76 +1,61 @@
-# Personal-finance-tracker
+# TrackIt - Financial Management System
 
-create database finance_tracker;
+TrackIt is a comprehensive financial management system designed to help users manage their daily transactions, set budgets for specific expenses, and track their financial health. The platform offers a user-friendly interface combined with real-time insights into spending habits.
 
-create table User(
-user_id int auto_increment primary key,
-user_name varchar(50),
-email varchar(100),
-password varchar(255)
-);
+## Features
 
-create table Accounts(
-ac_id int auto_increment primary key,
-user_id int,
-ac_name varchar(100),
-ac_type varchar(100),
-ac_balance decimal(15,2),
-foreign key (user_id) references User(user_id)
-ON DELETE CASCADE
-ON UPDATE CASCADE
-);
+* Daily Transactions: Add, edit, and manage daily transactions with ease.
+* Budget Management: Set budgets for individual expense categories and monitor your spending.
+* Cleared & Uncleared Balances: Automatically calculate and display cleared, uncleared balances, and working capital.
+* Spending Analytics:
+* Category-wise spending breakdown.
+* Category-type spending insights (e.g., Bills, Needs, Wants).
+* Dynamic Updates: Real-time data fetching and visualization for up-to-date financial tracking.
 
-create table Category(
-category_id int auto_increment primary key,
-user_id int,
-category_type varchar(100),
-category_name varchar(100),
-foreign key (user_id) references User(user_id)
-ON DELETE CASCADE
-ON UPDATE CASCADE
-);
+## Tech Stack
 
-create table budget(
-budget_id int auto_increment primary key,
-user_id int,
-created_date date,
-category_id int,
-assigned decimal(15,2),
-foreign key (user_id) references User(user_id)
-ON DELETE CASCADE
-ON UPDATE CASCADE,
-foreign key (category_id) references Category(category_id)
-ON DELETE CASCADE
-ON UPDATE CASCADE
-);
+* Frontend:
 
-CREATE TABLE transaction (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    ac_id INT,
-    category_id INT,
-    created_date DATE,
-    payee VARCHAR(50),
-    outflow DECIMAL(15,2),
-    inflow DECIMAL(15,2),
-    cleared BOOLEAN,
-    FOREIGN KEY (user_id) REFERENCES User(user_id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-    FOREIGN KEY (ac_id) REFERENCES Accounts(ac_id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-    FOREIGN KEY (category_id) REFERENCES Category(category_id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-);
+    * HTML, CSS, JavaScript
 
-create table networth(
-id int AUTO_INCREMENT primary key,
-user_id int,
-networth_month date,
-amount decimal(15,2),
-foreign key(user_id) references User(user_id)
-ON DELETE CASCADE
-ON UPDATE CASCADE
-);
+* Backend:
+
+    * PHP
+
+* Database:
+
+    * MySQL
+
+## Database Design
+
+## Tables Overview
+
+* User: Stores user credentials and information.
+* Accounts: Tracks user accounts and balances.
+* Category: Defines spending categories and subcategories:
+    * Category Types: Bills, Needs, Wants.
+* Transaction: Records inflow and outflow details for each account.
+* Budget: Stores user-defined budgets for specific categories.
+
+## Key Functionalities
+
+1. Cleared and Uncleared Balances
+    * Users can tag transactions as "cleared" or "uncleared."
+    * The system calculates:
+        * Cleared Balance: Sum of all cleared transactions.
+        * Uncleared Balance: Sum of all uncleared transactions.
+        * Working Capital: Total of cleared + uncleared balances.
+
+2. Category-wise Spending
+    * Users can view total spending for each subcategory.
+    * Provides detailed insights into how money is spent across subcategories like Electricity, Groceries, or Dining Out.
+
+3. Category-type Spending Insights
+    * Spending is grouped into three main types:
+        * Bills: Mandatory recurring expenses.
+        * Needs: Essential but variable expenses.
+        * Wants: Non-essential, discretionary expenses.
+
+4. Real-time Updates
+    * JavaScript handles real-time data fetching and DOM updates for seamless user experience.
+    * Date inputs are dynamically updated to show the current month and year as defaults.
